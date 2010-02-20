@@ -22,34 +22,51 @@
 		<%= yield(:head) %>
 	</head>
 	<body>
-		<div class="container_12">
-			<div id="header" class="grid_12">
-				<div id="logo" class="grid_5" >
-					<div class="title"><%= link_to 'Civic OpenMedia', home_path %></div><br/>
-					<div class="sub-title">Digital Public Square</div>
-				</div>
-				<div id="mainnav" class="grid_7">
-					<ul>
-						<li><%= link_to 'Curate', admin_data_sets_path, :title => "" %>
+		<div id="header">
+			<div class="container_12">
+				<div class="grid_12">
+					<h1 id="branding"><%= link_to 'Civic OpenMedia', home_path %></h1>
+					
+				</div><!--#grid_12-->
+				<div class="clear"></div>
+				<div class="grid_12">
+					<ul class="nav main">
+						<li><%= link_to 'Curate', home_path, :title => "" %>
+							<ul>
+								<li><%= link_to 'Submenu 1', home_path, :title => "" %>
+								<li><%= link_to 'Submenu 2', home_path, :title => "" %>
+							</ul>
 						<li><%= link_to 'Transform', home_path, :title => "" %>
 						<li><%= link_to 'Publish', home_path, :title => "" %>
+						<li class="secondary"><%= link_to 'Digital Public Square', home_path, 
+							:title => "The open source public information publishing system" %>
+						</li>
 					</ul>
-				</div>
-			</div>
-			<div class="clear"></div>
-			<div id="content" class="grid_12">
-				<% flash.each do |name, msg| %>
-	        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-	      <% end %>
-	      <% if show_title? %>
-	        <h2><%=h yield(:title) %></h2>
-	      <% end %>
-	      <%= yield :layout %>
-			</div>
-			<div class="clear"></div>
-			<div id="footer" class="block grid_12">
-				<p>Data Feed System by <a href="http://www.civicopenmedia.org/">Civic OpenMedia</a> - Licensed under <a href="http://www.gnu.org/licenses/gpl.html" rel="license">GPL</a></p>
-			</div>
-		</div>
+				</div><!--#grid_12-->
+			</div><!--#container_12-->
+		</div><!--#header-->
+		<div class="clear"></div>
+		<div id="content">
+			<div class="container_12">
+				<div class="grid_12">
+					<% flash.each do |name, msg| %>
+		        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+		      <% end %>
+		      <% if show_title? %>
+		        <h2><%=h yield(:title) %></h2>
+		      <% end %>
+		      <%= yield :layout %>
+				</div><!-- #grid_12 -->
+				<div class="clear"></div>
+				<div class="grid_12" id="site_info">
+					<div class="box">
+						<p>Data Feed System by <a href="http://www.civicopenmedia.org/">Civic OpenMedia</a>
+							 - Licensed under <a href="http://www.gnu.org/licenses/gpl.html" rel="license">GPL</a>
+						</p>
+					</div>
+				</div><!--site_info #grid_12-->
+				<div class="clear"></div>
+			</div><!--#container_12-->
+		</div><!--#content-->
 	</body>
 </html>
