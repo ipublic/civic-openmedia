@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title><%= h(yield(:title) || "Civic OpenMedia") %></title>
+		
+		<!-- CSS - Use 960 framework -->
+		<%= stylesheet_link_tag "css/reset.css", :media => "screen" %>
+		<%= stylesheet_link_tag "css/text.css", :media => "screen" %>
+		<%= stylesheet_link_tag "css/960.css", :media => "screen" %>
+		<%= stylesheet_link_tag "css/layout.css", :media => "screen" %>
+		<%= stylesheet_link_tag "css/nav.css", :media => "screen" %>
+		<%= stylesheet_link_tag "css/ipublic.css", :media => "screen" %>
+
+		<!--[if IE 6]><%= stylesheet_link_tag "css/ie6.css", :media => "screen" %><![endif]-->
+		<!--[if IE 7]><%= stylesheet_link_tag "css/ie.css", :media => "screen" %><![endif]-->
+
+		<%= javascript_include_tag 'js/mootools-1.2.1-core.js'%>
+		<%= javascript_include_tag 'js/mootools-1.2-more.js'%>
+		<%= javascript_include_tag 'js/mootools-fluid16-autoselect.js'%>
+
+		<%= yield(:head) %>
+	</head>
+	<body>
+		<div class="container_12">
+			<div id="header" class="grid_12">
+				<div id="logo" class="grid_5" >
+					<div class="title"><%= link_to 'Civic OpenMedia', home_path %></div><br/>
+					<div class="sub-title">Digital Public Square</div>
+				</div>
+				<div id="mainnav" class="grid_7">
+					<ul>
+						<li><%= link_to 'Curate', admin_data_sets_path, :title => "" %>
+						<li><%= link_to 'Transform', home_path, :title => "" %>
+						<li><%= link_to 'Publish', home_path, :title => "" %>
+					</ul>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<div id="content" class="grid_12">
+				<% flash.each do |name, msg| %>
+	        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+	      <% end %>
+	      <% if show_title? %>
+	        <h2><%=h yield(:title) %></h2>
+	      <% end %>
+	      <%= yield :layout %>
+			</div>
+			<div class="clear"></div>
+			<div id="footer" class="block grid_12">
+				<p>Data Feed System by <a href="http://www.civicopenmedia.org/">Civic OpenMedia</a> - Licensed under <a href="http://www.gnu.org/licenses/gpl.html" rel="license">GPL</a></p>
+			</div>
+		</div>
+	</body>
+</html>
