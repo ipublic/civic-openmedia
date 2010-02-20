@@ -1086,3 +1086,683 @@ ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" 
   
 
 Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 12:38:58) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 10ms (View: 9, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 12:38:58) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (2.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 16:38:45) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 7ms (View: 5, DB: 2) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 16:38:45) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 16:58:04) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 75ms (View: 74, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 16:58:04) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 16:58:05) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 16:58:05) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 16:58:59) [GET]
+Rendering template within layouts/application
+Rendering home/index
+
+ActionView::TemplateError (undefined local variable or method `home_index' for #<ActionView::Base:0x10434d320>) on line #39 of app/views/layouts/application.html.erb:
+36: 								<li><%= link_to 'Submenu 2', home_path, :title => "" %>
+37: 							</ul>
+38: 						<li><%= link_to 'Transform', home_path, :title => "" %>
+39: 						<li><%= link_to 'Publish', home_index, :title => "" %>
+40: 						<li><%= link_to 'About', home_path, :title => "" %>
+41: 						<li class="secondary"><%= link_to 'Digital Public Square', home_path, 
+42: 							:title => "The open source public information publishing system" %>
+
+    app/views/layouts/application.html.erb:39
+
+Rendered rescues/_trace (106.7ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 16:59:22) [GET]
+Rendering template within layouts/application
+Rendering home/index
+
+ActionView::TemplateError (undefined local variable or method `home_index' for #<ActionView::Base:0x1017731f0>) on line #39 of app/views/layouts/application.html.erb:
+36: 								<li><%= link_to 'Submenu 2', home_path, :title => "" %>
+37: 							</ul>
+38: 						<li><%= link_to 'Transform', home_path, :title => "" %>
+39: 						<li><%= link_to 'Publish', home_index, :title => "" %>
+40: 						<li><%= link_to 'About', home_path, :title => "" %>
+41: 						<li class="secondary"><%= link_to 'Digital Public Square', home_path, 
+42: 							:title => "The open source public information publishing system" %>
+
+    app/views/layouts/application.html.erb:39
+
+Rendered rescues/_trace (45.2ms)
+Rendered rescues/_request_and_response (1.2ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 16:59:26) [GET]
+Rendering template within layouts/application
+Rendering home/index
+
+ActionView::TemplateError (undefined local variable or method `home_index' for #<ActionView::Base:0x1042ba728>) on line #39 of app/views/layouts/application.html.erb:
+36: 								<li><%= link_to 'Submenu 2', home_path, :title => "" %>
+37: 							</ul>
+38: 						<li><%= link_to 'Transform', home_path, :title => "" %>
+39: 						<li><%= link_to 'Publish', home_index, :title => "" %>
+40: 						<li><%= link_to 'About', home_path, :title => "" %>
+41: 						<li class="secondary"><%= link_to 'Digital Public Square', home_path, 
+42: 							:title => "The open source public information publishing system" %>
+
+    app/views/layouts/application.html.erb:39
+
+Rendered rescues/_trace (113.1ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:00:10) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 10ms (View: 9, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:00:10) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:00:20) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 5ms (View: 4, DB: 0) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:00:20) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:00:29) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 5ms (View: 4, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:00:29) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:00:54) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 6ms (View: 4, DB: 0) | 200 OK [http://localhost/home]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:00:54) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:00:58) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:00:58) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:29:30) [GET]
+Rendering template within layouts/application
+Rendering home/index
+
+ActionView::TemplateError (undefined local variable or method `home_path' for #<ActionView::Base:0x104474d48>) on line #28 of app/views/layouts/application.html.erb:
+25: 		<div id="header">
+26: 			<div class="container_12">
+27: 				<div class="grid_12">
+28: 					<h1 id="branding"><%= link_to 'Civic OpenMedia', home_path %></h1>
+29: 				</div><!--#grid_12-->
+30: 				<div class="clear"></div>
+31: 				<div class="grid_12">
+
+    app/views/layouts/application.html.erb:28
+
+Rendered rescues/_trace (40.9ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:43:18) [GET]
+Rendering template within layouts/application
+Rendering home/index
+
+ActionView::TemplateError (undefined local variable or method `root' for #<ActionView::Base:0x1042165b0>) on line #28 of app/views/layouts/application.html.erb:
+25: 		<div id="header">
+26: 			<div class="container_12">
+27: 				<div class="grid_12">
+28: 					<h1 id="branding"><%= link_to 'Civic OpenMedia', root %></h1>
+29: 				</div><!--#grid_12-->
+30: 				<div class="clear"></div>
+31: 				<div class="grid_12">
+
+    app/views/layouts/application.html.erb:28
+
+Rendered rescues/_trace (110.9ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:43:19) [GET]
+Rendering template within layouts/application
+Rendering home/index
+
+ActionView::TemplateError (undefined local variable or method `root' for #<ActionView::Base:0x1043d2048>) on line #28 of app/views/layouts/application.html.erb:
+25: 		<div id="header">
+26: 			<div class="container_12">
+27: 				<div class="grid_12">
+28: 					<h1 id="branding"><%= link_to 'Civic OpenMedia', root %></h1>
+29: 				</div><!--#grid_12-->
+30: 				<div class="clear"></div>
+31: 				<div class="grid_12">
+
+    app/views/layouts/application.html.erb:28
+
+Rendered rescues/_trace (40.8ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:43:21) [GET]
+Rendering template within layouts/application
+Rendering home/index
+
+ActionView::TemplateError (undefined local variable or method `root' for #<ActionView::Base:0x10417ef80>) on line #28 of app/views/layouts/application.html.erb:
+25: 		<div id="header">
+26: 			<div class="container_12">
+27: 				<div class="grid_12">
+28: 					<h1 id="branding"><%= link_to 'Civic OpenMedia', root %></h1>
+29: 				</div><!--#grid_12-->
+30: 				<div class="clear"></div>
+31: 				<div class="grid_12">
+
+    app/views/layouts/application.html.erb:28
+
+Rendered rescues/_trace (42.2ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:44:40) [GET]
+Rendering template within layouts/application
+Rendering home/index
+
+ActionView::TemplateError (undefined local variable or method `home_path' for #<ActionView::Base:0x1043523c0>) on line #38 of app/views/layouts/application.html.erb:
+35: 								<li><%= link_to 'Submenu 1', root_path, :title => "" %>
+36: 								<li><%= link_to 'Submenu 2', root_path, :title => "" %>
+37: 							</ul>
+38: 						<li><%= link_to 'Transform', home_path, :title => "" %>
+39: 						<li><%= link_to 'Publish', home_index_path, :title => "" %>
+40: 						<li><%= link_to 'About', '/about', :title => "" %>
+41: 						<li class="secondary"><%= link_to 'Digital Public Square', home_path, 
+
+    app/views/layouts/application.html.erb:38
+
+Rendered rescues/_trace (40.3ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:45:34) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 10ms (View: 8, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:45:34) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#about (for 127.0.0.1 at 2010-02-20 17:45:37) [GET]
+Rendering template within layouts/application
+Rendering home/about
+Completed in 9ms (View: 7, DB: 0) | 200 OK [http://localhost/about]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:45:37) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#about (for 127.0.0.1 at 2010-02-20 17:46:17) [GET]
+Rendering template within layouts/application
+Rendering home/about
+Completed in 6ms (View: 4, DB: 0) | 200 OK [http://localhost/about]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:46:17) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:46:18) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:46:18) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:46:20) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:46:20) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:46:21) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 5ms (View: 4, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:46:21) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:46:49) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 6ms (View: 4, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:46:49) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:46:51) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:46:51) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:46:52) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:46:52) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:46:55) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:46:55) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#about (for 127.0.0.1 at 2010-02-20 17:46:56) [GET]
+Rendering template within layouts/application
+Rendering home/about
+Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/about]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:46:56) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:46:58) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 5ms (View: 4, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:46:59) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:47:00) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:47:00) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:47:02) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 5ms (View: 4, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:47:02) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#about (for 127.0.0.1 at 2010-02-20 17:47:04) [GET]
+Rendering template within layouts/application
+Rendering home/about
+Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/about]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:47:04) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:58:20) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 5ms (View: 4, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:58:20) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#about (for 127.0.0.1 at 2010-02-20 17:58:26) [GET]
+Rendering template within layouts/application
+Rendering home/about
+Completed in 5ms (View: 4, DB: 0) | 200 OK [http://localhost/about]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:58:26) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:58:30) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 5ms (View: 4, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:58:30) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-02-20 17:58:36) [GET]
+Rendering template within layouts/application
+Rendering home/index
+Completed in 5ms (View: 4, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-20 17:58:36) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/css/ipublic.css" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)

@@ -25,19 +25,20 @@
 		<div id="header">
 			<div class="container_12">
 				<div class="grid_12">
-					<h1 id="branding"><%= link_to 'Civic OpenMedia', home_path %></h1>
+					<h1 id="branding"><%= link_to 'Civic OpenMedia', root_path %></h1>
 				</div><!--#grid_12-->
 				<div class="clear"></div>
 				<div class="grid_12">
 					<ul class="nav main">
-						<li><%= link_to 'Curate', home_path, :title => "" %>
+						<li><%= link_to 'Curate', root_path, :title => "" %>
 							<ul>
-								<li><%= link_to 'Submenu 1', home_path, :title => "" %>
-								<li><%= link_to 'Submenu 2', home_path, :title => "" %>
+								<li><%= link_to 'Submenu 1', root_path, :title => "" %>
+								<li><%= link_to 'Submenu 2', root_path, :title => "" %>
 							</ul>
-						<li><%= link_to 'Transform', home_path, :title => "" %>
-						<li><%= link_to 'Publish', home_path, :title => "" %>
-						<li class="secondary"><%= link_to 'Digital Public Square', home_path, 
+						<li><%= link_to 'Transform', root_path, :title => "" %>
+						<li><%= link_to 'Publish', root_path, :title => "" %>
+						<li><%= link_to 'About', '/about', :title => "" %>
+						<li class="secondary"><%= link_to 'Digital Public Square', root_path, 
 							:title => "The open source public information publishing system" %>
 						</li>
 					</ul>
