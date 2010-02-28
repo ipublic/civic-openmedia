@@ -25,6 +25,7 @@ Rails::Initializer.run do |config|
   config.gem "json", :version => "1.2.0"
   config.gem "authlogic", :version => "2.1.3"
   config.gem 'formtastic', :version => "0.9.7"
+  config.gem 'configatron', :version => "2.5.1"
 
   config.gem "rspec", :lib => false, :version => ">=1.2.6"
   config.gem "rspec-rails", :lib => "spec/rails", :version => ">=1.2.6"

@@ -1,0 +1,48 @@
+<% title "Catalog" %>
+<div class="box grid_7">
+	<h2>Data Sets</h2>
+	<div class="block" id="tables">
+		<table>
+			<tr>
+				<th>Source</th>
+				<th>Name</th>
+				<th>URL</th>
+				<th>Data Model</th>
+				<th>Updated</th>
+			</tr>
+			<tr>
+				<td><a href="#">Metro Police</a></td>
+				<td><a href="#">Crime incidents</a></td>
+				<td><a href="#"><%= configatron.site.canonical_url + "/crime" %></a></td>
+				<td>UCR Part I Offenses</td>
+				<td><%= Time.now %></td>
+			</tr>
+			<tr>
+				<td><a href="#">City Call Center</a></td>
+				<td>311 Calls</td>
+				<td><a href="#"><%= configatron.site.canonical_url + "/311" %></a></td>
+				<td>Open 311</td>
+				<td><%= Time.now %></td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div class="box grid_4">
+	<h2>Data Models</h2>
+	<div class="block" id="tables">
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td><a href="#">UCR Part I Offenses</a></td>
+				<td>Uniform Crime Reporting Part I crimes</td>
+			</tr>
+			<tr>
+				<td><a href="#">Open311</a></td>
+				<td>Standardized, open-access, read/write model for citizens to report non-emergency issues</td>
+			</tr>
+		</table>
+	</div>
+</div>
