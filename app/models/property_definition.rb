@@ -8,6 +8,7 @@ class PropertyDefinition < Hash
   property :display_name
   property :data_type # simplified set? (e.g.; number, string, lookup_value)
   property :property_hash, :cast_as => 'PropertyHash'
+  property :ordinal_position
   property :description
  
   def to_s

@@ -8,7 +8,8 @@ class DcesMetadata < Hash
   attr_accessor :title
   
   property :title
-  property :subject, :alias => :tags
+  property :subject
+  property :keywords, :cast_as => ['String'] # tags, cast as an array of strings
   property :description
   property :type, :alias => :dcmi_type
   property :source

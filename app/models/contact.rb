@@ -2,10 +2,9 @@ class Contact < CouchRestRails::Document
 
 # see http://github.com/hpoydar/couchrest-rails
 
-  use_database :schema
+  use_database :site
 
-  validates_presence_of :first_name
-
+  property :full_name
   property :first_name
   property :last_name, :alias => :family_name
   property :job_title
@@ -15,6 +14,8 @@ class Contact < CouchRestRails::Document
   property :address, :cast_as => 'Address'
   property :notes
   timestamps!
+
+  validates_presence_of :first_name
   
   view_by :first_name
   
