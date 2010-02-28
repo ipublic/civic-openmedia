@@ -3,10 +3,17 @@ ActionController::Routing::Routes.draw do |map|
 
   map.root :controller => 'home'
   map.connect 'about', :controller => 'home', :action => 'about'
-  #map.resources :about, :controller => 'home', :member => {:about => :get}
-  
-  # map.index 'index', :controller => 'home'
-  # map.resources :home, :only => :index, :member => {:about => :get}
+#  map.connect '/admin', :controller => '', :action => ''
+
+  # AuthLogic setup 
+  map.login "login", :controller => "user_sessions", :action => "new"
+  map.logout "logout", :controller => "user_sessions", :action => "destroy"
+
+  map.resource :user_session
+  #  map.root :controller => "user_sessions", :action => "new" # optional, this just sets the root route
+  map.resource :account, :controller => "users"
+  map.resources :users
+
 
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'

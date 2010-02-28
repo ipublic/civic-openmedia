@@ -1,0 +1,27 @@
+<% title "Login" %>
+<div class="grid_5">
+<div class="box">
+	<h2>Login</h2>
+	<div class="block" id="login-forms">
+		<fieldset class="login">
+			<legend>Login</legend>
+			<p class="notice">Login using your email address.</p>
+			<% form_for @user_session, :url => user_session_path do |f| %>
+			  <p><%= f.error_messages %></p>
+			  <p><%= f.label :email %>
+			  <%= f.text_field :email %></p>
+			  <p><%= f.label :password %>
+			  <%= f.password_field :password %></p>
+			  <p><%= f.check_box :remember_me %><%= f.label :remember_me %></p>
+			  <%= f.submit "Login" %> &nbsp; 
+			<% end %>
+		</fieldset>
+
+		<fieldset>
+			<legend>Register</legend>
+			<p>If you do not already have an account, please create a new account to register.</p>
+			<%= link_to "Register", new_account_path %>
+		</fieldset>
+		</div>
+	</div>
+</div>

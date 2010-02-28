@@ -1,0 +1,16 @@
+<% title "My Account" %>
+<div class="grid_5">
+	<div class="box">
+		<h2>Edit My Account</h2>
+		<div class="block" id="login-forms">
+			<% form_for @user, :url => account_path do |f| %>
+			  <%= f.error_messages %>
+				<fieldset class="login">
+				  <%= render :partial => "form", :object => f %>
+				  <%= f.submit "Update" %>
+				</fieldset>	
+			<% end %>
+			<p><%= link_to "My Profile", account_path %></p>
+		</div>
+	</div> 
+</div>

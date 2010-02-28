@@ -30,16 +30,24 @@
 				<div class="clear"></div>
 				<div class="grid_12">
 					<ul class="nav main">
-						<li><%= link_to 'Curate', root_path, :title => "" %>
+						<li><%= link_to 'Home', root_path, :title => "" %>
+						<li><%= link_to 'Catalog', root_path, :title => "" %>
+						<li><%= link_to 'Schedule', root_path, :title => "" %>
+						<li><%= link_to 'Vocabularies', root_path, :title => "" %>
+						<li><%= link_to 'Organizations', root_path, :title => "" %>
+						<li><%= link_to 'Administer', root_path, :title => "" %>
 							<ul>
-								<li><%= link_to 'Submenu 1', root_path, :title => "" %>
-								<li><%= link_to 'Submenu 2', root_path, :title => "" %>
+								<li><%= link_to 'Site settings', root_path, :title => "" %>
+								<li><%= link_to 'Replication', root_path, :title => "" %>
 							</ul>
-						<li><%= link_to 'Transform', root_path, :title => "" %>
-						<li><%= link_to 'Publish', root_path, :title => "" %>
 						<li><%= link_to 'About', '/about', :title => "" %>
-						<li class="secondary"><%= link_to 'Digital Public Square', root_path, 
-							:title => "The open source public information publishing system" %>
+						<li class="secondary">
+							<% if !current_user %>
+							  <%= link_to "Log In", new_user_session_path %>
+							<% else %>
+							  <li class="secondary"><%= link_to current_user.email, account_path %>
+							  <%= link_to "Logout", user_session_path, :method => :delete, :confirm => "Are you sure you want to logout?" %>
+							<% end %>	
 						</li>
 					</ul>
 				</div><!--#grid_12-->
@@ -53,7 +61,7 @@
 		        <%= content_tag :div, msg, :id => "flash_#{name}" %>
 		      <% end %>
 		      <% if show_title? %>
-		        <h2><%=h yield(:title) %></h2>
+		        <h2 id="page-heading"><%=h yield(:title) %></h2>
 		      <% end %>
 		      <%= yield :layout %>
 				</div><!-- #grid_12 -->

@@ -1,0 +1,6 @@
+<legend>My Profile</legend>
+<p><%= form.label :email %><%= form.text_field :email %></p>
+<p><%= form.label :password, form.object.new_record? ? nil : "Change password" %></p>
+<p><%= form.password_field :password %></p>
+<p><%= form.label :password_confirmation, "Confirm Password"%></p>
+<p><%= form.password_field :password_confirmation %></p>
