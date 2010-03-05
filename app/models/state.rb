@@ -17,27 +17,37 @@ class State < CouchRestRails::Document
   ## Validations
   validates_presence_of :name
   validates_numericality_of :state_fips_code
-#  validates_with_method :state_fips_code, :method => :check_fips_uniqueness
+  validates_with_method :abbreviation, :method => :check_abbreviation_uniqueness
 
   before_save :set_text_case
   
   ## CouchDB Views
-  # query with State.by_name or State.by_abbreviation
+  # query with State.by_name or State.by_fips_code
   view_by :name
   view_by :abbreviation
   view_by :state_fips_code
+
+  ## This constant assignment will throw error when DB is first initialized 
+  ## (until model views are loaded to CouchDB)
+  NAMES_IDS = self.all.map do |m|
+    [m.name, m.abbreviation]
+  end  
   
+  def check_abbreviation_uniqueness
+    if self.new_document? && State.get(self.abbreviation.upcase).nil?
+      return true
+    end
+    return [false, "A state has already been created with this abbreviation"]
+  end
+
+private
   def set_text_case
     self.abbreviation = abbreviation.upcase
     self.name = mixed_case(name)
   end
-  
-  def check_fips_uniqueness
-#    if self.new_document? && State.state_fips_code(:key => self.state_fips_code).length > 0
-    if self.new_document? && State.get(:key => self.state_fips_code).length > 0
-      return [false, "A state has already been created with this FIPS code"]
-    end
-    return true
+
+  def mixed_case(name)
+     name.downcase.gsub(/\b\w/) {|first| first.upcase }
   end
   
 #  =begin
@@ -52,7 +62,4 @@ class State < CouchRestRails::Document
     record
   end
   
-  def mixed_case(name)
-     name.downcase.gsub(/\b\w/) {|first| first.upcase }
-  end
 end
