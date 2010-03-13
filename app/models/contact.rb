@@ -1,8 +1,7 @@
-class Contact < CouchRestRails::Document
+class Contact < Hash
 
-# see http://github.com/hpoydar/couchrest-rails
-
-  use_database :site
+  include ::CouchRest::CastedModel
+  include Validatable
 
   property :full_name
   property :first_name
@@ -10,13 +9,7 @@ class Contact < CouchRestRails::Document
   property :job_title
   property :phone, :cast_as => 'Phone'
   property :email
-  property :organization, :cast_as => 'Organization'
   property :address, :cast_as => 'Address'
   property :notes
-  timestamps!
 
-  validates_presence_of :first_name
-  
-  view_by :first_name
-  
 end

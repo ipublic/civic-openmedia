@@ -2,18 +2,19 @@ class PropertyDefinition < Hash
   include ::CouchRest::CastedModel
   include Validatable
   
-  validates_presence_of :name
-  
   property :name
-  property :display_name
-  property :data_type # simplified set? (e.g.; number, string, lookup_value)
-  property :property_hash, :cast_as => 'PropertyHash'
+  property :alias_name  # use alias for synonyms, e.g.; lat, long, address
+  property :data_type   # simplified set? (e.g.; number, string, lookup_value)
+  property :default
+  property :domain_lookup, :cast_as => 'DomainLookup'
   property :ordinal_position
   property :description
+
+  validates_presence_of :name
  
   def to_s
     property_str = "#{name}"
-    property_str << "\n#{display_name}" if display_name
+    property_str << "\n#{alias_name}" if display_name
     property_str << "\n#{data_type}, " if data_type
     property_str << "\n#{domain_url}, " if domain_url
     property_str << "\n#{publish_property}, " if publish_property

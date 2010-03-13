@@ -26,6 +26,7 @@ Rails::Initializer.run do |config|
   config.gem "authlogic", :version => "2.1.3"
   config.gem 'configatron', :version => "2.5.1"
   config.gem 'ruport', :version => "1.6.3"
+  config.gem 'searchlogic'
 
   config.gem "rspec", :lib => false, :version => ">=1.2.6"
   config.gem "rspec-rails", :lib => "spec/rails", :version => ">=1.2.6"

@@ -3,6 +3,7 @@
 configatron.site.name = "Civic OpenMedia"
 configatron.site.canonical_url = "http://pubdata.changeme.gov"
 configatron.site.city = "Anchorage"
+configatron.site.state = "Alaska"
 configatron.site.state_abbreviation = "AK"
 
 # Example:

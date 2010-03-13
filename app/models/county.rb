@@ -30,6 +30,7 @@ class County < CouchRestRails::Document
 
 
   def generate_fips_code
+    fips_str = self.class.to_s + '-'
     fips_str << "#{state_fips_code}, " if state_fips_code
     fips_str << "#{county_fips_code}, " if county_fips_code
 

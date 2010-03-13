@@ -39,6 +39,7 @@ class State < CouchRestRails::Document
     end
     return [false, "A state has already been created with this abbreviation"]
   end
+  
 
 private
   def set_text_case

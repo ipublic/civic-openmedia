@@ -340,6 +340,11 @@ fieldset.login p input {
 fieldset.login input.button {
 	margin-left:35%;
 }
+
+fieldset.date {
+	width:30%;
+}
+
 form p.notice {
 	font-weight:bold;
 }
