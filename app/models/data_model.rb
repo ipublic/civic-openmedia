@@ -1,17 +1,18 @@
 class DataModel < CouchRestRails::Document
 
 # see http://github.com/hpoydar/couchrest-rails
-
+  require 'property_definition'
+  require 'dces_metadata'
   include CouchRest::Validation
 
   use_database :schema
   unique_id :uri
 
   property :name, :length => 1...20
-  property :property_list, :cast_as => ["PropertyDefinition"] # syntax to cast an array of instances 
-  property :metadata, :cast_as => 'DcesMetadata'
-  property :tags, :cast_as => ['String']
-  property :contact, :cast_as => 'Contact'
+  property :property_definitions, :cast_as => ['PropertyDefinition'], :default => [] # syntax to cast an array of instances 
+  property :metadata, :cast_as => 'DcesMetadata', :default => []
+  property :tags, :cast_as => ['String'], :default => []
+#  property :contact, :cast_as => 'Contact'
   property :uri, :read_only => true
 
   timestamps!
@@ -47,5 +48,28 @@ class DataModel < CouchRestRails::Document
   def generate_uri
     self['uri'] = name.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
   end
+  
+  def new_property_definition_attributes=(property_definition_attributes)
+    property_definition_attributes.each do |attributes|
+      property_definition.build(attributes)
+    end
+  end
+  
+  def existing_property_definition_attributes=(property_definition_attributes)
+    tasks.reject(&:new_record?).each do |task|
+      attributes = task_attributes[task.id.to_s]
+      if attributes
+        task.attributes = attributes
+      else
+        tasks.delete(task)
+      end
+    end
+  end
+  
+  # def save_tasks
+  #   tasks.each do |task|
+  #     task.save(false)
+  #   end
+  # end
   
 end

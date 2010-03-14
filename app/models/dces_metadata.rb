@@ -2,7 +2,7 @@ class DcesMetadata < Hash
   # See http://dublincore.org/documents/usageguide/elements.shtml
 
   include ::CouchRest::CastedModel
-  include Validatable
+  include CouchRest::Validation
 
   validates_presence_of :title
   attr_accessor :title
@@ -11,7 +11,14 @@ class DcesMetadata < Hash
   property :subject
   property :keywords, :cast_as => ['String'] # tags, cast as an array of strings
   property :description
-  property :type, :alias => :dcmi_type
+  
+  # Reference DCMI Type vocubulary: http://dublincore.org/documents/dcmi-type-vocabulary/
+  property :type, :alias => :dcmi_type, :default => 'Dataset'
+
+  # Reference Internet Media type (MIME Types): http://www.iana.org/assignments/media-types/
+  property :format, :alias => :dces_format, :default => 'text/plain'
+  property :language, :default => 'en-US'
+  
   property :source
   property :relation
   property :spatial_coverage
@@ -25,9 +32,8 @@ class DcesMetadata < Hash
 
   # creation or availability date of the resource
   property :date #, :cast_as => 'Date', :init_method => 'parse'
-  property :format, :alias => :dces_format
+
   property :identifier, :alias => :uri
-  property :language, :default => 'en-US'
   property :accrual_periodity, :alias => :update_interval_in_minutes
 #  property :data_accuracy
  
