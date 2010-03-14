@@ -15,11 +15,12 @@
 		<!--[if IE 6]><%= stylesheet_link_tag "css/ie6.css", :media => "screen" %><![endif]-->
 		<!--[if IE 7]><%= stylesheet_link_tag "css/ie.css", :media => "screen" %><![endif]-->
 
-		<%= javascript_include_tag :defaults %>
 
 		<%= javascript_include_tag 'js/mootools-1.2.1-core.js'%>
 		<%= javascript_include_tag 'js/mootools-1.2-more.js'%>
 		<%= javascript_include_tag 'js/mootools-fluid16-autoselect.js'%>
+
+		<%= javascript_include_tag :defaults %>
 
 		<%= yield(:head) %>
 	</head>
