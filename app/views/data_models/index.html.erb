@@ -1,0 +1,21 @@
+<% title "Data Models" %>
+<div class="grid_12">
+	<div class="box">
+	  <h2>Data Models</h2>
+	  <div class="block" id="tables">
+			<table>
+			  <tr>
+					<td>Title</td>
+			  </tr>
+
+				<% @data_models.each do |data_model| %>
+				  <tr>
+						<td><%= link_to data_model.title, data_model %></td>
+				  </tr>
+				<% end %>
+			</table>
+			<%= link_to 'New Data Model', new_data_model_path %>
+		</div>
+	</div>
+</div>
+

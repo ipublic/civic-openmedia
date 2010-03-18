@@ -1,0 +1,10 @@
+<div id="forms" class="block">
+<fieldset>
+	<div id="property_definitions">
+		<div class="property_definition">
+			<%= render :partial => 'property_definition', :collection => @data_model.property_definitions %>
+		</div>
+	</div>
+	<p><%= add_property_definition_link "Add Property"%></p>
+</fieldset>
+</div>

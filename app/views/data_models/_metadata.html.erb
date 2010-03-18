@@ -1,0 +1,19 @@
+<fieldset>
+	<% fields_for(@data_model.metadata) do |m| %>
+    <%= m.error_messages %>
+    <p><%= m.label :type %> <%= m.text_field :type %></p>
+    <p><%= m.label :format %> <%= m.text_field :format %></p>
+    <p><%= m.label :subject %><br/> <%= m.text_area :subject, :rows => 3 %></p>
+    <p><%= m.label :source %> <%= m.text_field :source %></p>
+    <p><%= m.label :creator %> <%= m.text_field :creator %></p>
+    <p><%= m.label :contributor %> <%= m.text_field :contributor %></p>
+    <p><%= m.label :publisher %> <%= m.text_field :publisher %></p>
+    <p><%= m.label :date %> <%= m.date_select :date %></p>
+    <p><%= m.label :rights %><br/> <%= m.text_area :rights, :rows => 3 %></p>
+    <p><%= m.label :language %> <%= m.text_field :language %></p>
+    <p><%= m.label :spatial_coverage %> <%= m.text_field :spatial_coverage %></p>
+    <p><%= m.label :temporal_coverage %> <%= m.text_field :temporal_coverage %></p>
+    <p><%= m.label :accrual_periodity %> <%= m.text_field :accrual_periodity %></p>
+    <p><%= m.label :description %><br/> <%= m.text_area :description, :rows => 3 %></p>
+	<% end %>
+</fieldset>

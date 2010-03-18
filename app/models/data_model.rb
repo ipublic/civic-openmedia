@@ -6,34 +6,35 @@ class DataModel < CouchRestRails::Document
   include CouchRest::Validation
 
   use_database :schema
-  unique_id :uri
+  unique_id :identifier
+  attr_accessor :identifier
+  
 
-  property :name, :length => 1...20
-  property :property_definitions, :cast_as => ['PropertyDefinition'], :default => [] # syntax to cast an array of instances 
+  property :identifier, :read_only => true
+  property :title, :alias => :name, :length => 1...20
   property :metadata, :cast_as => 'DcesMetadata', :default => []
-  property :tags, :cast_as => ['String'], :default => []
+  property :property_definitions, :cast_as => ['PropertyDefinition'], :default => [] # syntax to cast an array of instances 
 #  property :contact, :cast_as => 'Contact'
-  property :uri, :read_only => true
 
   timestamps!
   
-  validates_presence_of :name
-  set_callback :save, :before, :generate_uri
+  validates_presence_of :title
+  set_callback :save, :before, :generate_identifier
 
   ## Views
    # query with DataModel.by_name
-   view_by :name
+   view_by :title
 
    # compound sort keys, query with DataModel.by_uri_and_name
-   view_by :uri, :name
+   view_by :identifier, :title
 
    # custom map/reduce function, query with DataModel.by_tags :reduce => true
    view_by :tags,
      :map => 
        "function(doc) {
-         if (doc['couchrest-type'] == 'DataModel' && doc.tags) {
-           doc.tags.forEach(function(tag){
-             emit(tag, 1);
+         if (doc['couchrest-type'] == 'DataModel' && doc.metadata.subject) {
+           doc.metadata.subject.forEach(function(subject){
+             emit(subject, 1);
            });
          }
        }",
@@ -45,13 +46,13 @@ class DataModel < CouchRestRails::Document
 =begin
   TODO Prepend canonical_url from site to make name unique
 =end
-  def generate_uri
-    self['uri'] = name.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
+  def generate_identifier
+    self['identifier'] = title.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
   end
   
   def new_property_definition_attributes=(property_definition_attributes)
     property_definition_attributes.each do |attributes|
-      property_definition.build(attributes)
+      self.property_definitions << attributes
     end
   end
   
