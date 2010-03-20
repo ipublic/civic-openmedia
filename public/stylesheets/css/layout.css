@@ -5,6 +5,8 @@ Grey Box Method - Layout CSS
 
 body {
 	background: #eee;
+	background: #D9E8F5;
+	background:#304269;
 	border-top: 5px solid #000;
 	color: #333;
 	font-size: 11px;
@@ -16,11 +18,13 @@ body {
 ----------------------------------------------- */
 a {
 	color: #000;
+	color:#304269;
 	font-weight:bold;
 	text-decoration: none;
 }
 a:hover {
 	color:#333;
+	color:#F26101;
 }
 
 
@@ -52,6 +56,7 @@ h1#branding {
 	font-size:3em;
 	text-align:left;
 	background:#aaa;
+	background:#91bed4;
 	padding:.7em 1em;
 	margin-bottom:0;
 }
@@ -71,6 +76,7 @@ h2#page-heading {
 ----------------------------------------------- */
 .box {
 	background:#ddd;
+	background:#91bed4;
 	margin-bottom:20px;
 	padding:10px 10px 1px 10px;
 }
@@ -80,6 +86,7 @@ h2#page-heading {
 	text-transform:uppercase;
 	color:#fff;
 	background:#333;
+	background:#304269;
 	margin:-10px -10px 0 -10px;
 	padding:6px 12px;
 }
@@ -253,11 +260,13 @@ col.colC {
 }
 th, td {
 	padding:.2em 1em;
-	text-align:left;
+	text-align:left;	
 }
-thead th {
+thead th { 
 	border-bottom:2px solid #888;
+	border-bottom:2px solid #304269;
 	background:#bbb;
+	background:#D9E8F5;
 	padding:.4em 1em .2em;
 }
 thead th.table-head {
@@ -272,7 +281,10 @@ tbody th,
 tbody td {
 	border-top:1px solid #bbb;
 	border-bottom:1px solid #bbb;
+	border-top:1px solid #D9E8F5;
+	border-bottom:1px solid #D9E8F5;
 	background:#eee;
+	background:#fff;	
 }
 tbody tr.odd th,
 tbody tr.odd td {
@@ -306,6 +318,7 @@ fieldset {
 	padding:10px;
 	position:relative;
 	background:#e9e9e9;
+	background:#D9E8F5;
 	margin-bottom:10px;
 }
 legend {
@@ -432,6 +445,7 @@ margin-left: 95px;
 #site_info .box {
 	color:#ccc;
 	background:#666;
+	background:#304269;
 	margin-bottom:10px;
 }
 #site_info a {
