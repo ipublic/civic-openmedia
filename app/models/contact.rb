@@ -1,15 +1,18 @@
 class Contact < Hash
-
+  
   include ::CouchRest::CastedModel
   include Validatable
+  require 'address'
 
   property :full_name
   property :first_name
   property :last_name, :alias => :family_name
   property :job_title
-  property :phone, :cast_as => 'Phone'
+  property :phone
   property :email
-  property :address, :cast_as => 'Address'
+  property :website_url
+  
+  property :address, :cast_as => ['Address'] # support multiple addresses for contact
   property :notes
 
 end
