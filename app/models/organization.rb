@@ -28,13 +28,13 @@ class Organization < CouchRestRails::Document
   # query with Organization.by_name
   view_by :name
 
-private
   ## This constant assignment will throw error when DB is first initialized 
   ## (until model views are loaded to CouchDB)
   NAMES_IDS = self.all.map do |m|
     [m.name, m.identifier]
   end  
 
+private
   def generate_identifier
     unless abbreviation.blank? 
       self['identifier'] = self['couchrest-type'].to_s.pluralize.downcase + '_'+ abbreviation.rstrip.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
