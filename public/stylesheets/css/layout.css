@@ -314,9 +314,11 @@ legend {
 	background:#fff;
 	border:1px solid #bbb;
 }
-fieldset.login p {
-	margin-bottom:1em;
-	margin-top:0pt;
+form p.date select {
+	width:26%;
+}
+form p.notice {
+	font-weight:bold;
 }
 fieldset p label {
 	width:98%;
@@ -326,6 +328,10 @@ fieldset p input {
 }
 fieldset p select {
 	width:99%;
+}
+fieldset.login p {
+	margin-bottom:1em;
+	margin-top:0pt;
 }
 fieldset.login p label {
 	float:left;
@@ -340,14 +346,6 @@ fieldset.login p input {
 fieldset.login input.button {
 	margin-left:35%;
 }
-
-form p.date select {
-	width:26%;
-}
-
-form p.notice {
-	font-weight:bold;
-}
 input.search.text {
 	width:66%;
 }
@@ -355,7 +353,6 @@ input.search.button {
 	width:28%;
 	margin-left:2%;
 }
-
 .buttonSubmit {
 	font-size: .95em;
 	float: right;
