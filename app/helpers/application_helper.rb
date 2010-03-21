@@ -9,5 +9,4 @@ module ApplicationHelper
   def boolean_to_human(test)
     test  ? "Yes" : "No"
   end
-  
 end
