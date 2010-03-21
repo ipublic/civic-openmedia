@@ -1,4 +1,4 @@
-class Address < CouchRestRails::Document
+class SiteAddress < CouchRestRails::Document
   
   use_database :catalog
   unique_id :uri
