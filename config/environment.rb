@@ -20,17 +20,17 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
 
-  config.gem "couchrest", :lib => "couchrest", :source => "http://gemcutter.org", :version => "0.35"
-  config.gem 'validatable', :version => "1.6.7", :source => "http://gemcutter.org"
-  config.gem "json", :version => "1.2.0"
-  config.gem "authlogic", :version => "2.1.3"
-  config.gem 'configatron', :version => "2.5.1"
-  config.gem 'ruport', :version => "1.6.3"
+  config.gem "couchrest" #, :lib => "couchrest", :source => "http://gemcutter.org", :version => "0.35"
+  config.gem 'validatable' #, :version => "1.6.7", :source => "http://gemcutter.org"
+  config.gem "json" #, :version => "1.2.0"
+  config.gem "authlogic" #, :version => "2.1.3"
+  config.gem 'configatron'
+  config.gem 'ruport' #, :version => "1.6.3"
   config.gem 'searchlogic'
 
-  config.gem "rspec", :lib => false, :version => ">=1.2.6"
-  config.gem "rspec-rails", :lib => "spec/rails", :version => ">=1.2.6"
-  config.gem "factory_girl", :source => "http://gemcutter.org"
+  # config.gem "rspec", :lib => false, :version => ">=1.2.6"
+  # config.gem "rspec-rails", :lib => "spec/rails", :version => ">=1.2.6"
+  # config.gem "factory_girl", :source => "http://gemcutter.org"
   
 
   # Only load the plugins named here, in the order given (default is alphabetical).
