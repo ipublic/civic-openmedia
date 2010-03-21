@@ -1,10 +1,10 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: civicom-dev
+  database: openmedia-dev
   pool: 5
-  username: dthomas
-  password: myrtle12
+  username: my_user
+  password: my_password
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -12,15 +12,15 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: civicom-test
+  database: openmedia-test
   pool: 5
-  username: dthomas
-  password: myrtle12
+  username: my_user
+  password: my_password
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: civicom-production
+  database: openmedia-production
   pool: 5
-  username: dthomas
-  password: myrtle12
+  username: my_user
+  password: my_password
