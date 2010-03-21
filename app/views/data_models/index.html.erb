@@ -1,21 +1,24 @@
 <% title "Data Models" %>
 <div class="grid_12">
 	<div class="box">
-	  <h2>Data Models</h2>
+	  <h2>Data Model List</h2>
 	  <div class="block" id="tables">
 			<table>
-			  <tr>
-					<td>Title</td>
-			  </tr>
-
+				<thead>
+				  <tr>
+						<th>Title</th>
+						<th>Publisher</th>
+				  </tr>
+				</thead>
 				<% @data_models.each do |data_model| %>
 				  <tr>
 						<td><%= link_to data_model.title, data_model %></td>
+						<td><%= link_to organization_lookup(data_model.metadata.publisher), organization_path(data_model.metadata.publisher) %></td>
 				  </tr>
 				<% end %>
 			</table>
-			<%= link_to 'New Data Model', new_data_model_path %>
 		</div>
 	</div>
+	<p><%= link_to 'New Data Model', new_data_model_path %></p>
 </div>
 

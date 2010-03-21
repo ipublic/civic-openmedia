@@ -1,29 +1,30 @@
+<% form_for(@data_model) do |f| %>
 <div class="grid_5">
-	<% form_for(@data_model) do |f| %>
-		<div class="box">
-			<h2><%= @data_model.title || "Data Model" %></h2>
-			<div class="block" id="forms">
-			  <%= f.error_messages %>
-				<%= f.hidden_field :rev, :value => @data_model['_rev'] if @data_model['_rev'] %>
-				<fieldset>
-				  <p><%= f.label :title %> <%= f.text_field :title %></p>
-				</fieldset>
-			</div>
-			<div class="block" id="forms">
-				<%= render :partial => 'metadata' %>
-			</div>
-			<p>
-				<%= link_to 'Back', data_models_path %></p><p>
-		    <%= f.submit "Submit", :class => "buttonSubmit" %><br/>
-		  </p>
+	<div class="box">
+		<h2><%= @data_model.title || "New Data Model" %></h2>
+		<div class="block" id="forms">
+		  <%= f.error_messages %>
+			<%= f.hidden_field :rev, :value => @data_model['_rev'] if @data_model['_rev'] %>
+			<fieldset>
+			  <p><%= f.label :title %> <%= f.text_field :title %></p>
+			</fieldset>
+		</div>
+		<div class="block" id="forms">
+			<%= render :partial => 'metadata' %>
 		</div>
 	</div>
-
-	<div class="grid_7">
-		<div class="box">
-			<h2>Properties</h2>
-			<%= render :partial => 'properties' %>
-		</div>
-		<% end %>
+	<p>
+		<%= link_to 'Back', data_models_path %>
+    <%= f.submit "Submit", :class => "buttonSubmit" %>
+  </p>
 </div>
+
+<!-- Right column -->
+<div class="grid_7">
+	<div class="box">
+		<h2>Properties</h2>
+		<%= render :partial => 'properties' %>
+	</div>
+</div>
+<% end %>
 

@@ -5,10 +5,10 @@
     <p><%= m.label :format %> <%= m.text_field :format %></p>
     <p><%= m.label :subject %><br/> <%= m.text_area :subject, :rows => 3 %></p>
     <p><%= m.label :source %> <%= m.text_field :source %></p>
-    <p><%= m.label :creator %> <%= m.text_field :creator %></p>
-    <p><%= m.label :contributor %> <%= m.text_field :contributor %></p>
-    <p><%= m.label :publisher %> <%= m.text_field :publisher %></p>
-    <p><%= m.label :date %> <%= m.date_select :date %></p>
+    <p><%= m.label :creator %> <%= m.select :creator, Organization::NAMES_IDS, :include_blank => true %></p>
+    <p><%= m.label :contributor %> <%= m.select :contributor, Organization::NAMES_IDS, :include_blank => true %></p>
+    <p><%= m.label :publisher %> <%= m.select :publisher, Organization::NAMES_IDS, :include_blank => true %></p>
+    <p class="date"><%= m.label :date %><br/> <%= m.date_select :date %></p>
     <p><%= m.label :rights %><br/> <%= m.text_area :rights, :rows => 3 %></p>
     <p><%= m.label :language %> <%= m.text_field :language %></p>
     <p><%= m.label :spatial_coverage %> <%= m.text_field :spatial_coverage %></p>

@@ -1,4 +1,4 @@
-<% title "Data Model" %>
+<% title "Data Models" %>
 <div class="grid_5">
 		<div class="box">
 			<h2><%=h @data_model.title %></h2>
@@ -9,9 +9,9 @@
 		    <p><b>Format:</b> <%=h metatdata.format %></p>
 		    <p><b>Subject:</b> <%=h metatdata.subject %></p> 
 		    <p><b>Source:</b> <%=h metatdata.source %></p>
-		    <p><b>Creator:</b> <%=h metatdata.creator %></p> 
-		    <p><b>Contributor:</b> <%=h metatdata.contributor %></p> 
-		    <p><b>Publisher:</b> <%=h metatdata.publisher %></p> 
+		    <p><b>Creator:</b> <%= link_to organization_lookup(@data_model.metadata.creator), organization_path(metatdata.contributor) %></p> 
+		    <p><b>Contributor:</b> <%= link_to organization_lookup(@data_model.metadata.contributor), organization_path(metatdata.contributor) %></p> 
+		    <p><b>Publisher:</b> <%= link_to organization_lookup(@data_model.metadata.publisher), organization_path(metatdata.publisher) %></p> 
 		    <p><b>Date:</b> <%=h metatdata.date %></p>
 		    <p><b>Rights:</b> <%=h metatdata.rights %></p> 
 		    <p><b>Language:</b> <%=h metatdata.language %></p>
