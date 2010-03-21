@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-		<title><%= h(yield(:title) || "Civic OpenMedia") %></title>
+		<title><%= yield(:title).nil? ? "Civic OpenMedia" : "Civic OpenMedia: " + h(yield(:title)) %></title>
 		
 		<!-- CSS - Use 960 framework -->
 		<%= stylesheet_link_tag "css/reset.css", :media => "screen" %>
@@ -35,10 +35,10 @@
 						<li><%= link_to 'Home', root_path, :title => "" %>
 						<li><%= link_to 'Catalog', catalogs_path, :title => "" %>
 						<li><%= link_to 'Data Models', data_models_path, :title => "" %>
-						<li><%= link_to 'Addresses', addresses_path, :title => "" %>
+						<li><%= link_to 'Organizations', organizations_path, :title => "" %>
+						<li><%= link_to 'Addresses', root_path, :title => "" %>
 						<li><%= link_to 'Feeds', root_path, :title => "" %>
 						<li><%= link_to 'Vocabularies', root_path, :title => "" %>
-						<li><%= link_to 'Organizations', organizations_path, :title => "" %>
 						<li><%= link_to 'Administer', root_path, :title => "" %>
 							<ul>
 								<li><%= link_to 'Local settings', root_path, :title => "" %>
