@@ -2,7 +2,7 @@ class DataModelsController < ApplicationController
 
   # GET /data_models
   def index
-    @data_models = DataModel.all
+    @data_models = DataModel.by_title
   end
 
   # GET /data_models/:id
@@ -24,6 +24,7 @@ class DataModelsController < ApplicationController
   # GET /data_models/:id/edit
   def edit
     @data_model = DataModel.get(params[:id])
+
     if @data_model.nil?
       flash[:error] = 'Data Model not found.'
       redirect_to(data_models_url)
