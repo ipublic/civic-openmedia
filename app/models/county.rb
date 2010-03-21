@@ -3,7 +3,7 @@ class County < CouchRestRails::Document
   include CouchRest::Validation
   
   ## CouchDB database and record key
-  use_database :catalog
+  use_database :community
   unique_id :fips_code # coumpound natural key
   
   ## Properties

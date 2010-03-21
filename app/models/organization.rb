@@ -5,7 +5,7 @@ class Organization < CouchRestRails::Document
   require 'address'
   include CouchRest::Validation
   
-  use_database :schema
+  use_database :community
   unique_id :identifier
   
 #  attr_accessor :url
@@ -30,10 +30,10 @@ class Organization < CouchRestRails::Document
 
   ## This constant assignment will throw error when DB is first initialized 
   ## (until model views are loaded to CouchDB)
-  NAMES_IDS = self.all.map do |m|
-    [m.name, m.identifier]
-  end  
-
+    NAMES_IDS = self.all.map do |m|
+      [m.name, m.identifier]
+    end  
+  
 private
   def generate_identifier
     unless abbreviation.blank? 

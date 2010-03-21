@@ -3,7 +3,7 @@ class State < CouchRestRails::Document
   include CouchRest::Validation
   
   ## CouchDB database and record key
-  use_database :catalog
+  use_database :community
   unique_id :abbreviation #natural key
   
   ## Properties

@@ -5,7 +5,7 @@ class DataModel < CouchRestRails::Document
   require 'dces_metadata'
   include CouchRest::Validation
 
-  use_database :schema
+  use_database :community
   unique_id :identifier
   attr_accessor :identifier
   
