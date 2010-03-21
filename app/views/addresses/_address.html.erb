@@ -1,0 +1,16 @@
+<% fields_for(@organization.address) do |address| %>
+	<fieldset>
+		<legend>Address</legend>
+    <%= address.error_messages %>
+    <p><%= address.label :address_1 %> <%= address.text_field :address_1 %></p>
+    <p><%= address.label :address_2 %> <%= address.text_field :address_2 %></p>
+    <p><%= address.label :city %> <%= address.text_field :city %></p>
+	  <p><%= address.label :state_abbreviation, 'State' %> 
+					<%= address.select :state_abbreviation, State::NAMES_IDS, :include_blank => true  %></p>
+    <p><%= address.label :zipcode %> <%= address.text_field :zipcode %></p>
+    <p><%= address.label :address_type %> <%= address.select :address_type, {'Work' => "Work"}, :include_blank => true %></p>
+	</fieldset>
+<% end %>
+
+
+
