@@ -6,6 +6,14 @@
 #   cities = City.create([{ :name => 'Chicago' }).save { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
 
+# Seed default user
+User.delete_all
+User.new(:login => 'admin', 
+  :password => 'password', 
+  :password_confirmation => 'password', 
+  :email => 'admin@example.com').save
+
+## Syntax for CouchRest documents
 #State.all.delete
 State.new({:abbreviation => 'AK', :state_fips_code => '02', :name => 'ALASKA'}).save
 State.new({:abbreviation => 'AL', :state_fips_code => '01', :name => 'ALABAMA'}).save
