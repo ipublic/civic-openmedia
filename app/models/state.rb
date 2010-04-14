@@ -4,10 +4,10 @@ class State < CouchRestRails::Document
   
   ## CouchDB database and record key
   use_database :community
-  unique_id :identifier 
+  unique_id :state_id 
   
   ## Properties
-  property :identifier
+  property :state_id
   property :name, :length => 1...20
   property :abbreviation, :length => 1...2
   property :state_fips_code #, :read_only => true
@@ -20,8 +20,8 @@ class State < CouchRestRails::Document
 #  validates_with_method :abbreviation, :method => :check_abbreviation_uniqueness
 
   before_save :set_text_case
-  before_save :generate_identifier
-#  set_callback :save, :before, :generate_identifier
+  before_save :generate_state_id
+#  set_callback :save, :before, :generate_state_id
   
   ## CouchDB Views
   # query with State.by_name or State.by_fips_code
@@ -48,9 +48,9 @@ private
     self.name = mixed_case(name)
   end
 
-  def generate_identifier
+  def generate_state_id
     #Pattern for Unique ID: class_key
-    self['identifier'] = self.class.to_s.downcase + '_' + abbreviation.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
+    self['state_id'] = self.class.to_s.downcase + '_' + abbreviation.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
   end
 
   def mixed_case(name)
