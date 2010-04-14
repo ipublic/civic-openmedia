@@ -4,10 +4,10 @@ class County < CouchRestRails::Document
   
   ## CouchDB database and record key
   use_database :community
-  unique_id :identifier
+  unique_id :county_id
   
   ## Properties
-  property :identifier
+  property :county_id
   property :name
   property :state_fips_code
   property :county_fips_code
@@ -19,7 +19,7 @@ class County < CouchRestRails::Document
   validates_presence_of :name, :state_fips_code, :county_fips_code
 #  validates_with_method :state_fips_code, :method => :check_fips_uniqueness
   
-  before_save :generate_identifier
+  before_save :generate_county_id
   
   ## CouchDB Views
   # query with:
@@ -38,11 +38,11 @@ class County < CouchRestRails::Document
   # end
   
 private
-  def generate_identifier
+  def generate_county_id
     fips_str = "#{state_fips_code}_#{county_fips_code}"
 
     #Pattern for Unique ID: class_key
-    self['identifier'] = self.class.to_s.downcase + '_' + fips_str if new?
+    self['county_id'] = self.class.to_s.downcase + '_' + fips_str if new?
   end
 
 end
