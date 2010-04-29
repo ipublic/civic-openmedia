@@ -1,9 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :data_models
-
-  map.resources :addresses
-
-  map.resources :organizations
 
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -13,6 +8,12 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect 'about', :controller => 'admin/home', :action => 'about'
 #  map.connect '/admin', :controller => '', :action => ''
+
+  map.resources :catalogs
+  map.resources :catalog_records
+  map.resources :data_models
+  map.resources :addresses
+  map.resources :organizations
 
   # AuthLogic setup 
   map.login "login", :controller => "user_sessions", :action => "new"
@@ -25,8 +26,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :account, :controller => "users"
   map.resources :users
   
-  map.resource :catalogs, :only => [:index, :show]
-
 
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
