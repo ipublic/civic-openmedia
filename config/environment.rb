@@ -14,7 +14,7 @@ Rails::Initializer.run do |config|
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
   
-  # Support extended folder organization/structure -- DT 2009-04-03
+  # Support extended folder organization/structure 
   config.load_paths += %W( 
     #{RAILS_ROOT}/app/controllers/admin 
     #{RAILS_ROOT}/app/controllers/physical 
