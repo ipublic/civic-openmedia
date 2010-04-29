@@ -7,9 +7,11 @@ ActionController::Routing::Routes.draw do |map|
 
 
   # The priority is based upon order of creation: first created -> highest priority.
+  map.home '', :controller => 'admin/home', :action => 'index'
+#  map.index 'index', :controller => 'admin/home', :action => 'index'
+  map.admin 'admin', :controller => 'admin/home', :action => 'index'
 
-  map.root :controller => 'home'
-  map.connect 'about', :controller => 'home', :action => 'about'
+  map.connect 'about', :controller => 'admin/home', :action => 'about'
 #  map.connect '/admin', :controller => '', :action => ''
 
   # AuthLogic setup 
