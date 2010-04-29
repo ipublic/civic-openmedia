@@ -27,23 +27,27 @@
 		<div id="header">
 			<div class="container_12">
 				<div class="grid_12">
-					<h1 id="branding"><%= link_to 'Civic OpenMedia', root_path %></h1>
+					<h1 id="branding"><%= link_to 'Civic OpenMedia', admin_path %></h1>
 				</div><!--#grid_12-->
 				<div class="clear"></div>
 				<div class="grid_12">
 					<ul class="nav main">
-						<li><%= link_to 'Home', root_path, :title => "" %>
+						<li><%= link_to 'Home', admin_path, :title => "" %>
+						<li><%= link_to 'Load Data', data_models_path, :title => "" %>
+						<ul>
+							<li><%= link_to 'Organizations', organizations_path, :title => "" %>
+							<li><%= link_to 'Addresses', admin_path, :title => "" %>
+							<li><%= link_to 'Vocabularies', admin_path, :title => "" %>
+						</ul>
 						<li><%= link_to 'Catalog', catalogs_path, :title => "" %>
-						<li><%= link_to 'Data Models', data_models_path, :title => "" %>
-						<li><%= link_to 'Organizations', organizations_path, :title => "" %>
-						<li><%= link_to 'Addresses', root_path, :title => "" %>
-						<li><%= link_to 'Feeds', root_path, :title => "" %>
-						<li><%= link_to 'Vocabularies', root_path, :title => "" %>
-						<li><%= link_to 'Administer', root_path, :title => "" %>
-							<ul>
-								<li><%= link_to 'Local settings', root_path, :title => "" %>
-								<li><%= link_to 'Replication', root_path, :title => "" %>
-							</ul>
+						<ul>
+							<li><%= link_to 'Feeds', admin_path, :title => "" %>
+						</ul>
+						<li><%= link_to 'Site settings', admin_path, :title => "" %>
+						<ul>
+							<li><%= link_to 'Local settings', admin_path, :title => "" %>
+							<li><%= link_to 'Replication', admin_path, :title => "" %>
+						</ul>
 						<li><%= link_to 'About', '/about', :title => "" %>
 						<li class="secondary">
 							<% if !current_user %>
