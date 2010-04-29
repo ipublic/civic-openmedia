@@ -13,6 +13,18 @@ Rails::Initializer.run do |config|
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
+  
+  # Support extended folder organization/structure -- DT 2009-04-03
+  config.load_paths += %W( 
+    #{RAILS_ROOT}/app/controllers/admin 
+    #{RAILS_ROOT}/app/controllers/physical 
+    #{RAILS_ROOT}/app/controllers/service 
+    #{RAILS_ROOT}/app/models/admin
+    #{RAILS_ROOT}/app/models/logical 
+    #{RAILS_ROOT}/app/models/physical
+    #{RAILS_ROOT}/app/views/admin
+    #{RAILS_ROOT}/app/models/physical
+  )
 
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
@@ -52,5 +64,8 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
   
-  
 end
+
+ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.merge!(
+  :simple => "%B %d, %Y"
+)
