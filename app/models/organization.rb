@@ -13,8 +13,8 @@ class Organization < CouchRestRails::Document
   property :name, :length => 1...50
   property :abbreviation
   property :identifier, :length => 1...100
-  property :point_of_contact, :cast_as => 'Contact', :default => []
-  property :address, :cast_as => 'Address', :default => []
+  property :points_of_contact, :cast_as => ['Contact'], :default => []
+  property :addresses, :cast_as => ['Address'], :default => []
   property :website_url
   property :description
   timestamps!
@@ -22,7 +22,6 @@ class Organization < CouchRestRails::Document
   ## Validations
   validates_presence_of :name
   set_callback :save, :before, :generate_identifier
-  set_callback :save, :before, :generate_contact_fullname
   
   ## CouchDB Views
   # query with Organization.by_name
@@ -31,7 +30,7 @@ class Organization < CouchRestRails::Document
   ## This constant assignment will throw error when DB is first initialized 
   ## (until model views are loaded to CouchDB)
     NAMES_IDS = self.all.map do |m|
-      [m.name, m.identifier]
+     [m.name, m.identifier]
     end  
   
 private
