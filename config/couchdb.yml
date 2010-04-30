@@ -1,6 +1,6 @@
 base: &base
  database_prefix: "ipublic_org_"
- database_suffix: _<%%= RAILS_ENV %>
+ database_suffix: _<%= RAILS_ENV %>
 
 development:
   host: localhost

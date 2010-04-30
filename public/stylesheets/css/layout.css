@@ -61,6 +61,68 @@ h1#branding {
 	margin-bottom:0;
 }
 
+#frontpage .spotlight {
+float: left;
+width: 235px;
+padding: 0px;
+padding-left : 70px;
+margin: 0 10px 20px 5px;
+
+}
+
+.grid_4 .spotlight {
+	background:#91bed4;
+	
+}
+
+#frontpage .spotlight h2 {
+font: normal normal normal 1.75em/.80em auto, sans-serif;
+padding: 0;
+margin: 0 0 0.5em -60px;
+
+}
+
+#frontpage .spotlight h2 a {
+text-decoration : none;
+padding-left : 60px;
+padding-bottom : 60px;
+display : block;
+}
+
+#frontpage .spotlight img {
+display: block;
+padding: 0.5em;
+}
+
+#frontpage .spotlight p a,
+#frontpage .spotlight p a:hover {	
+display : block;
+color : #000;
+text-decoration : none;
+}
+
+#frontpage .spotlight p {
+font-size : 1em;
+margin: -60px 0 .5em 0;
+}
+
+#frontpage_load_data {
+background : transparent url(images/rails.png) 0 -90px no-repeat;
+}
+
+#frontpage-support {
+background : transparent url(./images/icon-support.png) 0 -90px no-repeat;
+}
+
+#frontpage-develop {
+background : transparent url(./images/icon-develop.png) 0 -90px no-repeat;
+}
+
+#frontpage-learn:hover, 
+#frontpage-support:hover, 
+#frontpage-develop:hover {
+background-position : 0 0;
+}
 
 /* page heading
 ----------------------------------------------- */
