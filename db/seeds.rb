@@ -14,6 +14,29 @@
 #   :email => 'admin@example.com').save
 
 ## Syntax for CouchRest documents
+
+Organization.new({
+  :name => 'iPublic, LLC', 
+  :abbreviation => 'ipublic',
+  :points_of_contact => [
+    :first_name => 'Dan',
+    :last_name => 'Thomas',
+    :job_title => 'Chief Technology Officer',
+    :email => 'dan.thomas@ipublic.org',
+    ],
+  :addresses => [
+    :city => 'Ellicott City',
+    :state_abbreviation => 'MD',
+    :zipcode => '21043',
+    :address_type => 'Business'
+    ],
+  :website_url => 'http://www.ipublic.org/',
+  :description => 'iPublic is creator and maintainer of Civic OpenMedia system'
+  }
+).save
+
+@organization = Organization.first
+
 #State.all.delete
 State.new({:abbreviation => 'AL', :state_fips_code => '01', :name => 'ALABAMA'}).save
 State.new({:abbreviation => 'AK', :state_fips_code => '02', :name => 'ALASKA'}).save
@@ -73,7 +96,7 @@ State.new({:abbreviation => 'VI', :state_fips_code => '78', :name => 'VIRGIN ISL
 
 
 # this call will load the model's predefined views
-s = State.all
+s = State.first
 
 # Load County values
 County.new({:state_fips_code => "02", :county_fips_code => "013", :name => "Aleutians East Borough"}).save
@@ -3218,4 +3241,4 @@ County.new({:state_fips_code => "56", :county_fips_code => "041", :name => "Uint
 County.new({:state_fips_code => "56", :county_fips_code => "043", :name => "Washakie County"}).save
 County.new({:state_fips_code => "56", :county_fips_code => "045", :name => "Weston County"}).save
 
-c = County.all
+c = County.first
