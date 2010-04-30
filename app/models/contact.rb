@@ -12,7 +12,7 @@ class Contact < Hash
   property :email
   property :website_url
   
-  property :address, :cast_as => ['Address'] # support multiple addresses for contact
+  property :addresses, :cast_as => ['Address'] # support multiple addresses for contact
   property :notes
 
 end

@@ -8,8 +8,8 @@ class Address < Hash
   property :city
   property :state_abbreviation
   property :zipcode
-  property :address_type, :default => 'Work'
-  property :comments
+  property :address_type, :default => 'Business'
+  property :notes
   
   def to_html
     address_str = ""
