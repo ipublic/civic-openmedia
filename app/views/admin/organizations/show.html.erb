@@ -1,0 +1,32 @@
+<% title "Organizations" %>
+<div class="grid_5">
+		<div class="box">
+			<h2><%=h @organization.name %></h2>
+			<div class="block">
+
+		    <p><b>Identifier:</b> <%=h @organization.identifier %></p>
+		    <p><b>Abbreviation:</b> <%=h @organization.abbreviation %></p>
+				<% unless @organization.website_url.blank? %>
+		    	<p><b>Website URL:</b> <%= link_to h(@organization.website_url), @organization.website_url %></p>
+				<% end %>
+				<h5>Address</h5>
+				<% @organization.addresses.each do |address| %>
+					<p><b><%= address.address_type %> address:</b></p>
+			    <p><%= address.to_html %></p>
+				<% end %>
+		    <p><b>Organization Description:</b><br/> <%=h @organization.description %></p>
+				<h5>Points of Contact</h5>
+				<% @organization.points_of_contact.each do |contact| %>
+			    <p><b>Name:</b> <%=h contact.first_name %> <%=h contact.last_name %></p>
+			    <p><b>Job title:</b> <%=h contact.job_title %></p>
+			    <p><b>Phone:</b> <%=h contact.phone %></p>
+			    <p><b>Email:</b> <%=h contact.email %></p>
+			    <p><b>Contact Notes:</b><br/> <%=h contact.notes %></p>
+				<% end %>
+			</div>
+		</div>
+		<p><%= link_to 'Edit', edit_admin_organization_path(@organization) %> |
+		<%= link_to 'Back', admin_organizations_path %> | 
+		<%= link_to 'Delete', [:admin, @organization], :confirm => 'Are you sure?', :method => :delete %></p>
+</div>
+

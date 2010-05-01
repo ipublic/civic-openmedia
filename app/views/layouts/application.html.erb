@@ -33,16 +33,14 @@
 				<div class="grid_12">
 					<ul class="nav main">
 						<li><%= link_to 'Home', admin_path, :title => "" %>
-						<li><%= link_to 'Load Data', data_models_path, :title => "" %>
+						<li><%= link_to 'Datasets', admin_datasets_path, :title => "" %>
 						<ul>
-							<li><%= link_to 'Organizations', organizations_path, :title => "" %>
+							<li><%= link_to 'Organizations', admin_organizations_path, :title => "" %>
 							<li><%= link_to 'Addresses', admin_path, :title => "" %>
 							<li><%= link_to 'Vocabularies', admin_path, :title => "" %>
 						</ul>
-						<li><%= link_to 'Catalog', catalogs_path, :title => "" %>
-						<ul>
-							<li><%= link_to 'Feeds', admin_path, :title => "" %>
-						</ul>
+						<li><%= link_to 'Catalogs', catalogs_path, :title => "" %>
+						<li><%= link_to 'Community', communities_path, :title => "" %>
 						<li><%= link_to 'Site settings', admin_path, :title => "" %>
 						<ul>
 							<li><%= link_to 'Local settings', admin_path, :title => "" %>

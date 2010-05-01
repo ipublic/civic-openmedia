@@ -12,8 +12,15 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :catalogs
   map.resources :catalog_records
   map.resources :data_models
+  map.resources :datasets
+  map.resources :communities
   map.resources :addresses
-  map.resources :organizations
+  
+  map.namespace :admin do |admin|
+    admin.resources :datasets
+    admin.resources :organizations
+  end
+  
 
   # AuthLogic setup 
   map.login "login", :controller => "user_sessions", :action => "new"
