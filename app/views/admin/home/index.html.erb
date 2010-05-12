@@ -1,57 +1,92 @@
-<% title "Publishing system for municipal data sets" %>
-<% title "Digital library for municipal datasets" %>
+<% title "Publishing System for Open Government Data" %>
 <div class="grid_3">
 		<div class="spotlight" id="frontpage_load_data">
-			<h2><%= link_to 'Load Data', catalogs_path, :title => "" %></h2>
-			<p>Put data in the system</p>
+			<h2><%= link_to 'Prepare Data', admin_datasets_path, :title => "" %></h2>
+			<p>Collect and curate content from data sources</p>
 		</div>
 </div>
 <div class="grid_3">
 	<div class="spotlight">
-		<h2><%= link_to 'Manage Catalog', catalogs_path, :title => "" %></h2>
-		<p>Manage data catalog</p>
+		<h2><%= link_to 'Publish', catalogs_path, :title => "" %></h2>
+		<p>Launch services that provide access to your datasets</p>
 	</div>
 </div>
 <div class="grid_3">
 	<div class="spotlight">
 		<h2><%= link_to 'Community', catalogs_path, :title => "" %></h2>
-		<p>Manage data catalog</p>
+		<p>Share and exchange resources with other Civic OpenMedia sites</p>
 	</div>
 </div>
 <div class="grid_3">
 		<div class="spotlight">
-			<h2><%= link_to 'Site Settings', catalogs_path, :title => "" %></h2>
-			<p>Site settings</p>
+			<h2><%= link_to 'Settings', catalogs_path, :title => "" %></h2>
+			<p>Configure your site profile</p>
 	</div>
 </div>
+<div class="grid_12" ><hr /></div>
 <div class="clear"></div>
-<div class="grid_7">
+<div class="grid_6">
 	<div class="box">
-		<h2>Data Feed Status</h2>
+		<h2>Local Status</h2>
+		<div class="box">
+			<p><b>Catalogs:</b> <%= Catalog.count %></p>
+			<p><b>Datasets:</b> 12</p>
+		</div>
+		<h5>Recent Local Updates</h5>
 		<div class="block" id="tables">
 			<table>
+				<thead>
 				<tr>
-					<th>Source</th>
-					<th>Name</th>
-					<th>URL</th>
-					<th>Data Model</th>
+					<th>Creator</th>
+					<th>Dataset</th>
 					<th>Updated</th>
 				</tr>
+				</thead>
 				<tr>
-					<td><a href="#">Metro Police</a></td>
-					<td><a href="#">Crime incidents</a></td>
-					<td><a href="#"><%= configatron.site.canonical_url + "/crime" %></a></td>
-					<td>UCR Part I Offenses</td>
-					<td><%= Date.today.to_s(:simple) %></td>
+					<td><a href="#">Public Works Department</a></td>
+					<td><a href="#">Pothole repairs</a></td>
+					<td><%= Time.now %></td>
 				</tr>
 				<tr>
-					<td><a href="#">City Call Center</a></td>
-					<td>311 Calls</td>
-					<td><a href="#"><%= configatron.site.canonical_url + "/311" %></a></td>
-					<td>Open 311</td>
+					<td><a href="#">Mayor's Call Center</a></td>
+					<td><a href="#">311 Calls</a></td>
 					<td><%= Time.now %></td>
 				</tr>
 			</table>
+			<%= link_to "More...", admin_path %>
+		</div>
+	</div>
+</div>
+<div class="grid_6">
+	<div class="box">
+		<h2>Community Status</h2>
+		<div class="box">
+			<p><b>OpenMedia Sites:</b> 75</p>
+			<p><b>Catalogs:</b> 80</p>
+			<p><b>Datasets:</b> 517</p>
+		</div>
+		<h5>Recent Community Updates</h5>
+		<div class="block" id="tables">
+			<table>
+				<thead>
+				<tr>
+					<th>Site</th>
+					<th>Dataset</th>
+					<th>Updated</th>
+				</tr>
+				</thead>
+				<tr>
+					<td><a href="#">Boston PD</a></td>
+					<td><a href="#">Part One Crime Report</a></td>
+					<td><%= Date.today.to_s(:simple) %></td>
+				</tr>
+				<tr>
+					<td><a href="#">San Francisco 311 Call Center</a></td>
+					<td><a href="#">311 Calls</a></td>
+					<td><%= Time.now %></td>
+				</tr>
+			</table>
+			<%= link_to "More...", admin_path %>
 		</div>
 	</div>
 </div>
