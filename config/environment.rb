@@ -39,6 +39,8 @@ Rails::Initializer.run do |config|
   config.gem 'configatron'
   config.gem 'ruport' #, :version => "1.6.3"
   config.gem 'searchlogic'
+  config.gem "paperclip"
+  
 
   # config.gem "rspec", :lib => false, :version => ">=1.2.6"
   # config.gem "rspec-rails", :lib => "spec/rails", :version => ">=1.2.6"
