@@ -9,8 +9,7 @@ class Search
     [
       [Dataset, :title_like],
       [Organization, :name_like],
-      [Organization, :description_like] ].inject([]) 
-        { |results, model| results += model[0].send(model[1],what).to_a }
+      [Organization, :description_like] ].inject([]) { |results, model| results += model[0].send(model[1],what).to_a }
   end
 
   def self.recent_changes
