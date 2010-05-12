@@ -70,6 +70,9 @@
 				<div class="clear"></div>
 	      <% if show_title? %>
 		    	<div class="grid_12">
+						<div class="block" id="search" style="float:right;">
+					  	<%= render (:partial => 'admin/search/form') %>
+						</div>
 	          <h2 id="page-heading"><%= h yield(:title) %></h2>
 					</div>
 					<div class="clear"></div>
