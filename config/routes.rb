@@ -9,16 +9,16 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'about', :controller => 'admin/home', :action => 'about'
 #  map.connect '/admin', :controller => '', :action => ''
 
-  map.resources :catalogs
-  map.resources :catalog_records
+  map.resources :catalogs, :has_many => :catalog_records
+#  map.resources :catalog_records
   map.resources :data_models
-  map.resources :datasets
   map.resources :communities
   map.resources :addresses
   
   map.namespace :admin do |admin|
-    admin.resources :datasets
+    admin.resources :datasets, :has_many => :property_definitions
     admin.resources :organizations
+    admin.resources :search
   end
   
 

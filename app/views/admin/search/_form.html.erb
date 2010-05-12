@@ -1,0 +1,4 @@
+<% form_for( [:admin, Search.new], :html => {:method => 'get'}) do |f| %>
+   <%= f.text_field :what %>
+   <%= f.submit 'Search' %>
+<% end %>
