@@ -45,12 +45,12 @@
 				<tr>
 					<td><a href="#">Public Works Department</a></td>
 					<td><a href="#">Pothole repairs</a></td>
-					<td><%= Time.now %></td>
+					<td><%= Time.now.to_s(:simple) %></td>
 				</tr>
 				<tr>
 					<td><a href="#">Mayor's Call Center</a></td>
 					<td><a href="#">311 Calls</a></td>
-					<td><%= Time.now %></td>
+					<td><%= Time.now.to_s(:simple) %></td>
 				</tr>
 			</table>
 			<%= link_to "More...", admin_path %>
@@ -76,14 +76,14 @@
 				</tr>
 				</thead>
 				<tr>
-					<td><a href="#">Boston PD</a></td>
+					<td><a href="#">City of Boston, MA</a></td>
 					<td><a href="#">Part One Crime Report</a></td>
-					<td><%= Date.today.to_s(:simple) %></td>
+					<td><%= Time.now.to_s(:simple) %></td>
 				</tr>
 				<tr>
-					<td><a href="#">San Francisco 311 Call Center</a></td>
+					<td><a href="#">City of San Francisco, CA</a></td>
 					<td><a href="#">311 Calls</a></td>
-					<td><%= Time.now %></td>
+					<td><%= Time.now.httpdate %></td>
 				</tr>
 			</table>
 			<%= link_to "More...", admin_path %>
