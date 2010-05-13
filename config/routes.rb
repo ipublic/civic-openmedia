@@ -1,13 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
 
-
   # The priority is based upon order of creation: first created -> highest priority.
-  map.home '', :controller => 'admin/home', :action => 'index'
-#  map.index 'index', :controller => 'admin/home', :action => 'index'
-  map.admin 'admin', :controller => 'admin/home', :action => 'index'
 
+  map.home '', :controller => 'admin/home', :action => 'index'
+  map.admin 'admin', :controller => 'admin/home', :action => 'index'
   map.connect 'about', :controller => 'admin/home', :action => 'about'
-#  map.connect '/admin', :controller => '', :action => ''
+  #  map.index 'index', :controller => 'admin/home', :action => 'index'
 
   map.resources :catalogs, :has_many => :catalog_records
 #  map.resources :catalog_records
@@ -18,10 +16,10 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.resources :datasets, :has_many => :property_definitions
     admin.resources :organizations
+    admin.resources :communities
     admin.resources :setting, :controller => 'setting'
     admin.resources :search
   end
-  
 
   # AuthLogic setup 
   map.login "login", :controller => "user_sessions", :action => "new"
