@@ -18,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.resources :datasets, :has_many => :property_definitions
     admin.resources :organizations
+    admin.resources :setting, :controller => 'setting'
     admin.resources :search
   end
   
@@ -26,7 +27,6 @@ ActionController::Routing::Routes.draw do |map|
   map.login "login", :controller => "user_sessions", :action => "new"
   map.logout "logout", :controller => "user_sessions", :action => "destroy"
 
-  map.resource :site_setting
   map.resource :user_session
   
   #  map.root :controller => "user_sessions", :action => "new" # optional, this just sets the root route
