@@ -1,0 +1,16 @@
+<% title "Datasets" %>
+<div class="grid_12">
+	<p><%= link_to 'Add Dataset', new_admin_dataset_path %></p>
+	<hr />
+</div>
+<div class="grid_3">
+	<div class="box">
+		<h2>Filter</h2>
+		<div class="block">
+			<p>search box</p>
+			<h5>Keywords</h5>
+			<p>Dataset view_bys</p>
+		</div>	
+	</div>
+</div>
+<%= render :partial => 'list_datasets', :locals => {:datasets => @datasets } %>
