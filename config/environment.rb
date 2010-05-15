@@ -32,6 +32,8 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
 
+  # config.gem "rest-client", :version => "1.3.0"
+#  config.gem "rest-client", :version => "1.3.0"
   config.gem "couchrest" #, :lib => "couchrest", :source => "http://gemcutter.org", :version => "0.35"
   config.gem 'validatable' #, :version => "1.6.7", :source => "http://gemcutter.org"
   config.gem "json" #, :version => "1.2.0"
@@ -42,8 +44,9 @@ Rails::Initializer.run do |config|
   config.gem "paperclip"
   
 
-  # config.gem "rspec", :lib => false, :version => ">=1.2.6"
-  # config.gem "rspec-rails", :lib => "spec/rails", :version => ">=1.2.6"
+  config.gem "rspec", :lib => false #, :version => ">=1.2.6"
+#  config.gem "rspec-rails", :lib => "false" #, :version => ">=1.2.6"
+  config.gem "rspec-rails", :lib => "spec/rails" #, :version => ">=1.2.6"
   # config.gem "factory_girl", :source => "http://gemcutter.org"
   
 
