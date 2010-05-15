@@ -7,8 +7,6 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'about', :controller => 'admin/home', :action => 'about'
   #  map.index 'index', :controller => 'admin/home', :action => 'index'
 
-  map.resources :catalogs, :has_many => :catalog_records
-#  map.resources :catalog_records
   map.resources :data_models
   map.resources :communities
   map.resources :addresses
@@ -16,7 +14,9 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.resources :datasets, :has_many => :property_definitions
     admin.resources :organizations
-    admin.resources :communities
+    admin.resources :catalogs, :has_many => :catalog_records
+    #  admin.resources :catalog_records
+    admin.resources :community, :controller => 'community'
     admin.resources :setting, :controller => 'setting'
     admin.resources :search
   end
