@@ -1,5 +1,10 @@
 <% title "Organizations" %>
 <div class="grid_12">
+	<p style="float:right"><%= link_to 'New Organization', new_admin_organization_path %> |
+		<%= link_to 'Datasets', admin_datasets_path %></p>
+	<hr />
+</div>
+<div class="grid_12">
 	<div class="box">
 		<h2>Organizations List</h2>
 		<div class="block" id="tables">
@@ -19,7 +24,6 @@
 					<% end %>
 				<% end %>
 			</table>
-			<%= link_to 'New organization', new_admin_organization_path %>
 		</div>
 	</div>
 </div>

@@ -1,6 +1,7 @@
 <% title "Datasets" %>
 <div class="grid_12">
-	<p><%= link_to 'Add Dataset', new_admin_dataset_path %></p>
+	<p style="float:right"><%= link_to 'New Dataset', new_admin_dataset_path %> |
+		<%= link_to 'Organizations', admin_organizations_path %></p>
 	<hr />
 </div>
 <div class="grid_3">
@@ -13,4 +14,4 @@
 		</div>	
 	</div>
 </div>
-<%= render :partial => 'list_datasets', :locals => {:datasets => @datasets } %>
+<%= render :partial => 'list_datasets', :locals => {:datasets => @datasets} %>

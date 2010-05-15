@@ -1,0 +1,28 @@
+<div class="grid_6">
+	<div class="box">
+		<h2>Datasets List</h2>
+		<div class="block" id="tables">
+			<table>
+				<thead>
+				<tr>
+					<th>Title</th>
+					<th>Description</th>
+					<th>Source</th>
+					<th>URI</th>
+					<th>Updated</th>
+				</tr>
+				</thead>
+				<% datasets.each do |ds| %>
+				  <tr>
+						<td><%= link_to ds.title, [:admin, ds] %></td>
+						<td><%= ds.metadata.description unless ds.metadata.nil? %></td>
+						<% source_org = ds.get_creator_organization %>
+						<td><%= link_to ds.get_creator_organization.name, [:admin, ds.get_creator_organization] unless source_org.nil? %></td>
+						<td><%= ds.uri %></td>
+						<td><%= ds.updated_at %></td>
+				  </tr>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>

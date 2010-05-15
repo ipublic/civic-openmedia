@@ -9,10 +9,12 @@ class Admin::OrganizationsController < ApplicationController
     def show
       # Using CouchDB -- use Get method rather then Find used by ActiveRecord
       @organization = Organization.get(params[:id])
-
-      if @organization.nil?
-        flash[:error] = 'Organization not found.'
-        redirect_to(organizations_url)
+      
+      unless @organization.nil?
+#        @datasets = Dataset.view_by_creator_organization_id(:key => @organization['_id'])
+      else
+        flash[:error] = "Organization not found for ID=#{params[:id]}"
+        redirect_to(admin_organizations_url)
       end
     end
 
@@ -26,7 +28,7 @@ class Admin::OrganizationsController < ApplicationController
       @organization = Organization.get(params[:id])
       if @organization.nil?
         flash[:error] = 'Organization not found.'
-        redirect_to(organizations_url)
+        redirect_to(admin_organizations_url)
       end
     end
 
@@ -95,10 +97,10 @@ class Admin::OrganizationsController < ApplicationController
       @organization = Organization.get(params[:id])
       unless @organization.nil?
         @organization.destroy
-        redirect_to(organizations_url)
+        redirect_to(admin_organizations_url)
       else
         flash[:error] = "Organization not found. The organization could not be found, refresh the organization list and try again."
-        redirect_to(organizations_url)
+        redirect_to(admin_organizations_url)
       end
     end
   end
