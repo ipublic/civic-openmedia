@@ -30,8 +30,11 @@ class Metadata < Hash
   property :update_frequency, :alias => :accrual_periodity # , :alias => :update_interval_in_minutes
 
   # earliest and oldest record in set
-  property :beginning_date, :type => Date
-  property :ending_date, :type => Date
+  property :beginning_date, :cast_as => 'Date', :init_method => 'parse'
+  property :ending_date, :cast_as => 'Date', :init_method => 'parse'
+
+  # property :beginning_date, :type => Date
+  # property :ending_date, :type => Date
 
   # creation or availability date of the resource
   property :created_date, :type => Date
@@ -42,6 +45,6 @@ class Metadata < Hash
   property :license, :alias => :rights
 
   ## Validations
-#  validates_presence_of :title
+#  validates_presence_of :creator_organization_id
 
 end

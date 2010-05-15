@@ -31,9 +31,9 @@ class State < CouchRestRails::Document
 
   ## This constant assignment will throw error when DB is first initialized 
   ## (until model views are loaded to CouchDB)
-  # NAMES_IDS = self.all.map do |m|
-  #   [m.name, m.abbreviation]
-  # end  
+  NAMES_IDS = self.all.map do |m|
+    [m.name, m.abbreviation]
+  end  
   
   # def check_abbreviation_uniqueness
   #   if self.new_document? && State.get(self.abbreviation.upcase).nil?
