@@ -1,8 +1,8 @@
 class DataModel < CouchRestRails::Document
 
 # see http://github.com/hpoydar/couchrest-rails
-  require 'property_definition'
-  require 'dces_metadata'
+  require 'property'
+  require 'metadata'
   include CouchRest::Validation
 
   use_database :community
@@ -12,7 +12,7 @@ class DataModel < CouchRestRails::Document
 
   property :identifier, :read_only => true
   property :title, :alias => :name, :length => 1...20
-  property :metadata, :cast_as => 'DcesMetadata', :default => []
+  property :metadata, :cast_as => 'Metadata', :default => []
   property :property_definitions, :cast_as => ['PropertyDefinition'], :default => [] # syntax to cast an array of instances 
 #  property :contact, :cast_as => 'Contact'
 
