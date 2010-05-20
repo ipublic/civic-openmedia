@@ -1,13 +1,14 @@
 class Address < Hash
   
-  include ::CouchRest::CastedModel
+  include CouchRest::CastedModel
+  include CouchRest::Validation
   
   property :address_1
   property :address_2
   property :city
   property :state_abbreviation
   property :zipcode
-  property :address_type, :default => 'Business'
+  property :address_type
   property :notes
   
   def to_html
