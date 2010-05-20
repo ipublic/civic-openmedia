@@ -53,6 +53,42 @@ class Admin::DatasetsController < ApplicationController
   end
   
   def update
+    @dataset = Dataset.get(params[:id])
+
+    # logger.debug  "****"
+    # logger.debug "Database organization values: #{@organization.inspect}"
+    # logger.debug "Form organization values: #{params[:organization].inspect}"
+    # logger.debug "Form dces_metadata values: #{params[:dces_metadata].inspect}"
+    # logger.debug  "****"
+
+    unless @dataset.nil?
+      if @dataset['_rev'].eql?(params[:dataset]["rev"])
+
+        # Update without changing the class
+        @dataset.update_attributes_without_saving(
+          :title => params[:dataset]["title"],
+          :uri => params[:dataset]["uri"]
+        )
+
+        @dataset.metadata = (params[:metadata])
+#        @dataset.properties = (params[:properties])
+
+
+        if @dataset.save
+          flash[:notice] = 'Dataset successfully updated.'
+          redirect_to([:admin, @dataset]) 
+        else
+          flash[:error] = "Update conflict. This Dataset has been updated elsewhere, reload Dataset, then update again."
+          render :action => "edit" 
+        end
+      else
+        flash[:error] = "Update conflict. This Dataset has been updated elsewhere, reload Dataset, then update again."
+        render :action => "edit" 
+      end
+    else
+      flash[:error] = "Dataset not found. The Dataset could not be found, refresh the Dataset list and try again."
+      redirect_to(datasets_url)
+    end
   end
   
   def destroy
