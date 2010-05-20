@@ -21,4 +21,14 @@ module LayoutHelper
     args = args.map { |arg| arg == :defaults ? arg : arg.to_s }
     content_for(:head) { javascript_include_tag(*args) }
   end
+  
+  def organization_collection
+    Organization.by_name_and_identifier.collect {|o| [ o.name, o.id ] }
+  end
+
+  def state_collection
+    State.by_name_and_identifier.collect {|o| [ o.name, o.id ] }
+  end
+
+  
 end
