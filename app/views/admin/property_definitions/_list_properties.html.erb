@@ -1,0 +1,25 @@
+<div class="grid_9">
+	<div class="box">
+		<h2>Properties List</h2>
+		<div class="block" id="tables">
+			<table>
+				<thead>
+				<tr>
+					<th>Name</th>
+					<th>Data Type</th>
+					<th>URI</th>
+					<th>Definition</th>
+				</tr>
+				</thead>
+				<% properties.each do |prop| %>
+				  <tr>
+						<td><%= prop.name %></td>
+						<td><%= prop.data_type %></td>
+						<td><%= prop.uri %></td>
+						<td><%= prop.definition %></td>
+				  </tr>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>
