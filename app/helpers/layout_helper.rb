@@ -30,5 +30,11 @@ module LayoutHelper
     State.by_name_and_abbreviation.collect {|o| [ o.name, o.abbreviation ] }
   end
 
-  
+  def get_organization_name(organization_id)
+    unless organization_id.blank?
+      Organization.get(organization_id).nil? ? "undefined" : Organization.get(organization_id).name
+    else
+      "undefined"
+    end
+  end
 end
