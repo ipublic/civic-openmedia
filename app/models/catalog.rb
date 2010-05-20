@@ -39,7 +39,7 @@ class Catalog < CouchRestRails::Document
 private
   def generate_catalog_id
     #Pattern for Unique ID: "class" + "_" + "key"
-    self['catalog_id'] = self.class.to_s.downcase + '_' + title.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
+    self['catalog_id'] = self.class.to_s.pluralize.downcase + '_' + title.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
   end
   
 end
