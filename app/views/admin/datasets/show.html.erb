@@ -18,15 +18,6 @@
 		</div>
 	</div>
 </div>
-<div class="grid_7">
-	<div class="box">
-		<h2>Properties</h2>
-		<div class="block">
-			<% unless @dataset.properties.nil? %>
-			<% @dataset.properties.each do |prop| %>
-				<p><b>Title:</b> <%= prop.title %></p>
-				<% end %>
-			<% end %>
-		</div>
-	</div>
-</div>
+<% unless @dataset.properties.nil? %>
+	<%= render :partial => 'admin/property_definitions/list_properties', :locals => {:properties => @dataset.properties}  %>
+<% end %>
