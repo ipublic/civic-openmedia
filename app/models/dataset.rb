@@ -4,12 +4,12 @@ class Dataset < CouchRestRails::Document
   
   ## CouchDB database and record key
   use_database :community
-  unique_id :dataset_id 
+  unique_id :identifier 
   
   ## Properties
   property :title
   property :uri
-  property :dataset_id
+  property :identifier
   property :properties, :cast_as => ["Property"], :default => [] 
   property :metadata, :cast_as => 'Metadata'
   property :filters, :cast_as => ['Filter']
@@ -18,17 +18,29 @@ class Dataset < CouchRestRails::Document
 
   ## Validations
 #  validates_presence_of :title
-  
-#  validates_with_method :dataset_id, :method => :id_is_unique
+#  validates_with_method :identifier, :method => :id_is_unique
 
 
   ## Callbacks
-  before_save :generate_dataset_id
+  before_save :generate_identifier
   
   ## Views
   view_by :title
   view_by :title, :uri
 
+  view_by :creator_organization_id, {
+          :map => 
+            "function(doc) { 
+              if ((doc['couchrest-type'] == 'Dataset') && doc['metadata'] && doc['metadata']['creator_organization_id']) 
+                { emit(doc['metadata']['creator_organization_id'], doc['_id'], 1);  
+                }
+              }",
+          :reduce => 
+            "function(keys, values, rereduce) { 
+              return values;
+            }" 
+          }
+  
   # view_by :keywords,
   #   :map => 
   #     "function(doc) {
@@ -43,27 +55,24 @@ class Dataset < CouchRestRails::Document
   #       return sum(values);
   #     }"  
   # 
-  # view_by :creator_organization_id,
-  #   :map => 
-  #     "function(doc) {
-  #       if ((doc['couchrest-type'] == 'Dataset') && doc['metadata'] && doc['metadata']['creator_organization_id']) {
-  #           emit(doc['metadata']['creator_organization_id'], 1);
-  #       }
-  #     }",
-    # :reduce => 
-    #   "function(keys, values, rereduce) {
-    #     return sum(values);
-    #   }"  
 
   def get_creator_organization
     org = Organization.get(self.metadata.creator_organization_id) unless self.metadata.creator_organization_id.blank?
   end
 
+  def get_maintainer_organization
+    org = Organization.get(self.metadata.maintainer_organization_id) unless self.metadata.maintainer_organization_id.blank?
+  end
+
+  def get_publisher_organization
+    org = Organization.get(self.metadata.publisher_organization_id) unless self.metadata.publisher_organization_id.blank?
+  end
+
 private
-  def generate_dataset_id
+  def generate_identifier
     #Pattern for Unique ID: "class" + "_" + "key"
     unless title.blank?
-      self['dataset_id'] = self.class.to_s.downcase + '_' + title.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
+      self['identifier'] = self.class.to_s.pluralize.downcase + '_' + title.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
     end
   end
   
