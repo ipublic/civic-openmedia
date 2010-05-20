@@ -27,7 +27,7 @@ module LayoutHelper
   end
 
   def state_collection
-    State.by_name_and_identifier.collect {|o| [ o.name, o.id ] }
+    State.by_name_and_abbreviation.collect {|o| [ o.name, o.abbreviation ] }
   end
 
   
