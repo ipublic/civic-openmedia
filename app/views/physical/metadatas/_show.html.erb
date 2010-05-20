@@ -2,9 +2,9 @@
 <p><b>Keywords:</b> <br/><%= subject.metadata["keywords"] %></p>
 <p><b>URI:</b> <br/><%= subject.metadata['uri'] %></p>
 <p><b>Conforms to:</b> <br/><%= subject.metadata.conforms_to %></p>
-<p><b>Creator agency:</b> <br/><%= subject.metadata.creator_organization_id %></p>
-<p><b>Maintainer agency:</b> <br/><%= subject.metadata.maintainer_organization_id %></p>
-<p><b>Publisher agency:</b> <br/><%= subject.metadata.publisher_organization_id %></p>
+<p><b>Creator agency:</b> <br/><%= subject.get_creator_organization.name %></p>
+<p><b>Maintainer agency:</b> <br/><%= subject.get_maintainer_organization.name  %></p>
+<p><b>Publisher agency:</b> <br/><%= subject.get_publisher_organization.name  %></p>
 <p><b>Beginning date:</b> <br/><%= subject.metadata["beginning_date(1i)"] %></p>
 <p><b>Ending date:</b> <br/><%= subject.metadata["ending_date(1i)"] %></p>
 <p><b>Geographic coverage:</b> <br/><%= subject.metadata['geographic_coverage'] %></p>
