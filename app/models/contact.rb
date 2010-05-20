@@ -1,7 +1,7 @@
 class Contact < Hash
   
-  include ::CouchRest::CastedModel
-  include Validatable
+  include CouchRest::CastedModel
+  include CouchRest::Validation
   require 'address'
 
   property :full_name
@@ -12,7 +12,7 @@ class Contact < Hash
   property :email
   property :website_url
   
-  property :addresses, :cast_as => ['Address'] # support multiple addresses for contact
+#  property :addresses, :cast_as => ['Address'] # support multiple addresses for contact
   property :notes
 
 end
