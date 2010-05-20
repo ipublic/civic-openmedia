@@ -5,9 +5,9 @@
     <p><%= m.label :format %> <%= m.text_field :format %></p>
     <p><%= m.label :subject %><br/> <%= m.text_area :subject, :rows => 3 %></p>
     <p><%= m.label :source %> <%= m.text_field :source %></p>
-    <p><%= m.label :creator %> <%= m.select :creator, Organization::NAMES_IDS, :include_blank => true %></p>
-    <p><%= m.label :contributor %> <%= m.select :contributor, Organization::NAMES_IDS, :include_blank => true %></p>
-    <p><%= m.label :publisher %> <%= m.select :publisher, Organization::NAMES_IDS, :include_blank => true %></p>
+    <p><%= m.label :creator %> <%= m.select :creator, Organization.names_ids, {:prompt => 'Select Organization'} %></p>
+    <p><%= m.label :contributor %> <%= m.select :contributor, Organization.names_ids, :include_blank => true %></p>
+    <p><%= m.label :publisher %> <%= m.select :publisher, Organization.names_ids, :include_blank => true %></p>
     <p class="date"><%= m.label :date %><br/> <%= m.date_select :date %></p>
     <p><%= m.label :rights %><br/> <%= m.text_area :rights, :rows => 3 %></p>
     <p><%= m.label :language %> <%= m.text_field :language %></p>
