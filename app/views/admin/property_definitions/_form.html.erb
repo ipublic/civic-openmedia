@@ -1,0 +1,13 @@
+<div class="property-definition">
+	<% new_or_existing = false ? 'new' : 'existing' %>
+	<% prefix = "property[#{new_or_existing}_property_attributes][]" %>
+	<%= error_messages_for :property %>
+	<% fields_for :prefix do |p| %>
+		<p><%= p.label :name %> <%= p.text_field :name %></p>
+		<p><%= p.label :uri, 'Property URI' %> <%= p.text_field :uri %></p>
+		<p><%= p.label :data_type %> <%= p.text_field :data_type %></p>
+		<p><%= p.label :default_value %> <%= p.text_field :default_value %></p>
+		<p><%= p.label :example_value %> <%= p.text_field :example_value %></p>
+		<p><%= p.label :definition %><br/> <%= p.text_area :definition, :rows => 3 %></p>
+	<% end %>
+</div>
