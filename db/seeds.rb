@@ -3241,4 +3241,55 @@ County.new({:state_fips_code => "56", :county_fips_code => "041", :name => "Uint
 County.new({:state_fips_code => "56", :county_fips_code => "043", :name => "Washakie County"}).save
 County.new({:state_fips_code => "56", :county_fips_code => "045", :name => "Weston County"}).save
 
-c = County.first
+@c = County.first
+
+## Add defintitions for preloaded datasets 
+Dataset.new({
+  :title => 'US States',
+  :uri => 'http://db.civicopenmedia.org/us_states',
+  :metadata => {
+    :type => "Dataset",
+    :keywords => ["us", "states", "fips code"],
+    :language => "en-US",
+    :conforms_to => "FIPS PUB 6-4",
+    :geographic_coverage => "United States and Territories",
+    :update_frequency => 0,
+    :creator_organization_id => Organization.get("organizations_ipublic").identifier,
+    :publisher_organization_id => Organization.get("organizations_ipublic").identifier,
+    :maintainer_organization_id => Organization.get("organizations_ipublic").identifier,
+    :license => "Public domain",
+    :description => "Names of United States jurisdictions: states, districts, commonwealths, republics and territories"
+    },
+  :properties => [
+    {:name => "name", :data_type => "String", :example_value => "Alaska", :definition => "Full state name" },
+    {:name => "abbreviation", :data_type => "String", :example_value => "AK", :definition => "Two character abbreviation state" },
+    {:name => "state_fips_code", :data_type => "String", :example_value => "02", :definition => "Two character Federal Information Processing Standards (FIPS) Code for state" }
+    ]
+  }
+).save
+
+Dataset.new({
+  :title => 'US Counties',
+  :uri => 'http://db.civicopenmedia.org/us_counties',
+  :metadata => {
+    :type => "Dataset",
+    :keywords => ["us", "counties", "fips code"],
+    :language => "en-US",
+    :conforms_to => "",
+    :geographic_coverage => "United States county and borough names",
+    :update_frequency => 0,
+    :creator_organization_id => Organization.get("organizations_ipublic").identifier,
+    :publisher_organization_id => Organization.get("organizations_ipublic").identifier,
+    :maintainer_organization_id => Organization.get("organizations_ipublic").identifier,
+    :license => "Public domain",
+    :description => "Names of United States incorporated counties and boroughs"
+    },
+  :properties => [
+    {:name => "name", :data_type => "String", :example_value => "Anchorage Borough", :definition => "Full county/borough name" },
+    {:name => "state_fips_code", :data_type => "String", :example_value => "02", :definition => "Two character Federal Information Processing Standards (FIPS) Code for state" },
+    {:name => "county_fips_code", :data_type => "String", :example_value => "020", :definition => "Three character Federal Information Processing Standards (FIPS) Code for county" }
+    ]
+  }
+).save
+
+
