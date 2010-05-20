@@ -4,9 +4,9 @@
 	<p><%= m.label :keywords, 'Keywords (separated by commas)' %><br/> <%= m.text_area :keywords, :rows => 3 %></p>
 	<p><%= m.label :uri, 'URI' %> <%= m.text_field :uri %></p>
 	<p><%= m.label :conforms_to %> <%= m.text_field :conforms_to %></p>
-	<p><%= m.label :creator_organization_id, 'Creator agency' %> <%= m.select :creator_organization_id, Organization::NAMES_IDS, :include_blank => true %></p>
-	<p><%= m.label :maintainer_organization_id, 'Maintainer agency' %> <%= m.select :maintainer_organization_id, Organization::NAMES_IDS, :include_blank => true %></p>
-	<p><%= m.label :publisher_organization_id, 'Publisher agency' %> <%= m.select :publisher_organization_id, Organization::NAMES_IDS, :include_blank => true %></p>
+	<p><%= m.label :creator_organization_id, 'Creator agency' %> <%= m.select :creator_organization_id, organization_collection, {:prompt => 'Select organization'}  %></p>
+	<p><%= m.label :maintainer_organization_id, 'Maintainer agency' %> <%= m.select :maintainer_organization_id, organization_collection, {:prompt => 'Select organization'}  %></p>
+	<p><%= m.label :publisher_organization_id, 'Publisher agency' %> <%= m.select :publisher_organization_id, organization_collection, {:prompt => 'Select organization'} %></p>
 	<p class="date"><%= m.label :beginning_date %><br/> <%= m.date_select :beginning_date %></p>
 	<p class="date"><%= m.label :ending_date %><br/> <%= m.date_select :ending_date %></p>
 	<p><%= m.label :geographic_coverage %> <%= m.text_field :geographic_coverage %></p>
