@@ -1,11 +1,12 @@
-<fieldset>
-	<% fields_for([:admin, @organization.point_of_contact]) do |p| %>
-    <%= p.error_messages %>
-    <p><%= p.label :first_name %> <%= p.text_field :first_name %></p>
-    <p><%= p.label :last_name %> <%= p.text_field :last_name %></p>
-    <p><%= p.label :job_title %> <%= p.text_field :job_title %></p>
-    <p><%= p.label :phone %> <%= p.text_field :phone %></p>
-    <p><%= p.label :email %> <%= p.text_field :email %></p>
-    <p><%= p.label :notes, 'Contact notes' %><br/> <%= p.text_area :notes, :rows => 3 %></p>
-	<% end %>
-</fieldset>
+<% fields_for(@contact) do |c| %>
+	<fieldset>
+		<legend>Contact</legend>
+    <%= c.error_messages %>
+    <p><%= c.label :first_name %> <%= c.text_field :first_name %></p>
+    <p><%= c.label :last_name %> <%= c.text_field :last_name %></p>
+    <p><%= c.label :job_title %> <%= c.text_field :job_title %></p>
+    <p><%= c.label :phone %> <%= c.text_field :phone %></p>
+    <p><%= c.label :email %> <%= c.text_field :email %></p>
+    <p><%= c.label :notes, 'Contact notes' %><br/> <%= c.text_area :notes, :rows => 3 %></p>
+	</fieldset>
+<% end %>
