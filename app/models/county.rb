@@ -42,7 +42,7 @@ private
     fips_str = "#{state_fips_code}_#{county_fips_code}"
 
     #Pattern for Unique ID: class_key
-    self['county_id'] = self.class.to_s.downcase + '_' + fips_str if new?
+    self['county_id'] = self.class.to_s.pluralize.downcase + '_' + fips_str if new?
   end
 
 end
