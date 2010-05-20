@@ -12,7 +12,7 @@
 		<h2><%= @catalog.title %> Data Catalog</h2>
 		<div class="block">
 			<p><b>Description:</b> <br/><%= @catalog.description %></p>
-			<%= render :partial => 'physical/metadatas/show', :locals => {:subject => @catalog} %>
+			<%= render :partial => 'physical/metadatas/show', :locals => {:metadata => @catalog.metadata } %>
 		</div>
 	</div>
 </div>
