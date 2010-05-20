@@ -14,7 +14,7 @@ class Organization < CouchRestRails::Document
   property :abbreviation
   property :identifier, :length => 1...100
   property :points_of_contact, :cast_as => ['Contact'], :default => []
-  property :addresses, :cast_as => ['Address'], :default => []
+  property :addresses, :cast_as => ['Address'] #, :default => []
   property :website_url
   property :description
   timestamps!
@@ -26,19 +26,18 @@ class Organization < CouchRestRails::Document
   ## CouchDB Views
   # query with Organization.by_name
   view_by :name
-
-  ## This constant assignment will throw error when DB is first initialized 
-  ## (until model views are loaded to CouchDB)
-    NAMES_IDS = self.all.map do |m|
-     [m.name, m.identifier]
-    end  
+  view_by :name, :identifier
   
+  def get_creator_datasets
+    list = Dataset.by_creator_organization_id(:key => self['identifier']) # unless new?
+  end
+
 private
   def generate_identifier
     unless abbreviation.blank? 
-      self['identifier'] = self['couchrest-type'].to_s.pluralize.downcase + '_'+ abbreviation.rstrip.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
+      self['identifier'] = self.class.to_s.pluralize.downcase + '_'+ abbreviation.rstrip.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
     else
-      self['identifier'] = self['couchrest-type'].to_s.pluralize.downcase + '_'+ name.rstrip.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
+      self['identifier'] = self.class.to_s.pluralize.downcase + '_'+ name.rstrip.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
     end
 #    self['identifier'] = name.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
   end
