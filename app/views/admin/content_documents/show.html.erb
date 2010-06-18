@@ -1,0 +1,23 @@
+<% title "Content Documents" %>
+<div class="grid_12" >
+	<p style="float:right;">
+		<%= link_to 'List all', admin_content_documents_path %> | 
+		<%= link_to "Edit", edit_admin_content_document_path(@content_document) %> | 
+		<%= link_to 'Delete', [:admin, @dataset], 
+						:confirm => "Are you sure you want to delete #{@content_document.title} Content Document?", 
+						:method => :delete %>
+		</p>
+	<hr />
+</div>
+<div class="grid_3">
+	<div class="box">
+		<h2>Dataset: <%= @content_document.title %> </h2>
+		<div class="block">
+			<p><b>URI:</b> <%= @content_document.uri %></p>
+			<%= render :partial => 'physical/metadatas/show', :locals => {:metadata => @content_document.metadata} %>
+		</div>
+	</div>
+</div>
+<% unless @content_document.properties.nil? %>
+	<%= render :partial => 'admin/property_definitions/list_properties', :locals => {:properties => @content_document.properties}  %>
+<% end %>

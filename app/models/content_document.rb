@@ -14,7 +14,7 @@ class ContentDocument < CouchRestRails::Document
 #  property :uri
   property :properties, :cast_as => ["Property"], :default => [] 
   property :metadata, :cast_as => 'Metadata'
-  property :filters, :cast_as => ['Filter']
+  property :filters, :cast_as => ['DataFilter']
   
   timestamps!
 

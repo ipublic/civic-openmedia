@@ -1,1 +1,26 @@
 <% title "Settings" %>
+<div class="grid_12">
+	<p style="float:right"><%= link_to 'New Setting', new_admin_setting_path %> </p>
+	<hr />
+</div>
+<div class="grid_9">
+	<div class="box">
+		<h2>Settings List</h2>
+		<div class="block" id="tables">
+			<table>
+				<thead>
+				<tr>
+					<th>Site Name</th>
+					<th>Site Domain Name</th>
+				</tr>
+				</thead>
+				<% @settings.each do |setting| %>
+				  <tr>
+						<td><%= link_to setting.site_name, [:admin, setting] %></td>
+						<td><%= setting.site_domain_name %></td>
+				  </tr>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>

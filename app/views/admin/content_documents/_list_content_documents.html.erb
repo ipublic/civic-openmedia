@@ -1,6 +1,6 @@
 <div class="grid_9">
 	<div class="box">
-		<h2>Datasets List</h2>
+		<h2>Content Documents List</h2>
 		<div class="block" id="tables">
 			<table>
 				<thead>
@@ -12,14 +12,14 @@
 					<th>Updated</th>
 				</tr>
 				</thead>
-				<% datasets.each do |ds| %>
+				<% content_documents.each do |cd| %>
 				  <tr>
-						<td><%= link_to ds.title, [:admin, ds] %></td>
-						<% source_org = ds.get_creator_organization %>
+						<td><%= link_to cd.title, [:admin, cd] %></td>
+						<% source_org = cd.get_creator_organization %>
 						<td><%= link_to source_org.name, [:admin, source_org] unless source_org.nil? %></td>
-						<td><%= ds.uri %></td>
-						<td><%= ds.metadata.description unless ds.metadata.nil? %></td>
-						<td><%= ds.updated_at %></td>
+						<td><%= cd.uri %></td>
+						<td><%= cd.metadata.description unless cd.metadata.nil? %></td>
+						<td><%= cd.updated_at %></td>
 				  </tr>
 				<% end %>
 			</table>

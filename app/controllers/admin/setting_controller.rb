@@ -1,5 +1,6 @@
 class Admin::SettingController < ApplicationController
   def index
+    @settings = Setting.all
   end
   
   def new
@@ -11,8 +12,20 @@ class Admin::SettingController < ApplicationController
     end
   end
   
+  def create
+    @setting = Setting.new(params[:setting])
+
+    if @setting.save
+      flash[:notice] = 'Settings successfully created.'
+      redirect_to([:admin, @setting])
+    else
+#      flash[:error] = 'Unable to create Catalog.'
+      render :action => "new"
+    end
+  end
+
   def show
-    @setting = Setting.find(params[:id])
+    @setting = Setting.get(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -21,7 +34,7 @@ class Admin::SettingController < ApplicationController
   end
 
   def edit
-    @setting = Setting.find(params[:id])
+    @setting = Setting.get(params[:id])
   end
 
   def update

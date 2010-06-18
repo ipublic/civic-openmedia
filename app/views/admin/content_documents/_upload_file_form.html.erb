@@ -1,0 +1,6 @@
+<% form_for [:admin, @content_document], :html => { :multipart => true } do |form| %>
+    <div>
+      <%= form.file_field :resource %>
+      <%= form.submit 'Upload file' %>
+    </div>
+<% end %>

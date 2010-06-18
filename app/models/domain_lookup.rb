@@ -7,8 +7,8 @@ class DomainLookup < Hash
   property :display_value
   property :description
  
-  validates_presence_of :code
-  validates_presence_of :display_value
+#  validates_presence_of :code
+#  validates_presence_of :display_value
   
   def to_s
     property_domain_str = "#{code}"
