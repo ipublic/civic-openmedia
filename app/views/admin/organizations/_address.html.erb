@@ -1,7 +1,6 @@
 <% fields_for(@address) do |a| %>
 	<fieldset>
 		<legend>Address</legend>
-    <%= a.error_messages %>
     <p><%= a.label :address_1 %> <%= a.text_field :address_1 %></p>
     <p><%= a.label :address_2 %> <%= a.text_field :address_2 %></p>
     <p><%= a.label :city %> <%= a.text_field :city %></p>
