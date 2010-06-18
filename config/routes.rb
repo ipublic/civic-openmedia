@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :addresses
   
   map.namespace :admin do |admin|
-    admin.resources :datasets, :has_many => :property_definitions
+    admin.resources :content_documents, :has_many => :property_definitions
     admin.resources :organizations
     admin.resources :catalogs, :has_many => :catalog_records
     #  admin.resources :catalog_records

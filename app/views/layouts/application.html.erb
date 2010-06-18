@@ -33,8 +33,9 @@
 				<div class="grid_12">
 					<ul class="nav main">
 						<li><%= link_to 'Home', admin_path, :title => "" %>
-						<li><%= link_to 'Datasets', admin_datasets_path, :title => "" %>
+						<li><%= link_to 'Datasets', admin_content_documents_path, :title => "" %>
 						<ul>
+							<li><%= link_to 'Content Documents', admin_content_documents_path, :title => "" %>
 							<li><%= link_to 'Organizations', admin_organizations_path, :title => "" %>
 							<li><%= link_to 'Addresses', admin_path, :title => "" %>
 							<li><%= link_to 'Vocabularies', admin_path, :title => "" %>
