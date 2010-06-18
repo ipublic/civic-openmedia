@@ -1,19 +1,16 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
-# Examples:
-#   
-#   cities = City.create([{ :name => 'Chicago' }).save { :name => 'Copenhagen' }])
-#   Major.create(:name => 'Daley', :city => cities.first)
 
-# Seed default user
-# User.delete_all
-# User.new(:login => 'admin', 
-#   :password => 'password', 
-#   :password_confirmation => 'password', 
-#   :email => 'admin@example.com').save
+# Clear existing documents
+puts "Clearing existing Content Documents and Organizations..."
+Organization.all.each do |doc|
+  doc.destroy
+end
 
-## Syntax for CouchRest documents
+ContentDocument.all.each do |doc|
+  doc.destroy
+end
 
 Organization.new({
   :name => 'iPublic, LLC', 
@@ -35,7 +32,35 @@ Organization.new({
   }
 ).save
 
-@organization = Organization.first
+ContentDocument.new({
+  :title => 'Organizations',
+#  :uri => 'http://db.civicopenmedia.org/us_states',
+  :metadata => {
+    :type => "Dataset",
+    :keywords => ["agencies", "businesses", "entities"],
+    :language => "en-US",
+    :conforms_to => "",
+    :geographic_coverage => "World",
+    :update_frequency => 0,
+    :creator_organization_id => Organization.get("ipublic").identifier,
+    :publisher_organization_id => Organization.get("ipublic").identifier,
+    :maintainer_organization_id => Organization.get("ipublic").identifier,
+    :license => "Public domain",
+    :description => "Public and private agencies, entities and similar "
+    },
+  :properties => [
+    {:name => "name", :data_type => "String", :example_value => "Department of Public Works", :definition => "Agency or entity title" },
+    {:name => "abbreviation", :data_type => "String", :example_value => "DPW", :definition => "Acronym or short name for agency or entity" },
+    {:name => "points_of_contact", :data_type => "String", :example_value => "John Doe", :definition => "Representative(s) for organization" },
+    {:name => "addresses", :data_type => "String", :example_value => "101 Main St, Any City, My State 10001", :definition => "Agency or entity site or mailing address" },
+    {:name => "website_url", :data_type => "String", :example_value => "http://www.dpw.gov", :definition => "Link to organization's world wide web home page" },
+    {:name => "description", :data_type => "String", :example_value => "The DPW's mission is to construct and maintain the physical infrastructure that provides for the public’s health and safety.", :definition => "Brief organization overview or explanation"}
+    ]
+  }
+).save
+
+
+### STATES
 
 ## Add defintitions for preloaded datasets 
 ContentDocument.new({
@@ -48,9 +73,9 @@ ContentDocument.new({
     :conforms_to => "FIPS PUB 6-4",
     :geographic_coverage => "United States and Territories",
     :update_frequency => 0,
-    :creator_organization_id => Organization.get("organizations_ipublic").identifier,
-    :publisher_organization_id => Organization.get("organizations_ipublic").identifier,
-    :maintainer_organization_id => Organization.get("organizations_ipublic").identifier,
+    :creator_organization_id => Organization.get("ipublic").identifier,
+    :publisher_organization_id => Organization.get("ipublic").identifier,
+    :maintainer_organization_id => Organization.get("ipublic").identifier,
     :license => "Public domain",
     :description => "Names of United States jurisdictions: states, districts, commonwealths, republics and territories"
     },
@@ -62,32 +87,13 @@ ContentDocument.new({
   }
 ).save
 
-ContentDocument.new({
-  :title => 'US Counties',
-#  :uri => 'http://db.civicopenmedia.org/us_counties',
-  :metadata => {
-    :type => "Dataset",
-    :keywords => ["us", "counties", "fips code"],
-    :language => "en-US",
-    :conforms_to => "",
-    :geographic_coverage => "United States county and borough names",
-    :update_frequency => 0,
-    :creator_organization_id => Organization.get("organizations_ipublic").identifier,
-    :publisher_organization_id => Organization.get("organizations_ipublic").identifier,
-    :maintainer_organization_id => Organization.get("organizations_ipublic").identifier,
-    :license => "Public domain",
-    :description => "Names of United States incorporated counties and boroughs"
-    },
-  :properties => [
-    {:name => "name", :data_type => "String", :example_value => "Anchorage Borough", :definition => "Full county/borough name" },
-    {:name => "state_fips_code", :data_type => "String", :example_value => "02", :definition => "Two character Federal Information Processing Standards (FIPS) Code for state" },
-    {:name => "county_fips_code", :data_type => "String", :example_value => "020", :definition => "Three character Federal Information Processing Standards (FIPS) Code for county" }
-    ]
-  }
-).save
+# Clear existing documents
+puts "Clearing existing US State documents..."
+State.all.each do |doc|
+  doc.destroy
+end
 
-
-#State.all.delete
+puts "Loading US State documents..."
 State.new({:abbreviation => 'AL', :state_fips_code => '01', :name => 'ALABAMA'}).save
 State.new({:abbreviation => 'AK', :state_fips_code => '02', :name => 'ALASKA'}).save
 State.new({:abbreviation => 'AZ', :state_fips_code => '04', :name => 'ARIZONA'}).save
@@ -144,11 +150,40 @@ State.new({:abbreviation => 'GU', :state_fips_code => '66', :name => 'GUAM'}).sa
 State.new({:abbreviation => 'PR', :state_fips_code => '72', :name => 'PUERTO RICO'}).save
 State.new({:abbreviation => 'VI', :state_fips_code => '78', :name => 'VIRGIN ISLANDS'}).save
 
+### COUNTIES
 
-# this call will load the model's predefined views
-s = State.first
+ContentDocument.new({
+  :title => 'US Counties',
+#  :uri => 'http://db.civicopenmedia.org/us_counties',
+  :metadata => {
+    :type => "Dataset",
+    :keywords => ["us", "counties", "fips code"],
+    :language => "en-US",
+    :conforms_to => "",
+    :geographic_coverage => "United States county and borough names",
+    :update_frequency => 0,
+    :creator_organization_id => Organization.get("ipublic").identifier,
+    :publisher_organization_id => Organization.get("ipublic").identifier,
+    :maintainer_organization_id => Organization.get("ipublic").identifier,
+    :license => "Public domain",
+    :description => "Names of United States incorporated counties and boroughs"
+    },
+  :properties => [
+    {:name => "name", :data_type => "String", :example_value => "Anchorage Borough", :definition => "Full county/borough name" },
+    {:name => "state_fips_code", :data_type => "String", :example_value => "02", :definition => "Two character Federal Information Processing Standards (FIPS) Code for state" },
+    {:name => "county_fips_code", :data_type => "String", :example_value => "020", :definition => "Three character Federal Information Processing Standards (FIPS) Code for county" }
+    ]
+  }
+).save
+
+puts "Clearing existing US County documents..."
+# Clear existing documents
+County.all.each do |doc|
+  doc.destroy
+end
 
 # Load County values
+puts "Loading US County documents..."
 County.new({:state_fips_code => "02", :county_fips_code => "013", :name => "Aleutians East Borough"}).save
 County.new({:state_fips_code => "02", :county_fips_code => "016", :name => "Aleutians West Census Area"}).save
 County.new({:state_fips_code => "02", :county_fips_code => "020", :name => "Anchorage Borough"}).save
@@ -3291,7 +3326,7 @@ County.new({:state_fips_code => "56", :county_fips_code => "041", :name => "Uint
 County.new({:state_fips_code => "56", :county_fips_code => "043", :name => "Washakie County"}).save
 County.new({:state_fips_code => "56", :county_fips_code => "045", :name => "Weston County"}).save
 
-@c = County.first
+puts "Compacting database..."
+County.database.compact!
 
-
-
+puts "Done!"
