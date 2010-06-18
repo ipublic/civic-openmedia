@@ -28,8 +28,8 @@ class Organization < CouchRestRails::Document
   view_by :name
   view_by :name, :identifier
   
-  def get_creator_datasets
-    list = Dataset.by_creator_organization_id(:key => self['identifier']) # unless new?
+  def get_creator_content_documents
+    list = ContentDocument.by_creator_organization_id(:key => self['identifier']) # unless new?
   end
 
 private
