@@ -3,21 +3,19 @@ class Catalog < CouchRestRails::Document
   include CouchRest::Validation
   
   ## CouchDB database and record key
-  use_database :community
-  unique_id :catalog_id 
+  use_database :world
+  unique_id :identifier 
   
   ## Properties
-  property :catalog_id
   property :title
-  property :description
-  property :publisher_organization_id
-  property :catalog_records, :cast_as => ['CatalogRecord'], :default => []
+  property :identifier
+  property :catalog_records, :cast_as => ['ContentDocument'], :default => []
   property :metadata, :cast_as => 'Metadata'#, :default => []
 
   timestamps!
 
   ## Callbacks
-  before_save :generate_catalog_id
+  before_save :generate_identifier
   
   ## Views
   view_by :title
@@ -37,9 +35,8 @@ class Catalog < CouchRestRails::Document
   end
 
 private
-  def generate_catalog_id
-    #Pattern for Unique ID: "class" + "_" + "key"
-    self['catalog_id'] = self.class.to_s.pluralize.downcase + '_' + title.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
+  def generate_identifier
+    self['identifier'] = title.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
   end
   
 end
