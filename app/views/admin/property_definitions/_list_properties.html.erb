@@ -6,17 +6,17 @@
 				<thead>
 				<tr>
 					<th>Name</th>
-					<th>Data Type</th>
-					<th>URI</th>
+					<th>Type</th>
 					<th>Definition</th>
+					<th>Example value</th>
 				</tr>
 				</thead>
 				<% properties.each do |prop| %>
 				  <tr>
 						<td><%= prop.name %></td>
 						<td><%= prop.data_type %></td>
-						<td><%= prop.uri %></td>
 						<td><%= prop.definition %></td>
+						<td><%= prop.example_value %></td>
 				  </tr>
 				<% end %>
 			</table>
