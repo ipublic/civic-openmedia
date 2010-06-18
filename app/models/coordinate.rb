@@ -1,12 +1,11 @@
 class Coordinate < Hash
-  # geo microformat: http://microformats.org/wiki/geo
+
+  # GeoJSON - http://geojson.org/geojson-spec.html#id2.
+
   include ::CouchRest::CastedModel
   include Validatable
   
-  property :latitude
-  property :longitude
-  
-  # validates_presence_of [:latitude, :longitude]
-  # validates_numericality_of [:latitude, :longitude]
+  property :x
+  property :y
   
 end
