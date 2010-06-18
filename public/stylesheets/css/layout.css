@@ -162,7 +162,6 @@ h2#page-heading {
 .box h2 {
 	font-size:1em;
 	font-weight:normal;
-	text-transform:uppercase;
 	color:#fff;
 	background:#333;
 	background:#304269;
@@ -174,6 +173,9 @@ h2#page-heading {
   -webkit-border-top-right-radius: .5em;
   -webkit-border-top-left-radius: .5em;
   border-radius: 10px;
+/*
+text-transform:uppercase;
+*/
 }
 .box h2 a,
 .box h2 a.visible {
