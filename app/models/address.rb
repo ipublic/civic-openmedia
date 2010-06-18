@@ -1,7 +1,7 @@
 class Address < Hash
   
   include CouchRest::CastedModel
-  include CouchRest::Validation
+#  include CouchRest::Validation
   
   property :address_1
   property :address_2
