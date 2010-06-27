@@ -1,0 +1,29 @@
+<% title "New Dataset" %>
+<div class="grid_4">
+	<div class="box">
+		<h2>Steps</h2>
+		<div class="block">
+			<ol>
+				<b><li>Choose Dataset Source</li></b>
+				<li>Preview Content</li>
+			</ol>
+		</div>
+	</div>
+</div>
+<div class="grid_8">
+	<div class="box">
+		<h2>Choose Dataset Source</h2>
+		<div class="block">
+			<div class="box">
+				<% form_for([:admin, @dataset], :url => {:action => 'upload_file'}, :html => {:multipart => true}) do |ds| %>
+				  <p><%= ds.label :title, 'Dataset title:' %> <%= ds.text_field :title %></p>
+					<h5>File</h5>
+			  	<p><%= ds.label :uploaded_file, "File:" %> <%= ds.file_field "uploaded_file", :size => 60 %></p>
+				  <p><%= submit_tag 'Upload file' %></p>
+				<% end %>
+				<h5>Database</h5>
+				<h5>Web Service</h5>
+			</div>
+		</div>
+	</div>
+</div>
