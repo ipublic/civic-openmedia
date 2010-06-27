@@ -1,92 +1,25 @@
 <% title "Publishing System for Open Government Data" %>
 <div class="grid_3">
 		<div class="spotlight" id="frontpage_load_data">
-			<h2><%= link_to 'Prepare Data', admin_content_documents_path, :title => "" %></h2>
-			<p>Collect, organize and prepare source data content for publication</p>
+			<h2><%= link_to 'Import Data', admin_datasets_path, :title => "" %></h2>
+			<p>Upload your organization's data content</p>
 		</div>
 </div>
 <div class="grid_3">
 	<div class="spotlight">
-		<h2><%= link_to 'Publish', admin_catalogs_path, :title => "" %></h2>
-		<p>Launch services that provide access to your datasets</p>
+		<h2><%= link_to 'Refine Content', admin_catalogs_path, :title => "" %></h2>
+		<p>Edit, filter and extend dataset values prior to publishing</p>
 	</div>
 </div>
 <div class="grid_3">
 	<div class="spotlight">
-		<h2><%= link_to 'Community', admin_community_index_path, :title => "" %></h2>
-		<p>Share and exchange resources with other Civic OpenMedia sites</p>
+		<h2><%= link_to 'Describe Dataset', admin_community_index_path, :title => "" %></h2>
+		<p>Explain dataset content and define terms</p>
 	</div>
 </div>
 <div class="grid_3">
-		<div class="spotlight">
-			<h2><%= link_to 'Settings', admin_setting_index_path, :title => "" %></h2>
-			<p>Configure your site profile</p>
-	</div>
-</div>
-<div class="grid_12" ><hr /></div>
-<div class="clear"></div>
-<div class="grid_6">
-	<div class="box">
-		<h2>Local Status</h2>
-		<div class="box">
-			<p><b>Catalogs:</b> 2</p>
-			<p><b>Datasets:</b> 12</p>
-		</div>
-		<h5>Recent Local Updates</h5>
-		<div class="block" id="tables">
-			<table>
-				<thead>
-				<tr>
-					<th>Creator</th>
-					<th>Dataset</th>
-					<th>Updated</th>
-				</tr>
-				</thead>
-				<tr>
-					<td><a href="#">Public Works Department</a></td>
-					<td><a href="#">Pothole repairs</a></td>
-					<td><%= Time.now.to_s(:simple) %></td>
-				</tr>
-				<tr>
-					<td><a href="#">Mayor's Call Center</a></td>
-					<td><a href="#">311 Calls</a></td>
-					<td><%= Time.now.to_s(:simple) %></td>
-				</tr>
-			</table>
-			<%= link_to "More...", admin_path %>
-		</div>
-	</div>
-</div>
-<div class="grid_6">
-	<div class="box">
-		<h2>Community Status</h2>
-		<div class="box">
-			<p><b>OpenMedia Sites:</b> 75</p>
-			<p><b>Catalogs:</b> 80</p>
-			<p><b>Datasets:</b> 517</p>
-		</div>
-		<h5>Recent Community Updates</h5>
-		<div class="block" id="tables">
-			<table>
-				<thead>
-				<tr>
-					<th>Site</th>
-					<th>Dataset</th>
-					<th>Updated</th>
-				</tr>
-				</thead>
-				<tr>
-					<td><a href="#">City of Boston, MA</a></td>
-					<td><a href="#">Part One Crime Report</a></td>
-					<td><%= Time.now.to_s(:simple) %></td>
-				</tr>
-				<tr>
-					<td><a href="#">City of San Francisco, CA</a></td>
-					<td><a href="#">311 Calls</a></td>
-					<td><%= Time.now.httpdate %></td>
-				</tr>
-			</table>
-			<%= link_to "More...", admin_path %>
-		</div>
+	<div class="spotlight">
+		<h2><%= link_to 'Publish', admin_setting_index_path, :title => "" %></h2>
+		<p>Make datasets accessible to others</p>
 	</div>
 </div>
