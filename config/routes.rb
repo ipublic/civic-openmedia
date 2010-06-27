@@ -12,9 +12,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :addresses
   
   map.namespace :admin do |admin|
-    admin.resources :content_documents, :has_many => :property_definitions
+    admin.resources :content_documents
     admin.resources :organizations
-    admin.resources :catalogs, :has_many => :catalog_records
+    admin.resources :catalogs
+    admin.resources :datasets, :collection => {:upload_file => :post, :import => :post}, :member => {:preview => :get }
     #  admin.resources :catalog_records
     admin.resources :community, :controller => 'community'
     admin.resources :setting, :controller => 'setting'
