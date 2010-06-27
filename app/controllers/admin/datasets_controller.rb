@@ -4,6 +4,10 @@ class Admin::DatasetsController < ApplicationController
     @datasets = Dataset.all
   end
   
+  def show
+    @dataset = Dataset.get(params[:id])
+  end
+  
   def new
     @dataset = Dataset.new
   end
@@ -32,5 +36,10 @@ class Admin::DatasetsController < ApplicationController
     @xtab = OpenMedia::ExtendedTable.parse @dataset.uploaded_content.to_s
   end
   
+  def refine
+  end
+  
+  def describe
+  end
 
 end
