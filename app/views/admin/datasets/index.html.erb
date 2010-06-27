@@ -24,7 +24,7 @@
 					<% @datasets.each do |ds| %>
 					  <tr>
 							<td><%= link_to ds.title, [:admin, ds] %></td>
-							<td><%= ds.updated_at.to_s(:simple) %></td>
+							<td><%= ds.updated_at.to_s(:full) %></td>
 					  </tr>
 					<% end %>
 				<% end %>
