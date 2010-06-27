@@ -1,0 +1,18 @@
+<% title "Datasets" %>
+<div class="grid_12" >
+	<p style="float:right;">
+		<%= link_to 'Refine Content', refine_admin_dataset_path(@dataset) %> |
+		<%= link_to 'Describe Dataset', describe_admin_dataset_path(@dataset) %> |
+		<%= link_to 'List all', admin_datasets_path %> | 
+		<%= link_to 'Delete', [:admin, @dataset], :confirm => 'Are you sure?', :method => :delete %>
+		</p>
+	<hr/>
+</div>
+<div class="grid_3">
+		<div class="box">
+			<h2>Dataset: <%=h @dataset.title %></h2>
+			<div class="block">
+		    <p><b>URI:</b> <br/><%=h @dataset.uri %></p>
+			</div>
+		</div>
+</div>
