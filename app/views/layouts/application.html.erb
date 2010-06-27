@@ -33,24 +33,11 @@
 				<div class="grid_12">
 					<ul class="nav main">
 						<li><%= link_to 'Home', admin_path, :title => "" %>
-						<li><%= link_to 'Datasets', admin_content_documents_path, :title => "" %>
-						<ul>
-							<li><%= link_to 'Content Documents', admin_content_documents_path, :title => "" %>
-							<li><%= link_to 'Organizations', admin_organizations_path, :title => "" %>
-							<li><%= link_to 'Addresses', admin_path, :title => "" %>
-							<li><%= link_to 'Vocabularies', admin_path, :title => "" %>
-						</ul>
+						<li><%= link_to 'Datasets', admin_datasets_path, :title => "" %>
 						<li><%= link_to 'Catalogs', admin_catalogs_path, :title => "" %>
-						<li><%= link_to 'Community', admin_community_index_path, :title => "" %>
+						<li><%= link_to 'Dashboard', admin_path, :title => "" %>
 						<li><%= link_to 'Settings', admin_setting_index_path, :title => "" %>
-						<ul>
-							<li><%= link_to 'Local settings', admin_path, :title => "" %>
-							<li><%= link_to 'Replication', admin_path, :title => "" %>
-						</ul>
-						<li><%= link_to 'More...', admin_path, :title => "" %>
-							<ul>
-								<li><%= link_to 'About', '/about', :title => "" %>
-							</ul>
+						<li><%= link_to 'About', '/about', :title => "" %>
 						<li class="secondary">
 							<% if !current_user %>
 							  <%= link_to "Log In", new_user_session_path %>
