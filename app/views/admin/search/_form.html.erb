@@ -1,4 +1,4 @@
-<div class="block" id="search" style="float:right;">
+<div class="block" id="search">
 	<% form_for( [:admin, Search.new], :html => {:method => 'get'}) do |f| %>
 	   <%= f.text_field :what %>
 	   <%= f.submit 'Search' %>
