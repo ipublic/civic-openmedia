@@ -4,15 +4,15 @@ class Contact < Hash
   include CouchRest::Validation
   require 'address'
 
-  property :full_name
   property :first_name
-  property :last_name, :alias => :family_name
+  property :last_name
   property :job_title
   property :phone
   property :email
   property :website_url
+  property :address, :cast_as => 'Address'
   
 #  property :addresses, :cast_as => ['Address'] # support multiple addresses for contact
-  property :notes
+  property :note
 
 end
