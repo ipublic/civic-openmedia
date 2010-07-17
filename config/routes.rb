@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :addresses
   
   map.namespace :admin do |admin|
+    admin.resource :site, :controller => 'site'
     admin.resources :dashboards
     admin.resources :content_documents
     admin.resources :organizations
