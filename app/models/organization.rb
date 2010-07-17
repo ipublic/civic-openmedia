@@ -3,30 +3,27 @@ class Organization < CouchRestRails::Document
 # see http://github.com/hpoydar/couchrest-rails
   require 'contact'
   require 'address'
-  include CouchRest::Validation
   
-  use_database :community
-  unique_id :identifier
-  
-#  attr_accessor :url
-  
+  use_database :site
+
   property :name, :length => 1...50
   property :abbreviation
-  property :identifier, :length => 1...100
-  property :points_of_contact, :cast_as => ['Contact'], :default => []
-  property :addresses, :cast_as => ['Address'] #, :default => []
+  property :address, :cast_as => 'Address'
+  property :contact_id
   property :website_url
-  property :description
+  property :note
+  
+  # TODO: Add ability to upload agency logo 
   timestamps!
 
   ## Validations
   validates_presence_of :name
-  set_callback :save, :before, :generate_identifier
   
   ## CouchDB Views
   # query with Organization.by_name
   view_by :name
-  view_by :name, :identifier
+  view_by :abbreviation
+  view_by :contact_id
   
   def get_creator_content_documents
     list = ContentDocument.by_creator_organization_id(:key => self['identifier']) # unless new?
@@ -40,10 +37,6 @@ private
       self['identifier'] = self.class.to_s.pluralize.downcase + '_'+ name.rstrip.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
     end
 #    self['identifier'] = name.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
-  end
-  
-  def generate_contact_fullname
-    self.point_of_contact['full_name'] = self.point_of_contact['first_name'] + ' ' + self.point_of_contact['last_name']
   end
   
 end
