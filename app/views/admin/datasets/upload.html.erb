@@ -1,0 +1,32 @@
+<% title "New Dataset" %>
+<div class="grid_4">
+	<div class="box">
+		<h2>Steps</h2>
+		<div class="block">
+			<ol>
+				<li>Define Dataset</li>
+				<b><li>Upload content</li></b>
+				<li>Import content</li>
+			</ol>
+		</div>
+	</div>
+</div>
+<div class="grid_8">
+	<div class="box">
+		<h2>Upload Content</h2>
+		<div class="block">
+			<div class="box">
+				<h5>Dataset: <%= @dataset.title %></h5>
+				<h5>Database</h5><hr/>
+				<h5>Web Service</h5><hr/>
+				<% form_for([:admin, @dataset], :url => {:action => 'upload_file'}, :html => {:multipart => true}) do |f| %>
+					<h5>File</h5>
+					<% fields_for @attachment do |a| %>
+			  		<p><%= a.label :uploaded_file, "File:" %> <%= a.file_field "uploaded_file", :size => 60 %></p>
+					<% end %>
+				  <p><%= submit_tag 'Upload file' %></p>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
