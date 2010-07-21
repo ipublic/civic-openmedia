@@ -10,16 +10,41 @@ class Admin::DatasetsController < ApplicationController
   
   def new
     @dataset = Dataset.new
+    @metadata = Metadata.new
+  end
+  
+  def create
+    @dataset = Dataset.new(params[:dataset])
+    @dataset.metadata = Metadata.new(params[:metadata])
+
+    if @dataset.save
+      flash[:notice] = 'Dataset successfully created.'
+      redirect_to upload_admin_dataset_url(@dataset)
+    else
+      flash[:error] = 'Unable to create Dataset.'
+      render :action => "new"
+    end
+  end
+  
+  def upload
+    @dataset = Dataset.get(params[:id])
+    @attachment = Attachment.new({})
   end
    
   def upload_file
-#    @dataset = Dataset.new(params[:admin][:dataset])
-    @dataset = Dataset.new(params[:dataset])
-
+    @dataset = Dataset.get(params[:id])
+    @attachment = params[:attachment][:uploaded_file]
+    
+    @content = @attachment.read
+    @dataset['_attachments'] ||= {}
+    @dataset['_attachments'][@attachment.original_filename] = {
+      'type' => @attachment.content_type.chomp,
+      'data' => @content
+    }
+   
     if @dataset.save
       flash[:notice] = 'File successfully uploaded.'
-#      render :action => "import"
-      redirect_to preview_admin_dataset_url(@dataset)
+      redirect_to import_admin_dataset_url(@dataset)
     else
       flash[:error] = 'Error uploading datafile.'
       render :action => "new"
@@ -27,8 +52,8 @@ class Admin::DatasetsController < ApplicationController
   end
   
   def import
-    @dataset = Dataset.new(params[:dataset])
-    @connection = Connection.new(params[:connection])
+    @dataset = Dataset.get(params[:id])
+    @xtab = OpenMedia::ExtendedTable.parse @dataset.uploaded_content.to_s
   end
   
   def preview
