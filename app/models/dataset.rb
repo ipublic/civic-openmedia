@@ -11,15 +11,15 @@ class Dataset < CouchRestRails::Document
   ## Properties
   property :identifier
   property :title
-  property :catalog_id
+  property :catalog_id, :default => "staging-catalog"
   property :properties, :cast_as => ["Property"], :default => [] 
   property :metadata, :cast_as => 'Metadata'
 #  property :_attachments, :cast_as => ['Attachment']
   
   property :connection, :cast_as => 'Connection'
-
-  property :uploaded_content_type
-  property :uploaded_content
+  
+  property :delimiter_character, :default => ","
+  property :column_header_row, :type => TrueClass, :default => true
 
   property :filters, :cast_as => ['DataFilter']
   property :dataset_views, :cast_as => ["String"]
@@ -36,6 +36,20 @@ class Dataset < CouchRestRails::Document
   ## Views
   view_by :title
   view_by :catalog_id
+  view_by :keywords,
+    :map => 
+      "function(doc) {
+        if ((doc['couchrest-type'] == 'Dataset') && doc['metadata'] && doc['metadata']['keywords']) {
+          doc['metadata']['keywords'].forEach(function(keyword){
+            emit(keyword, 1);
+          });
+        }
+      }",
+    :reduce => 
+      "function(keys, values, rereduce) {
+        return sum(values);
+      }"  
+  
 
   ## Callbacks
   before_save :generate_identifier
