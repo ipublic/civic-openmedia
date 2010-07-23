@@ -21,6 +21,8 @@
 				<h5>Web Service</h5><hr/>
 				<% form_for([:admin, @dataset], :url => {:action => 'upload_file'}, :html => {:multipart => true}) do |f| %>
 					<h5>File</h5>
+					<p><%= f.label :delimiter_character, "Column Separator:" %><b/> <%= f.text_field :delimiter_character %></p>
+					<p><%= f.label :column_header_row, "Column names in first row?:" %><b/> <%= check_box "dataset", "column_header_row" %></p>
 					<% fields_for @attachment do |a| %>
 			  		<p><%= a.label :uploaded_file, "File:" %> <%= a.file_field "uploaded_file", :size => 60 %></p>
 					<% end %>
