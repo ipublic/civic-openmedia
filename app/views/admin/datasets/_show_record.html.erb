@@ -6,8 +6,7 @@
 		</tr>
 	</thead>
 	<% curr_rec = @xtab.data[0] %>
-	<% sorted_attributes = curr_rec.attributes.sort %>
-	<% sorted_attributes.each do |attrib_name| %>
+	<% sorted_attribute_list(curr_rec).each do |attrib_name| %>
 		<tr>
 			<td><%= attrib_name %></td>
 			<td><%= curr_rec.get(attrib_name) %></td>
