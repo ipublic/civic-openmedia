@@ -10,24 +10,35 @@
 			</ol>
 		</div>
 	</div>
+	<div class="box">
+		<h2>About</h2>
+		<div class="block">
+			<p>Choose a content source. </p>  
+			<ol>
+				<li>File: specify file source. Does the first line in file list column names?  Which character is used to separate the data values?</li>
+				<li>Database: provide connection information and table source.</li>
+				<li>Web service: include a sentence or two of notes about this content.</li>
+			</ol>
+		</div>
+	</div>
 </div>
 <div class="grid_8">
 	<div class="box">
-		<h2>Upload Content</h2>
+		<h2>Data Sources</h2>
 		<div class="block">
 			<div class="box">
-				<h5>Dataset: <%= @dataset.title %></h5>
-				<h5>Database</h5><hr/>
-				<h5>Web Service</h5><hr/>
+				<h5>Dataset title: <%= @dataset.title %></h5>
+				<hr/><h5>File</h5>
 				<% form_for([:admin, @dataset], :url => {:action => 'upload_file'}, :html => {:multipart => true}) do |f| %>
-					<h5>File</h5>
 					<p><%= f.label :delimiter_character, "Column Separator:" %><b/> <%= f.text_field :delimiter_character %></p>
 					<p><%= f.label :column_header_row, "Column names in first row?:" %><b/> <%= check_box "dataset", "column_header_row" %></p>
 					<% fields_for @attachment do |a| %>
-			  		<p><%= a.label :uploaded_file, "File:" %> <%= a.file_field "uploaded_file", :size => 60 %></p>
+			  		<p><%= a.label :uploaded_file, "File name:" %><br/> <%= a.file_field "uploaded_file", :size => 60 %></p>
 					<% end %>
 				  <p><%= submit_tag 'Upload file' %></p>
 				<% end %>
+				<hr/><h5>Database</h5>
+				<hr/><h5>Web Service</h5>
 			</div>
 		</div>
 	</div>
