@@ -44,7 +44,7 @@
 			<div class="box">
 				<h5>Dataset title: <%= @dataset.title %></h5>
 				<% form_for([:admin, @dataset], :url => {:action => 'import'}, :html => {:multipart => true}) do |f| %>
-					<p><%= f.label :unique_id_column, "Unique ID property:" %><b/> <%= f.text_field :unique_id_column %></p>
+					<p><%= f.label :unique_id_column, "Unique ID property:" %><b/> <%= f.select(:unique_id_column, sorted_attribute_list(@xtab[0]), {:prompt => '-OpenMedia Generated-'}) %></p>
 					<%= render :partial => 'show_record' %>
 				  <p><%= submit_tag 'Import' %></p>
 				<% end %>
