@@ -17,7 +17,13 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :content_documents
     admin.resources :organizations
     admin.resources :catalogs
-    admin.resources :datasets, :collection => {:upload_file => :post, :import => :post}, :member => {:preview => :get, :refine => :get, :describe => :get }
+    admin.resources :datasets,  
+                    :member => {:upload => :get, 
+                                :upload_file => :put, 
+                                :import => :get, 
+                                :initialize_document => :put, 
+                                :preview => :get }
+                    #, :collection => {},
     #  admin.resources :catalog_records
     admin.resources :community, :controller => 'community'
     admin.resources :setting, :controller => 'setting'
