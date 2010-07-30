@@ -2,7 +2,6 @@ class Dataset < CouchRestRails::Document
   
 #  require 'content_document'
   require 'connection'
-  require 'attachment'
 
   ## CouchDB database and record key
   use_database :staging
@@ -14,12 +13,12 @@ class Dataset < CouchRestRails::Document
   property :catalog_id, :default => "staging-catalog"
   property :properties, :cast_as => ["Property"], :default => [] 
   property :metadata, :cast_as => 'Metadata'
-#  property :_attachments, :cast_as => ['Attachment']
   
   property :connection, :cast_as => 'Connection'
   
   property :delimiter_character, :default => ","
   property :column_header_row, :type => TrueClass, :default => true
+#  property :unique_id_property
 
   property :filters, :cast_as => ['DataFilter']
   property :dataset_views, :cast_as => ["String"]
@@ -53,7 +52,48 @@ class Dataset < CouchRestRails::Document
 
   ## Callbacks
   before_save :generate_identifier
+
+  def add_property(property_hash)
+    property_name = property_hash['name']
+    unless property_name.nil?
+      idx = property_index_by_name(property_name)
+      self.properties << property_hash if idx.nil? 
+    end
+  end
   
+  def change_property(property_hash)
+    property_name = property_hash['name']
+    unless property_name.nil?
+      idx = property_index_by_name(property_name)
+      self.properties[idx] = property_hash unless idx.nil?
+    end
+  end
+  
+  def remove_property(property_name)
+    idx = property_index_by_name(property_name)
+    self.properties.delete_at(idx) unless idx.nil?
+  end
+  
+  def unique_id_property=(property_name)
+    unless property_name.nil?
+      self.properties ||= []
+      if self.properties.size > 0
+        self.properties.each do |prop|
+          prop.unique_id_property = prop.name == property_name ? true : false
+        end
+      else
+        new_prop = Property.new({'name' => property_name, 'unique_id_property' => true })
+        self.properties << new_prop
+      end 
+    end
+  end
+  
+  def property_index_by_name(property_name)
+    prop_pos = nil
+    self.properties.each_with_index { |prop, idx| prop_pos = idx if property_name == prop['name'] }
+    prop_pos
+  end
+
 private
   def generate_identifier
     if !title.blank?
