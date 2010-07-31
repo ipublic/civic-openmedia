@@ -1,6 +1,6 @@
 # Civic OpenMedia
 
-The Civic OpenMedia system enables government agencies to provide access to public information over the Internet in machine-readable form. It's free, open source software written in Ruby on Rails and uses the CouchDB document-oriented database. The first release is planned in Q2 2010.
+The Civic OpenMedia system enables government agencies to provide access to public information over the Internet in machine-readable form. It's free, open source software written in Ruby on Rails and uses the CouchDB document-oriented database. The first release is planned in Q3 2010.
 
 ## Requirements
 
