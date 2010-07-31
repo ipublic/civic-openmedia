@@ -13,6 +13,7 @@
   
     # use this property to generate CounchDB views?
     property :query_property, :default => false
+    property :unique_id_property, :default => false
 
   # Hashes may not contain :cast_as
   #  property :domain_lookup, :cast_as => 'DomainLookup'
