@@ -36,13 +36,6 @@ class Admin::DatasetsController < ApplicationController
     @dataset_update = Dataset.new(params[:dataset])
     @attachment = params[:attachment][:uploaded_file]
     
-    # logger.debug  "****"
-    # logger.debug  "IN UPLOAD_FILE"
-    # logger.debug "Dataset_update values: #{@dataset_update.inspect}"
-    # logger.debug "Dataset values: #{@dataset.inspect}"
-    # logger.debug "Attachment values: #{@attachment.inspect}"
-    # logger.debug  "****"
-
     @dataset.update_attributes_without_saving(
       :delimiter_character => @dataset_update["delimiter_character"],
       :column_header_row => @dataset_update["column_header_row"]
@@ -66,32 +59,44 @@ class Admin::DatasetsController < ApplicationController
   def import
     require 'ruport'
     @dataset = Dataset.get(params[:id])
+    @property = Property.new
     
     # Determine if attachment was added on latest revision
     @attachments = @dataset['_attachments']
     @attachments.each { |k, v| @attachment_name = k if (v['revpos'] == @dataset['_rev'].to_i) }
-    
-    # @xtab = OpenMedia::ExtendedTable.parse(
-    #     @dataset.fetch_attachment(@attachment_name),
-    #     :has_names => @dataset.column_header_row,
-    #     :csv_options => { :col_sep => @dataset.delimiter_character }
-    #   ) unless @attachment_name.nil?
 
-      @xtab = Ruport::Data::Table.parse(
-          @dataset.fetch_attachment(@attachment_name),
-          :has_names => @dataset.column_header_row,
-          :csv_options => { :col_sep => @dataset.delimiter_character }
-        ) unless @attachment_name.nil?
+    @xtab = Ruport::Data::Table.parse(
+        @dataset.fetch_attachment(@attachment_name),
+        :has_names => @dataset.column_header_row,
+        :csv_options => { :col_sep => @dataset.delimiter_character }
+      ) unless @attachment_name.nil?
   end
   
-  def load_attachment
+  def initialize_document
     @dataset = Dataset.get(params[:id])
-    
-    @attachments = @dataset['_attachments']
-    @attachments.each { |k, v| @attachment_name = k if (v['revpos'] == @dataset['_rev'].to_i) }
-    
-    
+    @property = Property.new(params[:property])
 
+    @dataset.unique_id_property = @property.name
+#    @dataset_update = Dataset.new(params[:Dataset])
+#    @xtab = Ruport::Data::Table.laod(params[:xtab])
+    
+#    @dataset.update_attributes_without_saving(:unique_id_property => @dataset_update["unique_id_property"])
+
+    logger.debug  "****"
+    logger.debug  "IN initialize_document"
+    logger.debug "Dataset values: #{@dataset.inspect}"
+    logger.debug "Property params: #{params[:property].inspect}"
+    logger.debug "Property name: #{@property.name}"
+    logger.debug "Property values: #{@property.inspect}"
+    logger.debug  "****"
+
+    if @dataset.save
+      flash[:notice] = 'Data content successfully imported.'
+      redirect_to admin_dataset_url(@dataset)
+    else
+      flash[:error] = 'Error loading Dataset content.'
+      render :action => "import"
+    end
   end
   
   # def preview
