@@ -53,6 +53,22 @@ class Dataset < CouchRestRails::Document
   ## Callbacks
   before_save :generate_identifier
 
+
+  ## Methods
+  
+  # CouchRest design doc
+  def create_design_document
+    if !self.identifier.blank?
+      @des = CouchRest::Design.new
+      @des.name = self.identifier
+      @des.database = self.database
+      @des.save
+    else
+      nil
+    end
+  end
+  
+  # Dataset properties
   def add_property(property_hash)
     property_name = property_hash['name']
     unless property_name.nil?
