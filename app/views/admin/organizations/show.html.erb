@@ -9,26 +9,18 @@
 </div>
 <div class="grid_3">
 		<div class="box">
-			<h2>Organization: <%=h @organization.name %></h2>
+			<h2>Organization</h2>
 			<div class="block">
-		    <p><b>Description:</b> <br/><%=h @organization.description %></p>
-		    <p><b>Abbreviation:</b> <br/><%=h @organization.abbreviation %></p>
+				<h5><%=h @organization.name %></h5>
+		    <p><b>Abbreviation:</b> <%=h @organization.abbreviation %></p>
 				<% unless @organization.website_url.blank? %>
 		    	<p><b>Website URL:</b> <br/><%= link_to h(@organization.website_url), @organization.website_url %></p>
 				<% end %>
-				<h5>Address</h5>
-				<% @organization.addresses.each do |address| %>
-					<p><b><%= address.address_type %> address:</b></p>
-			    <p><%= address.to_html %></p>
-				<% end %>
-				<h5>Points of Contact</h5>
-				<% @organization.points_of_contact.each do |contact| %>
-			    <p><b>Name:</b> <br/><%=h contact.first_name %> <%=h contact.last_name %></p>
-			    <p><b>Job title:</b> <br/><%=h contact.job_title %></p>
-			    <p><b>Phone:</b> <br/><%=h contact.phone %></p>
-			    <p><b>Email:</b> <br/><%=h contact.email %></p>
-			    <p><b>Contact Notes:</b><br/> <%=h contact.notes %></p>
-				<% end %>
+		    <p><b>Note:</b> <br/><%=h @organization.note %></p>
+				<h5>Addresses</h5>
+				<%= render(:partial => 'admin/addresses/show', :collection => @organization.addresses) %>
+				<h5>Contacts</h5>
+				<%= render(:partial => 'admin/contacts/show', :collection => @organization.contacts) %>
 			</div>
 		</div>
 </div>
