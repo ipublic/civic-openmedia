@@ -2,12 +2,12 @@ class Phone < Hash
   include ::CouchRest::CastedModel
   include Validatable
 
-  validates_presence_of :identifier
-  validates_presence_of :value
-  
   property :type
   property :number
  
+  # validates_presence_of :type
+  # validates_presence_of :number
+  
   def to_s
     property_domain_str = "#{type}"
     property_domain_str = "#{number}"
