@@ -22,14 +22,18 @@ class Admin::OrganizationsController < ApplicationController
   def new
     @organization = Organization.new
     @address = Address.new
+    @phone = Phone.new
     @contact = Contact.new
   end
 
   # POST /organizations
   def create
     @organization = Organization.new(params[:organization])
-    @organization.points_of_contact = (params[:contact])
+    @organization.phones = (params[:phone])
     @organization.addresses = (params[:address])
+    
+    @organization.contacts = (params[:contact])
+
 
     # logger.debug  "****"
     # logger.debug "New organization values: #{@organization.inspect}"
@@ -49,8 +53,9 @@ class Admin::OrganizationsController < ApplicationController
   def edit
     @organization = Organization.get(params[:id])
     unless @organization.nil?
-      @contact = @organization.points_of_contact[0]
-      @address = @organization.addresses[0]
+      @contact = @organization.contacts[0]
+      @address ||= []
+#      @address = @organization.addresses[0]
     else
       flash[:error] = 'Organization not found.'
       redirect_to(admin_organizations_url)
@@ -59,50 +64,36 @@ class Admin::OrganizationsController < ApplicationController
 
   # PUT /organizations/:id
   def update
-    # Grab the organization record from CouchDB -- we will compare with form version to verify no changes
-    # have occured elsewhere that will result in conflict
-    
     @organization = Organization.get(params[:id])
+    @updated_organization = Organization.new(params[:organization])
+    
+    @revs = @organization['_rev'] + ' ' + @updated_organization['rev']
 
-    # logger.debug  "****"
-    # logger.debug "Database organization values: #{@organization.inspect}"
-    # logger.debug "Form organization values: #{params[:organization].inspect}"
-    # logger.debug "Form dces_metadata values: #{params[:dces_metadata].inspect}"
-    # logger.debug  "****"
+    if @organization['_rev'].eql?(@updated_organization.delete("rev"))
+      @updated_organization.delete("couchrest-type")
+      @updated_organization.contacts = Contact.new(params[:contact])
+      @updated_organization.addresses = Address.new(params[:address])
 
-    unless @organization.nil?
-      if @organization['_rev'].eql?(params[:organization]["rev"])
-
-        @organization.update_attributes_without_saving(
-          :name => params[:organization]["name"],
-          :abbreviation => params[:organization]["abbreviation"],
-          :website_url => params[:organization]["website_url"],
-          :description => params[:organization]["description"]
-          # ,
-          # :addresses => params[:address],
-          # :points_of_contact => params[:contact]
-        )
-
-        @organization.points_of_contact = (params[:contact])
-        @organization.addresses = (params[:address])
-
-        if @organization.save
-          flash[:notice] = 'Organization successfully updated.'
-          redirect_to([:admin, @organization]) 
+      respond_to do |format|
+        if @organization.update_attributes(@updated_organization)
+          flash[:notice] = 'Successfully updated Organization.'
+          format.html { redirect_to(admin_organizations_path) }
+          format.xml  { head :ok }
         else
-          flash[:error] = "Update conflict. This Organization has been updated elsewhere, reload Organization, then update again."
-          render :action => "edit" 
+          format.html { render :action => "edit" }
+          format.xml  { render :xml => @organization.errors, :status => :unprocessable_entity }
         end
-      else
-        flash[:error] = "Update conflict. This Organization has been updated elsewhere, reload Organization, then update again."
-        render :action => "edit" 
       end
     else
-      flash[:error] = "Organization not found. The Organization could not be found, refresh the Organization list and try again."
-      redirect_to(admin_organizations_url)
+      # Document revision is out of sync
+      flash[:notice] = 'Update conflict. This Organization has been updated elsewhere, reload Organziztion page, then update again. ' + @revs
+      respond_to do |format|
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @organization.errors, :status => :unprocessable_entity }
+      end
     end
   end
-
+  
 
   # DELETE /organizations/:id
   def destroy
