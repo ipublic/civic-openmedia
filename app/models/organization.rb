@@ -1,16 +1,19 @@
 class Organization < CouchRestRails::Document
 
 # see http://github.com/hpoydar/couchrest-rails
-  require 'contact'
+  require 'phone'
   require 'address'
+  require 'contact'
   
   use_database :site
 
-  property :name, :length => 1...50
+  property :name
   property :abbreviation
-  property :address, :cast_as => 'Address'
-  property :contact_id
+  property :email
   property :website_url
+  property :phones, :cast_as => ['Phone']
+  property :addresses, :cast_as => ['Address']
+  property :contacts, :cast_as => ['Contact']
   property :note
   
   # TODO: Add ability to upload agency logo 
@@ -23,7 +26,6 @@ class Organization < CouchRestRails::Document
   # query with Organization.by_name
   view_by :name
   view_by :abbreviation
-  view_by :contact_id
   
   def get_creator_content_documents
     list = ContentDocument.by_creator_organization_id(:key => self['identifier']) # unless new?
