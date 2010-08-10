@@ -45,9 +45,15 @@
 				<div class="grid_12">
 					<ul class="nav main">
 						<li><%= link_to 'Home', admin_path, :title => "" %>
-						<li><%= link_to 'Catalogs', admin_catalogs_path, :title => "" %>
 						<li><%= link_to 'Dashboard', admin_dashboards_path, :title => "" %>
-						<li><%= link_to 'Settings', admin_setting_index_path, :title => "" %>
+						<li><%= link_to 'Catalogs', admin_catalogs_path, :title => "" %>
+						<li><%= link_to 'Maps', admin_path, :title => "" %>
+						<li><%= link_to 'Community', admin_path, :title => "" %>
+						<li><%= link_to 'Site', admin_setting_index_path, :title => "" %>
+							<ul>
+								<li><%= link_to 'Settings', admin_setting_index_path, :title => "" %>
+								<li><%= link_to 'Organizations', admin_organizations_path, :title => "" %>
+							</ul>
 						<li class="secondary">
 							<%= link_to 'About', '/about', :title => "" %>
 						</li>
