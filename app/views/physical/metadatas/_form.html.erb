@@ -2,7 +2,6 @@
   <%= m.error_messages %>
 	<p><%= m.label :description %><br/> <%= m.text_area :description, :rows => 3 %></p>
 	<p><%= m.label :keywords, 'Keywords (separated by commas)' %><br/> <%= m.text_area :keywords, :rows => 3 %></p>
-	<p><%= m.label :uri, 'URI' %> <%= m.text_field :uri %></p>
 	<p><%= m.label :conforms_to %> <%= m.text_field :conforms_to %></p>
 	<p><%= m.label :creator_organization_id, 'Creator agency' %> <%= m.select :creator_organization_id, organization_collection, {:prompt => 'Select organization'}  %></p>
 	<p><%= m.label :maintainer_organization_id, 'Maintainer agency' %> <%= m.select :maintainer_organization_id, organization_collection, {:prompt => 'Select organization'}  %></p>
