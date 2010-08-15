@@ -7,19 +7,20 @@
 		</p>
 	<hr />
 </div>
-<div class="grid_3">
+<div class="grid_4">
 	<div class="box">
 		<h2><%= @catalog.title %> Data Catalog</h2>
 		<div class="block">
-			<p><b>Description:</b> <br/><%= @catalog.description %></p>
+			<p><b>URI:</b><br/> <%= @catalog.uri %></p>
+			<p><b>Storage database:</b><br/> <%= @catalog.storage_database %></p>
 			<%= render :partial => 'physical/metadatas/show', :locals => {:metadata => @catalog.metadata } %>
 		</div>
 	</div>
 </div>
 
-<div class="grid_9">
+<div class="grid_8">
 	<div class="box" id="tables">
-		<h2>Data Sets</h2>
+		<h2>Datasets</h2>
 		<div class="block">
 			<table>
 				<thead>
@@ -31,22 +32,18 @@
 						<th>XML</th>
 					</tr>
 				</thead>
-				<% @catalog.catalog_records.each do |cr| %>
-					<% ds = Dataset.get(cr['dataset_id']) %>
-					<% unless ds.nil? %>
+				<% @catalog.datasets.each do |ds| %>
 						<tr>
 							<td><%= link_to ds.title, ds %> </td>
 							<td>Link to source Agency</td>
-							<% cr.formats.each do |format| %>
+							<% 3.times do %>
 								<td>
 									link_to format X
 								</td>
 							<% end %>
 						</tr>
-					<% end %>
 				<% end %>
 			</table>
 		</div>
 	</div>
 </div>
-
