@@ -10,7 +10,7 @@
 					
 					<fieldset>
 					  <p><%= f.label :title, 'Catalog title' %> <%= f.text_field :title %></p>
-				    <p><%= f.label :description %><br/> <%= f.text_area :description, :rows => 3 %></p>
+				    <p><%= f.label :storage_database %><br/> <%= f.text_field :storage_database %></p>
 						<%= render :partial => 'physical/metadatas/form', :locals => { :metadata => @metadata } %>
 					</fieldset>
 				</div>
