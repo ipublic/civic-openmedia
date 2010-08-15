@@ -1,16 +1,19 @@
 class Catalog < CouchRestRails::Document
   
-  include CouchRest::Validation
+  ## Catalogs can appear in any of these DBs: staging, public, community. This is the 
+  ## parent class, with StagingCatalog, PublicCatalog and CommunityCatalog children classes
+
+  require "metadata"
   
   ## CouchDB database and record key
-  use_database :world
-  unique_id :identifier 
+  use_database :site
+  unique_id :identifier
   
   ## Properties
   property :title
   property :identifier
-  property :catalog_records, :cast_as => ['ContentDocument'], :default => []
-  property :metadata, :cast_as => 'Metadata'#, :default => []
+  property :storage_database
+  property :metadata, :cast_as => 'Metadata' #, :default => []
 
   timestamps!
 
@@ -19,15 +22,15 @@ class Catalog < CouchRestRails::Document
   
   ## Views
   view_by :title
-  view_by :publisher_organization_id
-  view_by :publisher_organization_id, :title
 
-  def get_catalog_records
-    result = self.by_catalog_id(:key => self['_id'] )
+  def datasets
+    ds = Dataset.get(:catalog_id => self['identifer'])
+    res = ds.nil? ? [] : ds
   end
 
-  def catalog_record_count
-    result = CatalogRecord.by_catalog_id(:key => self['catalog_id']).count
+  def dataset_count
+    ds = Dataset.get(:catalog_id => self['identifier'])
+    count = ds.nil? ? 0 : ds.count
   end
 
   def publisher_organization_name
@@ -35,6 +38,13 @@ class Catalog < CouchRestRails::Document
   end
 
 private
+  # Catalog database defaults to 'staging'
+  # def assign_database
+  #   catalog_types = %w(staging public community)
+  #   db_name = catalog_types.include?(self.catalog_type) ? self.catalog_type : 'staging'
+  #   use_database db_name.to_sym
+  # end
+  
   def generate_identifier
     self['identifier'] = title.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
   end
