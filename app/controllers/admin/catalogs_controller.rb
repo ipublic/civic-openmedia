@@ -13,7 +13,7 @@ class Admin::CatalogsController < ApplicationController
 
   def create
     @catalog = Catalog.new(params[:catalog])
-    @catalog.metadata = (params[:metadata])
+    @catalog.metadata = Metadata.new(params[:metadata])
 
     # logger.debug  "****"
     # logger.debug "New catalog values: #{@catalog.inspect}"
@@ -52,39 +52,32 @@ class Admin::CatalogsController < ApplicationController
 
   def update
     @catalog = Catalog.get(params[:id])
+    @updated_catalog = Catalog.new(params[:catalog])
 
-    # logger.debug  "****"
-    # logger.debug "Database organization values: #{@organization.inspect}"
-    # logger.debug "Form organization values: #{params[:organization].inspect}"
-    # logger.debug "Form dces_metadata values: #{params[:dces_metadata].inspect}"
-    # logger.debug  "****"
+    @revs = @catalog['_rev'] + ' ' + @updated_catalog['rev']
 
-    unless @catalog.nil?
-      if @catalog['_rev'].eql?(params[:catalog]["rev"])
+    if @catalog['_rev'].eql?(@updated_catalog.delete("rev"))
+      @updated_catalog.delete("couchrest-type")
+      
+      @updated_catalog.metadata = Metadata.new(params[:metadata])
 
-        @catalog.update_attributes_without_saving(
-          :name => params[:organization]["name"],
-          :abbreviation => params[:organization]["abbreviation"],
-          :website_url => params[:organization]["website_url"],
-          :description => params[:organization]["description"],
-          :point_of_contact => params[:contact],
-          :address => params[:address]
-        )
-
-        if @catalog.save
-          flash[:notice] = 'Catalog successfully updated.'
-          redirect_to([:admin, @catalog]) 
+      respond_to do |format|
+        if @catalog.update_attributes(@updated_catalog)
+          flash[:notice] = 'Successfully updated Catalog.'
+          format.html { redirect_to(admin_catalogs_path) }
+          format.xml  { head :ok }
         else
-          flash[:error] = "Update conflict. This catalog has been updated elsewhere, reload catalog, then update again."
-          render :action => "edit" 
+          format.html { render :action => "edit" }
+          format.xml  { render :xml => @catalog.errors, :status => :unprocessable_entity }
         end
-      else
-        flash[:error] = "Update conflict. This catalog has been updated elsewhere, reload catalog, then update again."
-        render :action => "edit" 
       end
     else
-      flash[:error] = "Catalog not found. The catalog could not be found, refresh the catalog list and try again."
-      redirect_to(admin_catalogs_url)
+      # Document revision is out of sync
+      flash[:notice] = 'Update conflict. Catalog has been updated elsewhere, reload Catalog page, then update again. ' + @revs
+      respond_to do |format|
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @catalog.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
