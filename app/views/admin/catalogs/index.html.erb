@@ -13,10 +13,10 @@
 			<table>
 				<thead>
 				<tr>
-					<th>Name</th>
-					<th>Description</th>
+					<th>Title</th>
+					<th>Database</th>
 					<th>No. Datasets</th>
-					<th>Publisher</th>
+					<th>Description</th>
 					<th>Updated</th>
 				</tr>
 				</thead>
@@ -24,9 +24,9 @@
 					<% @catalogs.each do |catalog| %>
 					  <tr>
 							<td><%= link_to catalog.title, [:admin, catalog] %></td>
-							<td><%= catalog.description %></td>
-							<td><%= catalog.catalog_records.size %></td>
-							<td><%= catalog.publisher_organization_name %></td>
+							<td><%= catalog.storage_database %></td>
+							<td><%= catalog.dataset_count %></td>
+							<td><%= catalog.metadata['description'] %></td>
 							<td><%= catalog.updated_at.to_s(:full) %></td>
 					  </tr>
 					<% end %>
