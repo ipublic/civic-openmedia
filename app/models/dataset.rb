@@ -121,7 +121,7 @@ class Dataset < CouchRestRails::Document
     key = self.unique_id_property
 
     @des = CouchRest::Design.new
-    @des.name = self.identifier.mixed_case
+    @des.name = self.identifier
     @des.database = self.database
 #    @des.unique_id = key['name'] unless key.nil?
     
