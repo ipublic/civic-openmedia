@@ -30,7 +30,7 @@
 				<h5>Dataset title: <%= @dataset.title %></h5>
 				<hr/><h5>File</h5>
 				<% form_for([:admin, @dataset], :url => {:action => 'upload_file'}, :html => {:multipart => true}) do |f| %>
-					<p><%= f.label :delimiter_character, "Column Separator:" %><b/> <%= f.text_field :delimiter_character %></p>
+					<p><b><%= f.label :delimiter_character, "Column Separator:" %><b/> <%= f.text_field :delimiter_character %></p>
 					<p><%= f.label :column_header_row, "Column names in first row?:" %><b/> <%= check_box "dataset", "column_header_row" %></p>
 					<% fields_for @attachment do |a| %>
 			  		<p><%= a.label :uploaded_file, "File name:" %><br/> <%= a.file_field "uploaded_file", :size => 60 %></p>
