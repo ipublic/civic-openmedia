@@ -5,14 +5,37 @@ describe Dataset do
     reset_test_db!
   end
 
+  describe "CouchRest design doc" do
+    before(:each) do
+      @db = reset_test_db!
+      @des = CouchRest::Design.new
+      @ds = Dataset.new
+      @ds.database = @db
+      @des.database = @db
+    end
     
-  describe "properties" do
+    it "should fail without a dataset title" do
+      @ds.create_design_document.should == nil
+    end
+
+    it "should save design doc with identifier" do
+      @ds.title = "theater locations"
+      @ds.save
+      @ident = @ds.identifier
+      @ds.create_design_document
+      @db_des = @db.get "_design/" + @ident
+      @db_des.name.should == @ident
+    end
+
+  end
+    
+  describe "Dataset properties" do
     before(:each) do
       @ds = Dataset.new(:title => "movies")
       @ds.database = DB
       @prop = Property.new({"name"=>"genre", "default_value" => "Action"})
-      @prop_without_name = Property.new()
       @prop_update = Property.new({"name"=>"genre", "default_value" => "Horror"})
+      @prop_without_name = Property.new()
     end
 
     it "should not accept a property without name attribute" do
