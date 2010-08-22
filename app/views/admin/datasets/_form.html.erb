@@ -10,7 +10,7 @@
 					
 					<fieldset>
 					  <p><%= f.label :title, 'Dataset title' %> <%= f.text_field :title %></p>
-				    <p><%= f.label :catalog_id %><br/> <%= f.text_field :catalog_id %></p>
+						<p><%= f.label :catalog_id, 'Catalog' %> <%= f.select :catalog_id, catalog_collection, {:prompt => 'Select Catalog'}  %></p>
 						<%= render :partial => 'physical/metadatas/form', :locals => { :metadata => @metadata } %>
 					</fieldset>
 				</div>
