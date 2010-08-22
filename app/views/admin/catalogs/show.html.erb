@@ -1,6 +1,8 @@
 <% title "Catalogs" %>
 <div class="grid_12" >
-	<p style="float:right;"><%= link_to "List all", admin_catalogs_path %> | <%= link_to "Edit", edit_admin_catalog_path(@catalog) %> |
+	<p style="float:right;">
+		<%= link_to "List all", admin_catalogs_path %> | 
+		<%= link_to "Edit", edit_admin_catalog_path(@catalog) %> |
 		<%= link_to 'Delete', [:admin, @catalog], 
 					:confirm => "Are you sure you want to delete this catalog: #{@catalog.title}?", 
 					:method => :delete %>
@@ -12,7 +14,7 @@
 		<h2><%= @catalog.title %> Data Catalog</h2>
 		<div class="block">
 			<p><b>URI:</b><br/> <%= @catalog.uri %></p>
-			<p><b>Storage database:</b><br/> <%= @catalog.storage_database %></p>
+			<p><b>Database:</b><br/> <%= mixed_case @catalog.database_store %></p>
 			<%= render :partial => 'physical/metadatas/show', :locals => {:metadata => @catalog.metadata } %>
 		</div>
 	</div>

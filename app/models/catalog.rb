@@ -1,7 +1,7 @@
 class Catalog < CouchRestRails::Document
   
-  ## Catalogs can appear in any of these DBs: staging, public, community. This is the 
-  ## parent class, with StagingCatalog, PublicCatalog and CommunityCatalog children classes
+  ## Catalogs can appear in any of these DBs: staging, public, community (as defined in Site::DATABASES). 
+  ## This is the parent class, with StagingCatalog, PublicCatalog and CommunityCatalog children classes
 
   require "metadata"
   
@@ -12,7 +12,7 @@ class Catalog < CouchRestRails::Document
   ## Properties
   property :title
   property :identifier
-  property :storage_database
+  property :database_store, :default => 'staging'
   property :metadata, :cast_as => 'Metadata' #, :default => []
 
   timestamps!
@@ -22,6 +22,8 @@ class Catalog < CouchRestRails::Document
   
   ## Views
   view_by :title
+  view_by :title, :identifier
+  view_by :database_store
 
   def datasets
     ds = Dataset.get(:catalog_id => self['identifer'])

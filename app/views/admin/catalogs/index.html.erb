@@ -24,7 +24,7 @@
 					<% @catalogs.each do |catalog| %>
 					  <tr>
 							<td><%= link_to catalog.title, [:admin, catalog] %></td>
-							<td><%= catalog.storage_database %></td>
+							<td><%= mixed_case catalog.database_store %></td>
 							<td><%= catalog.dataset_count %></td>
 							<td><%= catalog.metadata['description'] %></td>
 							<td><%= catalog.updated_at.to_s(:full) %></td>
