@@ -45,9 +45,10 @@
 				<div class="grid_12">
 					<ul class="nav main">
 						<li><%= link_to 'Home', admin_path, :title => "" %>
-						<li><%= link_to 'Catalogs', admin_catalogs_path, :title => "" %>
+						<li><%= link_to 'Data content', admin_catalogs_path, :title => "" %>
 							<ul>
-								<li><%= link_to 'List Datasets', admin_catalogs_path, :title => "" %>
+								<li><%= link_to 'Catalogs', admin_catalogs_path, :title => "" %>
+								<li><%= link_to 'Datasets', admin_datasets_path, :title => "" %>
 								<li><%= link_to 'New Dataset', new_admin_dataset_path, :title => "" %>
 							</ul>
 						<li><%= link_to 'Maps', admin_path, :title => "" %>
