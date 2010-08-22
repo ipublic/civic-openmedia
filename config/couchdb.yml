@@ -1,5 +1,5 @@
 base: &base
- database_prefix: "ipublic_org_"
+# database_prefix: "ipublic_org_"
  database_suffix: _<%= RAILS_ENV %>
 
 development:
