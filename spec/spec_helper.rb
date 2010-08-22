@@ -42,13 +42,13 @@ end
 Spec::Runner.configure do |config|
   config.before(:all) { reset_test_db! }
   
-  config.after(:all) do
-    cr = TEST_SERVER
-    test_dbs = cr.databases.select { |db| db =~ /^#{TESTDB}/ }
-    test_dbs.each do |db|
-      cr.database(db).delete! rescue nil
-    end
-  end
+  # config.after(:all) do
+  #   cr = TEST_SERVER
+  #   test_dbs = cr.databases.select { |db| db =~ /^#{TESTDB}/ }
+  #   test_dbs.each do |db|
+  #     cr.database(db).delete! rescue nil
+  #   end
+  # end
 end
 
 def couchdb_lucene_available?
