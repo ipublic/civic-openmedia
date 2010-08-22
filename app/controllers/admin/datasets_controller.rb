@@ -16,6 +16,8 @@ class Admin::DatasetsController < ApplicationController
   def create
     @dataset = Dataset.new(params[:dataset])
     @dataset.metadata = Metadata.new(params[:metadata])
+    
+#    form_dates_to_json(@dataset.metadata, "last_updated")
 
     if @dataset.save
       flash[:notice] = 'Dataset successfully created.'
@@ -65,56 +67,96 @@ class Admin::DatasetsController < ApplicationController
     @attachments = @dataset['_attachments']
     @attachments.each { |k, v| @attachment_name = k if (v['revpos'] == @dataset['_rev'].to_i) }
 
-    @xtab = Ruport::Data::Table.parse(
-        @dataset.fetch_attachment(@attachment_name),
-        :has_names => @dataset.column_header_row,
-        :csv_options => { :col_sep => @dataset.delimiter_character }
-      ) unless @attachment_name.nil?
+    if !@attachment_name.nil?
+      @xtab = Ruport::Data::Table.parse(
+          @dataset.fetch_attachment(@attachment_name),
+          :has_names => @dataset.column_header_row,
+          :csv_options => { :col_sep => @dataset.delimiter_character }
+        )
+    
+      # Collect the property names
+#      @dataset.properties ||= {}
+      @xtab[0].attributes.each { |prop_name| @dataset.add_property(Property.new(:name => prop_name.to_s)) }
+    end
   end
   
   def initialize_document
     @dataset = Dataset.get(params[:id])
-    @property = Property.new(params[:property])
-
-    @dataset.unique_id_property = @property.name
-#    @dataset_update = Dataset.new(params[:Dataset])
-#    @xtab = Ruport::Data::Table.laod(params[:xtab])
-    
-#    @dataset.update_attributes_without_saving(:unique_id_property => @dataset_update["unique_id_property"])
+    @dataset_update = Dataset.new(params[:dataset])
+    @key_property = Property.new(params[:property])
 
     logger.debug  "****"
     logger.debug  "IN initialize_document"
     logger.debug "Dataset values: #{@dataset.inspect}"
+    logger.debug "Dataset_update values: #{@dataset_update.inspect}"
     logger.debug "Property params: #{params[:property].inspect}"
-    logger.debug "Property name: #{@property.name}"
-    logger.debug "Property values: #{@property.inspect}"
+    logger.debug "Key property name: #{@key_property.name}"
     logger.debug  "****"
+    
+    # Load the dataset properties array
+    @dataset.update_attributes_without_saving(
+      :properties => @dataset_update["properties"]
+    )
 
+    # Set the Unique ID property value
+    @dataset.unique_id_property = @key_property.name unless @key_property.nil?
+
+    # @dataset.delete("couchrest-type")
+    # @dataset.delete("rev")
+    
     if @dataset.save
-      flash[:notice] = 'Data content successfully imported.'
-      redirect_to admin_dataset_url(@dataset)
+      flash[:notice] = 'Successfully initialized Dataset properties.'
+      redirect_to admin_datasets_path
     else
-      flash[:error] = 'Error loading Dataset content.'
+      flash[:error] = 'Error initializing Dataset properties.'
       render :action => "import"
+    end
+
+    if @dataset.initialize_document
+    else
     end
   end
   
-  # def preview
-  #   @dataset = Dataset.get(params[:id])
-  #   @attachments = @dataset['_attachments']
-  #    @attachments.each { |k, v| @attachment_name = k if (v['revpos'] == @dataset['_rev'].to_i) }
-  # 
-  #    @xtab = OpenMedia::ExtendedTable.parse(
-  #        @dataset.fetch_attachment(@attachment_name),
-  #        :has_names => @dataset.column_header_row,
-  #        :csv_options => { :col_sep => @dataset.delimiter_character }
-  #      ) unless @attachment_name.nil?
-  # end
-  
-  def refine
+  def edit
+    @dataset = Dataset.get(params[:id])
+
+    unless @dataset.nil?
+      @metadata = @dataset.metadata
+    else
+      flash[:error] = 'Dataset not found.'
+      redirect_to(admin_datasets_url)
+    end
   end
   
-  def describe
+  def update
+    @dataset = Dataset.get(params[:id])
+    @updated_dataset = Dataset.new(params[:dataset])
+
+    @revs = @dataset['_rev'] + ' ' + @updated_dataset['rev']
+
+    if @dataset['_rev'].eql?(@updated_dataset.delete("rev"))
+      @updated_dataset.delete("couchrest-type")
+      
+      @updated_dataset.metadata = Metadata.new(params[:metadata])
+
+      respond_to do |format|
+        if @dataset.update_attributes(@updated_dataset)
+          flash[:notice] = 'Successfully updated Dataset.'
+          format.html { redirect_to(admin_datasets_path) }
+          format.xml  { head :ok }
+        else
+          format.html { render :action => "edit" }
+          format.xml  { render :xml => @dataset.errors, :status => :unprocessable_entity }
+        end
+      end
+    else
+      # Document revision is out of sync
+      flash[:notice] = 'Update conflict. Dataset has been updated elsewhere, reload Dataset page, then update again. ' + @revs
+      respond_to do |format|
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @dataset.errors, :status => :unprocessable_entity }
+      end
+    end
   end
 
 end
