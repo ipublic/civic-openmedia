@@ -22,8 +22,24 @@ module LayoutHelper
     content_for(:head) { javascript_include_tag(*args) }
   end
   
+  # def form_date_to_json(year, month, day)
+  #   Time.local(year.to_i, month.to_i, day.to_i)
+  # end
+  
+  def database_collection
+    Site::DATABASES.collect {|db_name| [db_name, db_name.downcase] }
+  end
+
+  def catalog_collection
+    Catalog.by_title_and_identifier.collect {|o| [ o.title, o['_id']] }
+  end
+
   def organization_collection
-    Organization.by_name_and_identifier.collect {|o| [ o.name, o.id ] }
+    Organization.by_name_and_identifier.collect {|o| [ o.name, o['_id']] }
+  end
+
+  def contact_collection
+    Contact.by_name_and_email.collect {|o| [ o.name, o.email ] }
   end
 
   def state_collection
