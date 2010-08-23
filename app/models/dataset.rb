@@ -74,11 +74,30 @@ class Dataset < CouchRestRails::Document
 
   ## Methods
   def initialize_document
-    create_design_document
+    init_dataset_class
     load_attachment
   end
   
-  
+  def init_dataset_class
+    return if self.identifier.blank?
+    ds_name = self.identifier.to_s.capitalize
+    
+    # TODO should raise error when attempting to create duplicate dataset name
+    return if Object::const_defined? ds_name
+    Object::const_set(ds_name.intern, Class::new(super_class=CouchRest::ExtendedDocument))
+    
+    # Specify database store
+    Object::const_get(ds_name).database = self.database
+    
+    Object::const_get(ds_name).property('identifier')
+    Object::const_get(ds_name).property('title')
+    Object::const_get(ds_name).property('catalog_id', {:default => "staging"})
+    Object::const_get(ds_name).property('metadata', {:cast_as => 'Metadata'})
+    Object::const_get(ds_name).property('import_series')
+    
+    #    view_by :title  
+  end
+    
   def load_attachment
     require 'ruport'
     require 'md5'
@@ -112,25 +131,8 @@ class Dataset < CouchRestRails::Document
       rs = self.database.bulk_save_doc(row.data)
     end
     self.database.bulk_save
-    
   end
-  
-  # CouchRest design doc
-  def create_design_document
-    return if self.identifier.blank?
-    key = self.unique_id_property
 
-    @des = CouchRest::Design.new
-    @des.name = self.identifier
-    @des.database = self.database
-#    @des.unique_id = key['name'] unless key.nil?
-    
-    # Set initial views
-    @des.view_by @des.name
-    @des.view_by(key['name']) unless key.nil?
-    
-    @des.save
-  end
   
   # Dataset properties
   def add_property(property_hash)
