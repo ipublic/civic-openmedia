@@ -35,7 +35,7 @@
 					  <%= m.error_messages %>
 						<p><%= m.label :description %><br/> <%= m.text_area :description, :rows => 3 %></p>
 						<p><%= m.label :keywords, 'Keywords (separated by commas)' %><br/> <%= m.text_area :keywords, :rows => 3 %></p>
-						<p class="date"><%= m.label :last_updated %> <%= m.date_select :last_updated %></p>
+						<p class="date"><%= m.label :last_updated %> <%= m.text_field :last_updated %></p>
 					<% end %>				
 				  <p><%= submit_tag 'Next' %></p>
 				<% end %>
