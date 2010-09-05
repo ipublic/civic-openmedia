@@ -15,7 +15,8 @@
 			<h2>Dataset: <%=h @dataset.title %></h2>
 			<div class="block">
 		    <p><b>URI:</b> <br/><%=h @dataset.uri %></p>
-				<%= render :partial => 'physical/metadatas/show', :locals => {:metadata => @dataset.metadata } %>
+				<% md = !@dataset.metadata.nil? ? @dataset.metadata : {} %>
+				<%= render :partial => 'physical/metadatas/show', :locals => {:metadata => md } %>
 			</div>
 		</div>
 </div>
