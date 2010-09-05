@@ -24,9 +24,9 @@
 					<% @datasets.each do |ds| %>
 						<% @cat = Catalog.get(ds.catalog_id) %>
 					  <tr>
-							<td><% if !@cat.nil? %> <%= link_to @cat.title, [:admin, @cat] %> <% end %></td>
+							<td><% if !@cat.nil? %><%= link_to @cat.title, [:admin, @cat] %><% end %></td>
 							<td><%= link_to ds.title, [:admin, ds] %></td>
-							<td><%= ds.metadata['description'] %></td>
+							<td><%= ds.metadata['description'] unless ds.metadata.nil? %></td>
 							<td><%= ds.updated_at.to_s(:full) %></td>
 					  </tr>
 					<% end %>
