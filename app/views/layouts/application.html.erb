@@ -10,6 +10,7 @@
 		<%= stylesheet_link_tag "css/960.css", :media => "screen" %>
 		<%= stylesheet_link_tag "css/layout.css", :media => "screen" %>
 		<%= stylesheet_link_tag "css/nav.css", :media => "screen" %>
+		<%= stylesheet_link_tag "css/openmedia/jquery-ui-1.8.4.custom.css", :media => "screen" %>
 
 		<!--[if IE 6]><%= stylesheet_link_tag "css/ie6.css", :media => "screen" %><![endif]-->
 		<!--[if IE 7]><%= stylesheet_link_tag "css/ie.css", :media => "screen" %><![endif]-->
@@ -20,6 +21,7 @@
 		<%= javascript_include_tag 'js/mootools-fluid16-autoselect.js'%>
 -->
 		<%= javascript_include_tag :defaults %>
+		<%= javascript_include_tag 'js/jquery-1.4.2.min.js', 'js/jquery-ui-1.8.4.custom.min.js', 'application' %>
 
 		<%= yield(:head) %>
 	</head>
@@ -29,9 +31,10 @@
 				<div class="grid_12">
 					<ul id="nav-service" class="nav-service">
 						<% if !current_user %>
+						  <li><%= link_to "Register", new_account_path %></li>
 						  <li><%= link_to "Log In", new_user_session_path %></li>
 						<% else %>
-						  <li><%= link_to "Logout", user_session_path, :method => :delete, :confirm => "Are you sure you want to logout?" %></li>
+						  <li><%= link_to "Log out", user_session_path, :method => :delete, :confirm => "Are you sure you want to log out?" %></li>
 						  <li><%= link_to current_user.email, account_path %></li>
 						<% end %>	
 					</ul>
