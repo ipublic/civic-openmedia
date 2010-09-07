@@ -47,4 +47,19 @@ class Metadata < Hash
   ## Validations
 #  validates_presence_of :creator_organization_id
 
+  # def created_date_string
+  #   return if created_date.nil?
+  #   created_date.strftime("%m/%d/%Y")
+  # end
+  # 
+  # def created_date_string=(created_date_str)
+  #   self['created_date'] = created_date_str #Date.parse(created_date_str)
+  # rescue ArgumentError
+  #   @created_date_invalid = true
+  # end
+  # 
+  # def validate
+  #   errors.add(:created_date, "is invalid") if @created_date_invalid
+  # end
+
 end
