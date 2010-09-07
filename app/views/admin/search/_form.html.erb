@@ -1,6 +1,8 @@
 <div class="block" id="search">
-	<% form_for( [:admin, Search.new], :html => {:method => 'get'}) do |f| %>
-	   <%= f.text_field :what %>
-	   <%= f.submit 'Search' %>
+	<% form_tag admin_datasets_path, :method => 'get' do %>
+	<p>
+		<%= text_field_tag :search, params[:search], :size => 10 %>
+		<%= submit_tag 'Search', :name => nil %>
+	</p>
 	<% end %>
 </div>
