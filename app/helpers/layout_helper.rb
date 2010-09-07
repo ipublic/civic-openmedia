@@ -31,6 +31,7 @@ module LayoutHelper
   end
 
   def catalog_collection
+#    Catalog::CATALOGS.collect {|cat_name| [cat_name, cat_name.downcase] }
     Catalog.by_title_and_identifier.collect {|o| [ o.title, o['_id']] }
   end
 
