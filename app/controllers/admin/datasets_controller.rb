@@ -1,7 +1,11 @@
 class Admin::DatasetsController < ApplicationController
   
   def index
-    @datasets = Dataset.all
+    @datasets = Dataset.search(params[:search])
+#    if @datasets.size.zero? 
+#      flash[:notice] = "No results found."
+#      @datasets = Dataset.all
+#    end
   end
   
   def show
@@ -158,5 +162,18 @@ class Admin::DatasetsController < ApplicationController
       end
     end
   end
+  
+  def destroy
+    @dataset = Dataset.get(params[:id])
+    
+    unless @dataset.nil?
+      @dataset.destroy
+      redirect_to(admin_datasets_url)
+    else
+      flash[:error] = "Dataset not found. The Dataset could not be found, refresh the catalog list and try again."
+      redirect_to(admin_datasets_url)
+    end
+  end
+  
 
 end
