@@ -36,6 +36,8 @@ class Admin::CatalogsController < ApplicationController
     if @catalog.nil?
       flash[:error] = 'Catalog not found.'
       redirect_to(admin_catalogs_url)
+    else
+      @datasets = Dataset.by_catalog_id(:key => @catalog.identifier)
     end
   end
 
