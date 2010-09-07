@@ -71,8 +71,15 @@ class Dataset < CouchRestRails::Document
   ## Callbacks
   before_save :generate_identifier
 
-
   ## Methods
+  def self.search(search_str)
+    if !search_str.nil?
+      by_title(:key => search_str)
+    else
+      all
+    end
+  end
+  
   def initialize_document
     init_dataset_class
     load_attachment
