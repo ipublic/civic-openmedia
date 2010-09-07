@@ -9,7 +9,7 @@
 		</p>
 	<hr />
 </div>
-<div class="grid_4">
+<div class="grid_5">
 	<div class="box">
 		<h2><%= @catalog.title %> Data Catalog</h2>
 		<div class="block">
@@ -20,32 +20,11 @@
 	</div>
 </div>
 
-<div class="grid_8">
+<div class="grid_7">
 	<div class="box" id="tables">
 		<h2>Datasets</h2>
 		<div class="block">
-			<table>
-				<thead>
-					<tr>
-						<th>Title</th>
-						<th>Creator Agency</th>
-						<th>JSON</th>
-						<th>CSV</th>
-						<th>XML</th>
-					</tr>
-				</thead>
-				<% @catalog.datasets.each do |ds| %>
-						<tr>
-							<td><%= link_to ds.title, ds %> </td>
-							<td>Link to source Agency</td>
-							<% 3.times do %>
-								<td>
-									link_to format X
-								</td>
-							<% end %>
-						</tr>
-				<% end %>
-			</table>
+			<%= render :partial => 'admin/datasets/list_datasets', :locals => {:datasets => @datasets } %>
 		</div>
 	</div>
 </div>
