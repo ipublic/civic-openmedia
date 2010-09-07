@@ -40,9 +40,9 @@ class Organization < CouchRestRails::Document
 private
   def generate_identifier
     unless abbreviation.blank? 
-      self['identifier'] = abbreviation.rstrip.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
+      self['identifier'] = self.class.to_s.downcase + '_' + abbreviation.rstrip.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
     else
-      self['identifier'] = name.rstrip.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
+      self['identifier'] = self.class.to_s.downcase + '_' + name.rstrip.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
     end
 #    self['identifier'] = name.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
   end
