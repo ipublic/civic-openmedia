@@ -2,20 +2,17 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
 
+## Initialize Organizations model with iPublic record
 # Clear existing documents
-puts "Clearing existing Content Documents and Organizations..."
+puts "Clearing existing Organizations..."
 Organization.all.each do |doc|
-  doc.destroy
-end
-
-ContentDocument.all.each do |doc|
   doc.destroy
 end
 
 Organization.new({
   :name => 'iPublic, LLC', 
   :abbreviation => 'ipublic',
-  :points_of_contact => [
+  :contacts => [
     :first_name => 'Dan',
     :last_name => 'Thomas',
     :job_title => 'Chief Technology Officer',
@@ -27,65 +24,144 @@ Organization.new({
     :zipcode => '21043',
     :address_type => 'Business'
     ],
-  :website_url => 'http://www.ipublic.org/',
-  :description => 'iPublic is creator and maintainer of Civic OpenMedia system'
+  :website_url => 'http://www.ipublic.org',
+  :note => 'iPublic is creator and maintainer of Civic OpenMedia system'
   }
 ).save
 
-ContentDocument.new({
-  :title => 'Organizations',
-#  :uri => 'http://db.civicopenmedia.org/us_states',
+## Add Default Catalogs
+puts "Clearing existing Catalogs and Datasets..."
+Dataset.all.each do |doc|
+  doc.destroy
+end
+
+Catalog.all.each do |doc|
+  doc.destroy
+end
+
+Catalog.new({
+  :title => 'Staging', 
+  :database_store => 'staging', 
   :metadata => {
-    :type => "Dataset",
-    :keywords => ["agencies", "businesses", "entities"],
-    :language => "en-US",
-    :conforms_to => "",
-    :geographic_coverage => "World",
-    :update_frequency => 0,
-    :creator_organization_id => Organization.get("organizations_ipublic").identifier,
-    :publisher_organization_id => Organization.get("organizations_ipublic").identifier,
-    :maintainer_organization_id => Organization.get("organizations_ipublic").identifier,
-    :license => "Public domain",
-    :description => "Public and private agencies, entities and similar "
-    },
-  :properties => [
-    {:name => "name", :data_type => "String", :example_value => "Department of Public Works", :definition => "Agency or entity title" },
-    {:name => "abbreviation", :data_type => "String", :example_value => "DPW", :definition => "Acronym or short name for agency or entity" },
-    {:name => "points_of_contact", :data_type => "String", :example_value => "John Doe", :definition => "Representative(s) for organization" },
-    {:name => "addresses", :data_type => "String", :example_value => "101 Main St, Any City, My State 10001", :definition => "Agency or entity site or mailing address" },
-    {:name => "website_url", :data_type => "String", :example_value => "http://www.dpw.gov", :definition => "Link to organization's world wide web home page" },
-    {:name => "description", :data_type => "String", :example_value => "The DPW's mission is to construct and maintain the physical infrastructure that provides for the public’s health and safety.", :definition => "Brief organization overview or explanation"}
-    ]
+    :description => "A workspace for transforming, curating and preparing Datasets for publication.  Staging catalog contents are visible only to local site.",
+    :dcmi_type => 'Dataset',
+    :language => 'en-US',
+    :beginning_date => Date.today.to_json,
+    :ending_date => Date.today.to_json,
+    :created_date => Date.today.to_json,
+    :last_updated => Date.today.to_json,
+    :license => ''
+    # :uri
+    # :creator_organization_id
+    # :publisher_organization_id
+    # :maintainer_organization_id
+    # :conforms_to => 
+    # :geographic_coverage  => # Geographic bounds, jurisdiction name from controlled vocab, 
+    # :update_frequency, :alias => :accrual_periodity # , :alias => :update_interval_in_minutes
+    # :released, :type => Date  #, :alias => :date, :cast_as => 'Date', :init_method => 'parse'
+    # :license, :alias => :rights
   }
-).save
+}).save
+
+Catalog.new({
+  :title => 'Commmunity', 
+  :database_store => 'public', 
+  :metadata => {
+    :description => 'A repository for data, templates and content shared among OpenMedia community members. Community catalog contents are shared with other OpenMedia sites.',
+    :type => 'Dataset',
+    :language => 'en-US',
+    :creator_organization_id => Organization.by_name(:key => "iPublic, LLC").first.identifier.to_s,
+    :publisher_organization_id => Organization.by_name(:key => "iPublic, LLC").first.identifier.to_s,
+    :maintainer_organization_id => Organization.by_name(:key => "iPublic, LLC").first.identifier.to_s,
+    :created_date => Date.today,
+    :last_updated => Date.today,
+    :released => Date.today,
+    :license => ''
+    # :conforms_to => 
+    # :uri =>
+    # :geographic_coverage  => # Geographic bounds, jurisdiction name from controlled vocab, 
+    # :update_frequency, :alias => :accrual_periodity # , :alias => :update_interval_in_minutes
+    # :beginning_date => Date.today.to_json,
+    # # :ending_date => Date.today.to_json
+  }
+}).save
+  
+Catalog.new({
+  :title => 'Public', 
+  :database_store => 'public', 
+  :metadata => {
+    :description => "Published Datasets. Public catalog contents are accessible to the public.",
+    :dcmi_type => 'Dataset',
+    :language => 'en-US',
+    :beginning_date => Date.today.to_json,
+    :ending_date => Date.today.to_json,
+    :created_date => Date.today.to_json,
+    :last_updated => Date.today.to_json,
+    :license => ''
+    # :uri
+    # :creator_organization_id
+    # :publisher_organization_id
+    # :maintainer_organization_id
+    # :conforms_to => 
+    # :geographic_coverage  => # Geographic bounds, jurisdiction name from controlled vocab, 
+    # :update_frequency, :alias => :accrual_periodity # , :alias => :update_interval_in_minutes
+  }
+}).save
+
+# ContentDocument.new({
+#   :title => 'Organizations',
+# #  :uri => 'http://db.civicopenmedia.org/us_states',
+#   :metadata => {
+#     :type => "Dataset",
+#     :keywords => ["agencies", "businesses", "entities"],
+#     :language => "en-US",
+#     :conforms_to => "",
+#     :geographic_coverage => "World",
+#     :update_frequency => 0,
+#     :creator_organization_id => Organization.get("organizations_ipublic").identifier,
+#     :publisher_organization_id => Organization.get("organizations_ipublic").identifier,
+#     :maintainer_organization_id => Organization.get("organizations_ipublic").identifier,
+#     :license => "Public domain",
+#     :description => "Public and private agencies, entities and similar "
+#     },
+#   :properties => [
+#     {:name => "name", :data_type => "String", :example_value => "Department of Public Works", :definition => "Agency or entity title" },
+#     {:name => "abbreviation", :data_type => "String", :example_value => "DPW", :definition => "Acronym or short name for agency or entity" },
+#     {:name => "points_of_contact", :data_type => "String", :example_value => "John Doe", :definition => "Representative(s) for organization" },
+#     {:name => "addresses", :data_type => "String", :example_value => "101 Main St, Any City, My State 10001", :definition => "Agency or entity site or mailing address" },
+#     {:name => "website_url", :data_type => "String", :example_value => "http://www.dpw.gov", :definition => "Link to organization's world wide web home page" },
+#     {:name => "description", :data_type => "String", :example_value => "The DPW's mission is to construct and maintain the physical infrastructure that provides for the public’s health and safety.", :definition => "Brief organization overview or explanation"}
+#     ]
+#   }
+# ).save
 
 
 ### STATES
 
 ## Add defintitions for preloaded datasets 
-ContentDocument.new({
-  :title => 'US States',
-#  :uri => 'http://db.civicopenmedia.org/us_states',
-  :metadata => {
-    :type => "Dataset",
-    :keywords => ["us", "states", "fips code"],
-    :language => "en-US",
-    :conforms_to => "FIPS PUB 6-4",
-    :geographic_coverage => "United States and Territories",
-    :update_frequency => 0,
-    :creator_organization_id => Organization.get("organizations_ipublic").identifier,
-    :publisher_organization_id => Organization.get("organizations_ipublic").identifier,
-    :maintainer_organization_id => Organization.get("organizations_ipublic").identifier,
-    :license => "Public domain",
-    :description => "Names of United States jurisdictions: states, districts, commonwealths, republics and territories"
-    },
-  :properties => [
-    {:name => "name", :data_type => "String", :example_value => "Alaska", :definition => "Full state name" },
-    {:name => "abbreviation", :data_type => "String", :example_value => "AK", :definition => "Two character abbreviation state" },
-    {:name => "state_fips_code", :data_type => "String", :example_value => "02", :definition => "Two character Federal Information Processing Standards (FIPS) Code for state" }
-    ]
-  }
-).save
+# ContentDocument.new({
+#   :title => 'US States',
+# #  :uri => 'http://db.civicopenmedia.org/us_states',
+#   :metadata => {
+#     :type => "Dataset",
+#     :keywords => ["us", "states", "fips code"],
+#     :language => "en-US",
+#     :conforms_to => "FIPS PUB 6-4",
+#     :geographic_coverage => "United States and Territories",
+#     :update_frequency => 0,
+#     :creator_organization_id => Organization.get("organizations_ipublic").identifier,
+#     :publisher_organization_id => Organization.get("organizations_ipublic").identifier,
+#     :maintainer_organization_id => Organization.get("organizations_ipublic").identifier,
+#     :license => "Public domain",
+#     :description => "Names of United States jurisdictions: states, districts, commonwealths, republics and territories"
+#     },
+#   :properties => [
+#     {:name => "name", :data_type => "String", :example_value => "Alaska", :definition => "Full state name" },
+#     {:name => "abbreviation", :data_type => "String", :example_value => "AK", :definition => "Two character abbreviation state" },
+#     {:name => "state_fips_code", :data_type => "String", :example_value => "02", :definition => "Two character Federal Information Processing Standards (FIPS) Code for state" }
+#     ]
+#   }
+# ).save
 
 # Clear existing documents
 puts "Clearing existing US State documents..."
@@ -152,29 +228,29 @@ State.new({:abbreviation => 'VI', :state_fips_code => '78', :name => 'VIRGIN ISL
 
 ### COUNTIES
 
-ContentDocument.new({
-  :title => 'US Counties',
-#  :uri => 'http://db.civicopenmedia.org/us_counties',
-  :metadata => {
-    :type => "Dataset",
-    :keywords => ["us", "counties", "fips code"],
-    :language => "en-US",
-    :conforms_to => "",
-    :geographic_coverage => "United States county and borough names",
-    :update_frequency => 0,
-    :creator_organization_id => Organization.get("organizations_ipublic").identifier,
-    :publisher_organization_id => Organization.get("organizations_ipublic").identifier,
-    :maintainer_organization_id => Organization.get("organizations_ipublic").identifier,
-    :license => "Public domain",
-    :description => "Names of United States incorporated counties and boroughs"
-    },
-  :properties => [
-    {:name => "name", :data_type => "String", :example_value => "Anchorage Borough", :definition => "Full county/borough name" },
-    {:name => "state_fips_code", :data_type => "String", :example_value => "02", :definition => "Two character Federal Information Processing Standards (FIPS) Code for state" },
-    {:name => "county_fips_code", :data_type => "String", :example_value => "020", :definition => "Three character Federal Information Processing Standards (FIPS) Code for county" }
-    ]
-  }
-).save
+# ContentDocument.new({
+#   :title => 'US Counties',
+# #  :uri => 'http://db.civicopenmedia.org/us_counties',
+#   :metadata => {
+#     :type => "Dataset",
+#     :keywords => ["us", "counties", "fips code"],
+#     :language => "en-US",
+#     :conforms_to => "",
+#     :geographic_coverage => "United States county and borough names",
+#     :update_frequency => 0,
+#     :creator_organization_id => Organization.get("organizations_ipublic").identifier,
+#     :publisher_organization_id => Organization.get("organizations_ipublic").identifier,
+#     :maintainer_organization_id => Organization.get("organizations_ipublic").identifier,
+#     :license => "Public domain",
+#     :description => "Names of United States incorporated counties and boroughs"
+#     },
+#   :properties => [
+#     {:name => "name", :data_type => "String", :example_value => "Anchorage Borough", :definition => "Full county/borough name" },
+#     {:name => "state_fips_code", :data_type => "String", :example_value => "02", :definition => "Two character Federal Information Processing Standards (FIPS) Code for state" },
+#     {:name => "county_fips_code", :data_type => "String", :example_value => "020", :definition => "Three character Federal Information Processing Standards (FIPS) Code for county" }
+#     ]
+#   }
+# ).save
 
 puts "Clearing existing US County documents..."
 # Clear existing documents
