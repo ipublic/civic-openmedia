@@ -1,10 +1,10 @@
 class Catalog < CouchRestRails::Document
+
+  require "metadata"
   
   ## Catalogs can appear in any of these DBs: staging, public, community (as defined in Site::DATABASES). 
   ## This is the parent class, with StagingCatalog, PublicCatalog and CommunityCatalog children classes
 
-  require "metadata"
-  
   ## CouchDB database and record key
   use_database :site
   unique_id :identifier
@@ -31,7 +31,7 @@ class Catalog < CouchRestRails::Document
   end
 
   def dataset_count
-    ds = Dataset.get(:catalog_id => self['identifier'])
+    ds = Dataset.by_catalog_id(:key => self.identifier)
     count = ds.nil? ? 0 : ds.count
   end
 
@@ -48,7 +48,7 @@ private
   # end
   
   def generate_identifier
-    self['identifier'] = title.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
+    self['identifier'] = self.class.to_s.downcase + '_' + title.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
   end
   
 end
