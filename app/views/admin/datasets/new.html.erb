@@ -30,7 +30,7 @@
 		<div class="block">
 			<div class="box">
 				<% form_for([:admin, @dataset]) do |ds| %>
-					<p><%= ds.label :catalog_id, 'Catalog' %> <%= ds.select :catalog_id, catalog_collection %></p>				
+					<p><%= ds.label :catalog_id, 'Catalog' %> <%= ds.select :catalog_id, catalog_collection, :selected => "catalog_staging" %></p>				
 				  <p><%= ds.label :title %> <%= ds.text_field :title %></p>
 					<% fields_for(@metadata) do |m| %>
 					  <%= m.error_messages %>
