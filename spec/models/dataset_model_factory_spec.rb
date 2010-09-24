@@ -15,7 +15,7 @@ describe DatasetModelFactory do
       lambda{@dmf.create_design_doc.should}.should raise_error(ArgumentError)
     end
     
-    it " should fail without a database" do
+    it "should fail without a database" do
       @dmf.name = "movies"
       lambda{@dmf.create_design_doc.should}.should raise_error(ArgumentError)
     end
@@ -28,7 +28,7 @@ describe DatasetModelFactory do
       resp["id"].should == @dd_id
     end
 
-    it "return nil if design document already exists" do
+    it "should return nil if design document already exists" do
       @dmf.name = "movies"
       @dmf.database = @db
       @dd_id = @dmf.design_doc_id
@@ -52,6 +52,14 @@ describe DatasetModelFactory do
       fac_doc = @dmf.document_class
       fac_doc.should be_an_instance_of(Class)
       fac_doc.name.to_s == "Movies"
+    end
+
+    it "should create an instance of type: class_name" do
+      @dmf.name = "movies"
+      klass_name = @dmf.class_name
+      fac_doc = @dmf.document_class
+      xdoc = fac_doc.new
+      xdoc["couchrest-type"].should == klass_name
     end
   end
 
