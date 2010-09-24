@@ -35,6 +35,8 @@ class DatasetModelFactory
         'created_date' => time_stamp,
         'last_updated' => time_stamp
         },
+      "properties" => {
+      },
       "views" => {
         'all' => {
           'map' => "function(doc) {
@@ -53,7 +55,7 @@ class DatasetModelFactory
   end
 
   def document_class
-    raise ArgumentError, self.class.name.to_s + " requires a name" unless @class_name && @class_name.length > 0
+    raise ArgumentError, "#{self.class.name.to_s} requires a name" unless @class_name && @class_name.length > 0
 
     if !Object::const_defined? @class_name
 #      xdoc_class = Object::const_set(@class_name.intern, Class::new(super_class=CouchRest::ExtendedDocument))
@@ -80,32 +82,7 @@ class DatasetModelFactory
     # classes['whatever'].property :a_new_property
     # classes['whatever'].new #=> a new instance of that class
 =end
-
-  
-  def create_design_document(doc_name, couch_db)
-    
-    return if Object::const_defined? doc_name
-
-    des_name = doc_name.capitalize
-
-    # TODO should raise error when attempting to create duplicate dataset name
-
-    des = Object::const_set(doc_name.intern, Class::new(super_class=CouchRest::ExtendedDocument))
-
-    Object::const_get(doc_name).database = couch_db
-    # Object::const_get(doc_name).view_by "title".intern
-    Object::const_get(doc_name).save_design_doc
-
-    # Object::const_get(ds_name) do
-    #   property('identifier')
-    #   property('title')
-    #   property('catalog_id', {:default => "staging"})
-    #   property('metadata', {:cast_as => 'Metadata'})
-    #   property('import_series')
-    # end
-
-  end
-    
+   
   def load_attachment
     require 'ruport'
     require 'md5'

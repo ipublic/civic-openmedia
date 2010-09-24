@@ -35,17 +35,24 @@ describe DatasetModelFactory do
       @dmf.create_design_doc
       @dmf.create_design_doc.should == nil
     end
+  end
     
-    describe "Create CouchDB Design Document for Dataset" do
-      before(:each) do
-        @db = reset_test_db!
-        @dmf = DatasetModelFactory.new
-      end
-
-      it " " do
-      end
+  describe "Instantiate CouchRest ExtendedDocument class" do
+    before(:each) do
+      @db = reset_test_db!
+      @dmf = DatasetModelFactory.new
     end
-    
+
+    it "should fail without a name" do
+      lambda{@dmf.document_class}.should raise_error(ArgumentError)
+    end
+
+    it "should return an anonymous class with passed name" do
+      @dmf.name = "movies"
+      fac_doc = @dmf.document_class
+      fac_doc.should be_an_instance_of(Class)
+      fac_doc.name.to_s == "Movies"
+    end
   end
 
   # describe "Dataset properties" do
