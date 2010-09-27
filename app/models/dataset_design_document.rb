@@ -10,6 +10,9 @@ class DatasetDesignDocument < CouchRest::Design
   #   prop_list
   # end
   
+  attr_accessor :doc
+  attr_reader :property_list
+  
   def initialize
     @property_list = []
   end
@@ -56,32 +59,31 @@ class DatasetDesignDocument < CouchRest::Design
 
   def get_property(property_name)
     idx = property_index_by_name(property_name)
-    return_property = @property_list.at(idx) unless idx.nil?
+    return_property = property_list.at(idx) unless idx.nil?
   end  
 
   def add_property(new_property)
-    idx = property_index_by_name(new_property) unless @property_list.empty?
-    @property_list << new_property if idx == nil
-    @property_list
+    idx = property_index_by_name(new_property) unless property_list.empty?
+    self.property_list << new_property if idx == nil
+    property_list
   end
 
   def delete_property(property_name)
     return if property_list.empty?
-    @property_list.delete_if { |list_prop| list_prop.name == property_name } 
-    @property_list ||= []
+    self.property_list.delete_if { |list_prop| list_prop.name == property_name } 
+    self.property_list ||= []
   end
 
   def property_index_by_name(property_name)
     prop_pos = nil
-    return if @property_list.empty?
-    @property_list.each_with_index { |prop, idx| prop_pos = idx if property_name == prop.name }
+    return if property_list.empty?
+    property_list.each_with_index { |prop, idx| prop_pos = idx if property_name == prop.name }
     prop_pos
   end
 
   def to_json
-    return [] if @property_list.empty?
-    # @property_list.each_with_object([]) { |prop| prop.to_hash }
-    @property_list.each { |e, arr| arr << e.to_hash }
+    return [] if property_list.empty?
+    property_list.each { |prop| prop.to_hash }
   end
   
   # def unique_id_property
