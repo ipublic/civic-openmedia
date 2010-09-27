@@ -12,19 +12,19 @@ class Property
   
   def parse_options(options)
     return if options.empty?
-    @type           = options.delete(:type)               if options[:type]
-    @definition     = options.delete(:definition)         if options[:definition]
-    @default_value  = options.delete(:default_value)      if options[:default_value]
-    @example_value  = options.delete(:example_value)      if options[:example_value]
-    @comment        = options.delete(:comment)            if options[:comment]
-    @can_query      = options[:can_query] ? true : false
-    @is_key         = options[:is_key] ? true : false
+    self.type           = options.delete(:type)               if options[:type]
+    self.definition     = options.delete(:definition)         if options[:definition]
+    self.default_value  = options.delete(:default_value)      if options[:default_value]
+    self.example_value  = options.delete(:example_value)      if options[:example_value]
+    self.comment        = options.delete(:comment)            if options[:comment]
+    self.can_query      = options[:can_query] ? true : false
+    self.is_key         = options[:is_key] ? true : false
   end
   
   def to_hash
     rtn_hash = {}
-    self.instance_variables.each do |var|
-      rtn_hash[var.gsub("@","")] = self.instance_variable_get(var)
+    instance_variables.each do |var|
+      rtn_hash[var.gsub("@","")] = instance_variable_get(var)
     end
     rtn_hash
   end
