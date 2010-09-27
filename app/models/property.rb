@@ -1,35 +1,32 @@
-  class Property < Hash
-  #  require 'domain_lookup'
-    include CouchRest::CastedModel
-    include CouchRest::Validation
-  
-    property :name
-    property :uri
-  #  property :alias_name  # use alias for synonyms, e.g.; lat, long, address
-    property :data_type, :default => 'String'   # simplified set? (e.g.; number, string, lookup_value)
-    property :definition
-    property :default_value
-    property :example_value
-  
-    # use this property to generate CounchDB views?
-    property :query_property, :default => false
-    property :unique_id_property, :default => false
+class Property
 
-  # Hashes may not contain :cast_as
-  #  property :domain_lookup, :cast_as => 'DomainLookup'
-
-  #  validates_presence_of :name
- 
-    def to_s
-      property_str = "#{name}"
-      property_str << ", \n#{uri}" if uri
-      property_str << ", \n#{data_type}" if data_type
-      property_str << ", \n#{definition}" if definition
-      property_str << ", \n#{default_value} " if default_value
-      property_str << ", \n#{ordinal_position} " if ordinal_position
-      property_str << ", \n#{example_value} " if example_value
-      property_str << ", \n#{query_property} " if query_property
-      property_str
-    end
+  attr_accessor :type, :definition, :default_value, :example_value, :can_query, :is_key, :comment
+  attr_reader :name
+  
+  # attribute to define
+  def initialize(name, options = {})
+    @name = name.to_s
+    parse_options(options)
+    self
   end
+  
+  def parse_options(options)
+    return if options.empty?
+    @type           = options.delete(:type)               if options[:type]
+    @definition     = options.delete(:definition)         if options[:definition]
+    @default_value  = options.delete(:default_value)      if options[:default_value]
+    @example_value  = options.delete(:example_value)      if options[:example_value]
+    @comment        = options.delete(:comment)            if options[:comment]
+    @can_query      = options[:can_query] ? true : false
+    @is_key         = options[:is_key] ? true : false
+  end
+  
+  def to_hash
+    rtn_hash = {}
+    self.instance_variables.each do |var|
+      rtn_hash[var.gsub("@","")] = self.instance_variable_get(var)
+    end
+    rtn_hash
+  end
+end
 
