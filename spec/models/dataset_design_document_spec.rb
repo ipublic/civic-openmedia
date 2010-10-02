@@ -1,5 +1,40 @@
+require 'spec_helper'
+
 describe DatasetDesignDocument do
   before(:all) do
+    reset_test_db!
+  end
+
+  describe "Accessing CouchDB" do
+    before(:each) do
+      @db = reset_test_db!
+      @ddd = DatasetDesignDocument.new
+    end
+    
+    it "should fail without a name" do
+      lambda{@ddd.save.should}.should raise_error(ArgumentError)
+    end
+
+    it "should fail without a database" do
+      @ddd.name = "movies"
+      lambda{@ddd.save.should}.should raise_error(ArgumentError)
+    end
+
+    it "should save design document with identifier" do
+      @ddd.name = "movies"
+      @ddd.database = @db
+      dd_id = @ddd.design_doc_id
+      resp = @ddd.save
+      resp["id"].should == dd_id
+    end
+
+    it "should raise error if design document already exists" do
+      @ddd.name = "movies"
+      @ddd.database = @db
+      dd_id = @ddd.design_doc_id
+      @ddd.save
+      lambda{@ddd.save.should}.should raise_error
+    end
   end
 
   describe "managing properties" do
@@ -41,7 +76,7 @@ describe DatasetDesignDocument do
       @ddd.add_property @prop0
       @ddd.add_property @prop1
       @ddd.add_property @prop2
-      props = @ddd.to_json
+      props = @ddd.property_list
       props.should be_an_instance_of(Array)
       props[0].should be_an_instance_of(Hash)
     end
