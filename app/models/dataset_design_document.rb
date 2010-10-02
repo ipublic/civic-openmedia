@@ -22,8 +22,8 @@ class DatasetDesignDocument < CouchRest::Design
   end
   
   def default_design_doc
-    
     time_stamp = Time.now.to_json
+
     {
       "language" => "javascript",
       "metadata" => {
@@ -32,8 +32,7 @@ class DatasetDesignDocument < CouchRest::Design
         'created_date' => time_stamp,
         'last_updated' => time_stamp
         },
-      "properties" => {
-      },
+      "properties" => to_json,
       "views" => {
         'all' => {
           'map' => "function(doc) {
@@ -82,8 +81,7 @@ class DatasetDesignDocument < CouchRest::Design
   end
 
   def to_json
-    return [] if property_list.empty?
-    property_list.each { |prop| prop.to_hash }
+    property_list.inject([]) {|props, next_prop| props << next_prop.to_hash }
   end
   
   # def unique_id_property

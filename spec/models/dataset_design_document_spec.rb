@@ -37,9 +37,13 @@ describe DatasetDesignDocument do
       @ddd.get_property(@prop0.name).should == nil
     end
 
-    it "should return all properties" do
+    it "should return all properties as an array of hashes" do
+      @ddd.add_property @prop0
+      @ddd.add_property @prop1
+      @ddd.add_property @prop2
+      props = @ddd.to_json
+      props.should be_an_instance_of(Array)
+      props[0].should be_an_instance_of(Hash)
     end
-
-
   end
 end
