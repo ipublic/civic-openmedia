@@ -1,52 +1,12 @@
 class DatasetModelFactory
-  require "dataset_template"
+  require "dataset_template"  # provides a few basic properties
   
-  attr_accessor :database
-  attr_reader :name, :class_name, :design_doc_id
+  attr_reader :name, :class_name
   
-  def name=(name_str)
-    @class_name = string_to_class(name_str)
-    design_doc_id
-    @name = name_str
-  end
-  
-  def design_doc_id
-    "_design/#{@class_name}"
-  end
-
-  def create_design_doc
-    raise ArgumentError, "#{self.class.name.to_s} requires a name" unless @class_name && @class_name.length > 0
-    raise ArgumentError, "#{self.class.name.to_s} requires a database" unless self.database
-    
-    doc = default_design_doc
-    doc["_id"] = design_doc_id
-
-    saved = database.get(doc["_id"]) rescue nil
-    resp = database.save_doc(doc) unless saved
-  end
-
-  def default_design_doc
-    time_stamp = Time.now.to_json
-    {
-      "language" => "javascript",
-      "metadata" => {
-        'type' => 'Dataset',
-        'language' => 'en-US',
-        'created_date' => time_stamp,
-        'last_updated' => time_stamp
-        },
-      "properties" => {
-      },
-      "views" => {
-        'all' => {
-          'map' => "function(doc) {
-            if (doc['couchrest-type'] == '#{@class_name.to_s}') {
-              emit(doc['_id'],1);
-            }
-          }"
-        }
-      }
-    }
+  def initialize(name)
+    @name = name.to_s
+    @class_name = string_to_class(@name)
+    document_class
   end
   
   def string_to_class(str)
@@ -54,9 +14,13 @@ class DatasetModelFactory
     @class_name = str.gsub(/[^A-Za-z0-9]/,'')
   end
 
-  def document_class
-    raise ArgumentError, "#{self.class.name.to_s} requires a name" unless @class_name && @class_name.length > 0
+  def unique_serial_number
+    # Generate unique import serial number from MD5 hash of current date + random number
+    require 'md5'
+    MD5.md5(Time.now.to_s + rand.to_s).to_s
+  end
 
+  def document_class
     if !Object::const_defined? @class_name
 #      xdoc_class = Object::const_set(@class_name.intern, Class::new(super_class=CouchRest::ExtendedDocument))
       fac_class = Object::const_set(@class_name.intern, Class::new(super_class=DatasetTemplate))
@@ -64,6 +28,7 @@ class DatasetModelFactory
       fac_class = Object::const_get(@class_name)
     end
   end
+  
 
 =begin
   TODO Change anonymous class handling
@@ -82,12 +47,13 @@ class DatasetModelFactory
     # classes['whatever'].property :a_new_property
     # classes['whatever'].new #=> a new instance of that class
 =end
+
+
    
   def load_attachment
     require 'ruport'
-    require 'md5'
 
-    # TODO - recode to handle multiple attachmentsz
+    # TODO - recode to handle multiple attachments
     att_name = self['_attachments'].keys[0]
     
     xtab = Ruport::Data::Table.parse(
@@ -96,16 +62,13 @@ class DatasetModelFactory
         :csv_options => { :col_sep => self.delimiter_character }
       )
     
-    # Generate unique import serial number from MD5 hash of current date + random number
-    time_val = Time.new
-    import_series = MD5.md5(time_val.to_s + rand.to_s).to_s
-
-    time_stamp = time_val.to_json
+    series_id = unique_serial_number
+    time_stamp = Time.now.to_json
     
     # Append administrative properties
     xtab.add_column("updated_at", :default => time_stamp, :position => 1)
     xtab.add_column("created_at", :default => time_stamp, :position => 1)
-    xtab.add_column("import_series", :default => import_series, :position => 1)
+    xtab.add_column("series_id", :default => series_id, :position => 1)
     xtab.add_column(COUCHREST_TYPE_PROPERTY_NAME, :default => self.identifier, :position => 1)
 
     # Write the column names 
