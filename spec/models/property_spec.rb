@@ -2,7 +2,8 @@ describe Property do
 
   describe "managing properties" do
     before(:each) do
-      @prop = Property.new("Title", "string", 
+      @prop = Property.new("Title", 
+        :type => "String", 
         :is_key => true, 
         :can_query => false, 
         :definition => "Movie name",
@@ -15,7 +16,7 @@ describe Property do
     it "should return saved values for all attributes" do
       @prop.should be_instance_of(Property)
       @prop.name.should == "Title"
-      @prop.type.should == "string"
+      @prop.type.should == "String"
       @prop.is_key.should == true
       @prop.definition.should == "Movie name"
       @prop.can_query.should == false
@@ -27,7 +28,7 @@ describe Property do
     it "should output all attributes in hash format" do
       hash_val = @prop.to_hash
       hash_val["name"].should == "Title"
-      hash_val["type"].should == "string"
+      hash_val["type"].should == "String"
       hash_val["is_key"].should == true
       hash_val["definition"].should == "Movie name"
       hash_val["can_query"].should == false
