@@ -1,6 +1,20 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
+
+# Verify required databases are created - else rake task must be run
+## TODO: can (should) we bootstrap where CouchDB installed isn't installed on local server?
+@srv = CouchRest.new
+srv_dbs = @srv.databases
+Site::DATABASE_NAMES.each do |db_name|
+  unless srv_dbs.include? db_name 
+    raise "Database '#{db_name}' not found on server . Please run command: rake couchdb:create"
+  end
+end
+
+@staging_db = @srv.database "staging"
+@site_db = @srv.database "site"
+@community_db = @srv.database "community"
+@public_db = @srv.database "public"
 
 ## Initialize Organizations model with iPublic record
 # Clear existing documents
@@ -30,26 +44,28 @@ Organization.new({
 ).save
 
 ## Add Default Catalogs
-puts "Clearing existing Catalogs and Datasets..."
-Dataset.all.each do |doc|
-  doc.destroy
-end
-
+puts "Clearing existing Catalogs..."
+# Dataset.all.each do |doc|
+#   doc.destroy
+# end
+# 
 Catalog.all.each do |doc|
   doc.destroy
 end
 
-Catalog.new({
+date_stamp = Date.today.to_json
+
+cat = Catalog.new({
   :title => 'Staging', 
   :database_store => 'staging', 
   :metadata => {
     :description => "A workspace for transforming, curating and preparing Datasets for publication.  Staging catalog contents are visible only to local site.",
     :dcmi_type => 'Dataset',
     :language => 'en-US',
-    :beginning_date => Date.today.to_json,
-    :ending_date => Date.today.to_json,
-    :created_date => Date.today.to_json,
-    :last_updated => Date.today.to_json,
+    :beginning_date => date_stamp,
+    :ending_date => date_stamp,
+    :created_date => date_stamp,
+    :last_updated => date_stamp,
     :license => ''
     # :uri
     # :creator_organization_id
@@ -61,11 +77,13 @@ Catalog.new({
     # :released, :type => Date  #, :alias => :date, :cast_as => 'Date', :init_method => 'parse'
     # :license, :alias => :rights
   }
-}).save
+})
+cat.database = @staging_db
+cat.save
 
-Catalog.new({
+cat = Catalog.new({
   :title => 'Commmunity', 
-  :database_store => 'public', 
+  :database_store => 'community', 
   :metadata => {
     :description => 'A repository for data, templates and content shared among OpenMedia community members. Community catalog contents are shared with other OpenMedia sites.',
     :type => 'Dataset',
@@ -73,30 +91,32 @@ Catalog.new({
     :creator_organization_id => Organization.by_name(:key => "iPublic, LLC").first.identifier.to_s,
     :publisher_organization_id => Organization.by_name(:key => "iPublic, LLC").first.identifier.to_s,
     :maintainer_organization_id => Organization.by_name(:key => "iPublic, LLC").first.identifier.to_s,
-    :created_date => Date.today,
-    :last_updated => Date.today,
-    :released => Date.today,
+    :created_date => date_stamp,
+    :last_updated => date_stamp,
+    :released => date_stamp,
     :license => ''
     # :conforms_to => 
     # :uri =>
     # :geographic_coverage  => # Geographic bounds, jurisdiction name from controlled vocab, 
     # :update_frequency, :alias => :accrual_periodity # , :alias => :update_interval_in_minutes
-    # :beginning_date => Date.today.to_json,
-    # # :ending_date => Date.today.to_json
+    # :beginning_date => date_stamp,
+    # # :ending_date => date_stamp
   }
-}).save
+})
+cat.database = @community_db
+cat.save
   
-Catalog.new({
+cat = Catalog.new({
   :title => 'Public', 
   :database_store => 'public', 
   :metadata => {
     :description => "Published Datasets. Public catalog contents are accessible to the public.",
     :dcmi_type => 'Dataset',
     :language => 'en-US',
-    :beginning_date => Date.today.to_json,
-    :ending_date => Date.today.to_json,
-    :created_date => Date.today.to_json,
-    :last_updated => Date.today.to_json,
+    :beginning_date => date_stamp,
+    :ending_date => date_stamp,
+    :created_date => date_stamp,
+    :last_updated => date_stamp,
     :license => ''
     # :uri
     # :creator_organization_id
@@ -106,7 +126,9 @@ Catalog.new({
     # :geographic_coverage  => # Geographic bounds, jurisdiction name from controlled vocab, 
     # :update_frequency, :alias => :accrual_periodity # , :alias => :update_interval_in_minutes
   }
-}).save
+})
+cat.database = @public_db
+cat.save
 
 # ContentDocument.new({
 #   :title => 'Organizations',
