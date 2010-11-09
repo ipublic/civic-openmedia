@@ -1,6 +1,6 @@
 class Property
 
-  attr_accessor :type, :definition, :default_value, :example_value, :can_query, :is_key, :comment
+  attr_accessor :type, :display_name, :definition, :default_value, :example_value, :can_query, :is_key, :comment
   attr_reader :name
   
   # attribute to define
@@ -13,6 +13,7 @@ class Property
   def parse_options(options)
     return if options.empty?
     self.type           = options.delete(:type)               if options[:type]
+    self.display_name   = options.delete(:display_name)       if options[:display_name]
     self.definition     = options.delete(:definition)         if options[:definition]
     self.default_value  = options.delete(:default_value)      if options[:default_value]
     self.example_value  = options.delete(:example_value)      if options[:example_value]
