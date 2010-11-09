@@ -34,7 +34,11 @@ class Organization < CouchRestRails::Document
   view_by :name, :identifier
   
   def get_creator_content_documents
-    list = ContentDocument.by_creator_organization_id(:key => self['identifier']) # unless new?
+#    list = ContentDocument.by_creator_organization_id(:key => self['identifier']) # unless new?
+=begin
+  TODO ContentDocument model was removed.  Update this method
+=end
+    list = {}
   end
 
 private
