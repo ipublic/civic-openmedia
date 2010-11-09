@@ -3,6 +3,8 @@ class Site < CouchRestRails::Document
   require 'gnis'
   require 'contact'
 
+  DATABASE_NAMES = ["site", "staging", "public", "community"]
+
 #  include CouchRest::Validation
   
   use_database :site
