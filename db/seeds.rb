@@ -23,6 +23,35 @@ Organization.all.each do |doc|
   doc.destroy
 end
 
+
+
+# ContentDocument.new({
+#   :title => 'Organizations',
+# #  :uri => 'http://db.civicopenmedia.org/us_states',
+#   :metadata => {
+#     :type => "Dataset",
+#     :keywords => ["agencies", "businesses", "entities"],
+#     :language => "en-US",
+#     :conforms_to => "",
+#     :geographic_coverage => "World",
+#     :update_frequency => 0,
+#     :creator_organization_id => Organization.get("organizations_ipublic").identifier,
+#     :publisher_organization_id => Organization.get("organizations_ipublic").identifier,
+#     :maintainer_organization_id => Organization.get("organizations_ipublic").identifier,
+#     :license => "Public domain",
+#     :description => "Public and private agencies, entities and similar "
+#     },
+#   :properties => [
+#     {:name => "name", :data_type => "String", :example_value => "Department of Public Works", :definition => "Agency or entity title" },
+#     {:name => "abbreviation", :data_type => "String", :example_value => "DPW", :definition => "Acronym or short name for agency or entity" },
+#     {:name => "points_of_contact", :data_type => "String", :example_value => "John Doe", :definition => "Representative(s) for organization" },
+#     {:name => "addresses", :data_type => "String", :example_value => "101 Main St, Any City, My State 10001", :definition => "Agency or entity site or mailing address" },
+#     {:name => "website_url", :data_type => "String", :example_value => "http://www.dpw.gov", :definition => "Link to organization's world wide web home page" },
+#     {:name => "description", :data_type => "String", :example_value => "The DPW's mission is to construct and maintain the physical infrastructure that provides for the public’s health and safety.", :definition => "Brief organization overview or explanation"}
+#     ]
+#   }
+# ).save
+
 Organization.new({
   :name => 'iPublic, LLC', 
   :abbreviation => 'ipublic',
@@ -130,35 +159,10 @@ cat = Catalog.new({
 cat.database = @public_db
 cat.save
 
-# ContentDocument.new({
-#   :title => 'Organizations',
-# #  :uri => 'http://db.civicopenmedia.org/us_states',
-#   :metadata => {
-#     :type => "Dataset",
-#     :keywords => ["agencies", "businesses", "entities"],
-#     :language => "en-US",
-#     :conforms_to => "",
-#     :geographic_coverage => "World",
-#     :update_frequency => 0,
-#     :creator_organization_id => Organization.get("organizations_ipublic").identifier,
-#     :publisher_organization_id => Organization.get("organizations_ipublic").identifier,
-#     :maintainer_organization_id => Organization.get("organizations_ipublic").identifier,
-#     :license => "Public domain",
-#     :description => "Public and private agencies, entities and similar "
-#     },
-#   :properties => [
-#     {:name => "name", :data_type => "String", :example_value => "Department of Public Works", :definition => "Agency or entity title" },
-#     {:name => "abbreviation", :data_type => "String", :example_value => "DPW", :definition => "Acronym or short name for agency or entity" },
-#     {:name => "points_of_contact", :data_type => "String", :example_value => "John Doe", :definition => "Representative(s) for organization" },
-#     {:name => "addresses", :data_type => "String", :example_value => "101 Main St, Any City, My State 10001", :definition => "Agency or entity site or mailing address" },
-#     {:name => "website_url", :data_type => "String", :example_value => "http://www.dpw.gov", :definition => "Link to organization's world wide web home page" },
-#     {:name => "description", :data_type => "String", :example_value => "The DPW's mission is to construct and maintain the physical infrastructure that provides for the public’s health and safety.", :definition => "Brief organization overview or explanation"}
-#     ]
-#   }
-# ).save
-
 
 ### STATES
+
+
 
 ## Add defintitions for preloaded datasets 
 # ContentDocument.new({
