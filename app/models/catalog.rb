@@ -6,7 +6,8 @@ class Catalog < CouchRestRails::Document
   ## This is the parent class, with StagingCatalog, PublicCatalog and CommunityCatalog children classes
 
   ## CouchDB database and record key
-  use_database :site
+#  use_database :site
+  use_database :staging
   unique_id :identifier
   
   ## Properties
