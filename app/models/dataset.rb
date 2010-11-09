@@ -68,8 +68,21 @@ class Dataset < CouchRestRails::Document
         return sum(values);
       }"  
 
+  view_by :creator_organization_id, {
+          :map => 
+            "function(doc) { 
+              if ((doc['couchrest-type'] == 'Dataset') && doc['metadata'] && doc['metadata']['creator_organization_id']) 
+                { emit(doc['metadata']['creator_organization_id'], doc['_id'], 1);  
+                }
+              }",
+          :reduce => 
+            "function(keys, values, rereduce) { 
+              return values;
+            }" 
+          }
+
   ## Callbacks
-  before_save :generate_identifier
+#  before_save :generate_identifier
 
   ## Methods
   def self.search(search_str)
@@ -95,14 +108,15 @@ class Dataset < CouchRestRails::Document
     
     # Specify database store
     Object::const_get(ds_name).database = self.database
-    
-    Object::const_get(ds_name).property('identifier')
-    Object::const_get(ds_name).property('title')
-    Object::const_get(ds_name).property('catalog_id', {:default => "staging"})
-    Object::const_get(ds_name).property('metadata', {:cast_as => 'Metadata'})
-    Object::const_get(ds_name).property('import_series')
-    
-    #    view_by :title  
+    # Object::const_get(ds_name).view_by 
+    Object::const_get(ds_name).save_design_doc
+
+    # Object::const_get(ds_name).property('identifier')
+    # Object::const_get(ds_name).property('title')
+    # Object::const_get(ds_name).property('catalog_id', {:default => "staging"})
+    # Object::const_get(ds_name).property('metadata', {:cast_as => 'Metadata'})
+    # Object::const_get(ds_name).property('import_series')
+
   end
     
   def load_attachment
