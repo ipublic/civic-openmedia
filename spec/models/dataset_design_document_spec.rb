@@ -8,17 +8,17 @@ describe DatasetDesignDocument do
   describe "Accessing CouchDB" do
     before(:each) do
       @db = reset_test_db!
-      @ddd = DatasetDesignDocument.new
+      @ddd = DatasetDesignDocument.new(@db)
     end
     
     it "should fail without a name" do
       lambda{@ddd.save.should}.should raise_error(ArgumentError)
     end
 
-    it "should fail without a database" do
-      @ddd.name = "movies"
-      lambda{@ddd.save.should}.should raise_error(ArgumentError)
-    end
+    # it "should fail without a database" do
+    #   @ddd.name = "movies"
+    #   lambda{@ddd.save.should}.should raise_error(ArgumentError)
+    # end
 
     it "should save design document with identifier" do
       @ddd.name = "movies"
@@ -39,7 +39,8 @@ describe DatasetDesignDocument do
 
   describe "managing properties" do
     before(:each) do
-      @ddd = DatasetDesignDocument.new
+      @db = reset_test_db!
+      @ddd = DatasetDesignDocument.new(@db)
       @prop0 = Property.new("Title", :type => "string", :is_key => true)
       @prop1 = Property.new("Category", :type => "string", :is_key => false, :example_value => "Science Fiction")
       @prop2 = Property.new("Rating", :type => "string", :example_value => "R")
