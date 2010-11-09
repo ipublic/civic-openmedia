@@ -10,10 +10,12 @@ class DatasetDesignDocument < CouchRest::Design
   #   prop_list
   # end
   
-  attr_accessor :doc, :database
-  attr_reader :name, :class_name, :property_list, :design_doc_id
+  # attr_accessor :doc
+  attr_reader :name, :class_name, :property_list, :design_doc_id, :database, :doc
   
-  def initialize
+  ## TODO add default catalog_id argument for staging db
+  def initialize(database)
+    self.database = database
     clear_property_list
   end
   
@@ -23,30 +25,30 @@ class DatasetDesignDocument < CouchRest::Design
     design_doc_id
   end
   
-  def property_list
-    @property_list.inject([]) {|props, next_prop| props << next_prop.to_hash }
-  end
+  def catalog_id=(catalog_id)
+#    valid_catalog = Site::DATABASE_NAMES.include?(catalog_id)
+    cats = database.catalogs
+    valid_catalog = cats.include?(catalog_id)
+    raise ArgumentError, "Catalog: '#{catalog_id}' not recognized" unless valid_catalog
 
-  def doc 
-    @doc = default_design_doc
+    @catalog_id = catalog_id
+  end
+  
+  def catalog_id
+    @catalog_id
   end
   
   def design_doc_id
     "_design/#{class_name}" 
   end
 
-  def default_design_doc
-    time_stamp = Time.now.to_json
-
+  def document
     {
-      "language" => "javascript",
-      "metadata" => {
-        'type' => 'Dataset',
-        'language' => 'en-US',
-        'created_date' => time_stamp,
-        'last_updated' => time_stamp
-        },
+      "_id" => design_doc_id,
+      "metadata" => metadata,
       "properties" => property_list,
+      "catalog_id" => catalog_id,
+      "language" => "javascript",
       "views" => {
         'all' => {
           'map' => "function(doc) {
@@ -64,11 +66,33 @@ class DatasetDesignDocument < CouchRest::Design
     cname = str.gsub(/[^A-Za-z0-9]/,'')
   end
 
-  def metadata_list
+  def clear_metadata
+    @metadata = {}
+  end
+
+  def metadata=(metadata)
+    raise argumenterror unless metadata.class == Hash
+    @metadata = metadata
   end
   
-  def clear_property_list
-    @property_list = []
+  def metadata 
+    @metadata ||= default_metadata
+  end
+  
+  def default_metadata
+    date_stamp = Date.today.to_json
+    time_stamp = Time.now.to_json
+    
+    @metadata = {
+      'type' => 'Dataset',
+      'language' => 'en-US',
+      'created_date' => date_stamp,
+      'last_updated' => time_stamp
+      }
+  end
+  
+  def property_list
+    @property_list.inject([]) {|props, next_prop| props << next_prop.to_hash }
   end
 
   def get_property(property_name)
@@ -95,16 +119,20 @@ class DatasetDesignDocument < CouchRest::Design
     prop_pos
   end
   
+  def clear_property_list
+    @property_list = []
+  end
+
   def save
     raise ArgumentError, "#{self.class.name} requires a name" unless @class_name && @class_name.length > 0
     raise ArgumentError, "#{self.class.name} requires a database" unless @database
     
-    doc = default_design_doc
-    doc["_id"] = design_doc_id
+    # doc = default_design_doc
+    # doc["_id"] = design_doc_id
 
     # saved = database.get(doc["_id"]) rescue nil
     # resp = database.save_doc(doc) unless saved
-    @database.save_doc(doc)
+    @database.save_doc(document)
   end
   
   
