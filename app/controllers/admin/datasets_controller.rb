@@ -34,13 +34,12 @@ class Admin::DatasetsController < ApplicationController
   
   def upload
     @dataset = Dataset.get(params[:id])
-    @attachment = Attachment.new({})
   end
    
   def upload_file
     @dataset = Dataset.get(params[:id])
     @dataset_update = Dataset.new(params[:dataset])
-    @attachment = params[:attachment][:uploaded_file]
+    @attachment = params[:uploaded_file]
     
     @dataset.update_attributes_without_saving(
       :delimiter_character => @dataset_update["delimiter_character"],
@@ -65,7 +64,6 @@ class Admin::DatasetsController < ApplicationController
   def import
     require 'ruport'
     @dataset = Dataset.get(params[:id])
-    @property = Property.new
     
     # Determine if attachment was added on latest revision
     @attachments = @dataset['_attachments']
