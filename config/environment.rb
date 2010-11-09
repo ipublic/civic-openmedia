@@ -33,7 +33,7 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
 
   # config.gem "rest-client", :version => "1.3.0"
-  config.gem "couchrest", :version => "0.38" #, :lib => "couchrest", :source => "http://gemcutter.org", 
+  config.gem "couchrest", :version => "0.38", :lib => "couchrest", :source => "http://gemcutter.org"
 #  config.gem "couchrest_extended_document"
   config.gem 'validatable' #, :version => "1.6.7", :source => "http://gemcutter.org"
   config.gem "json" #, :version => "1.2.0"
@@ -43,13 +43,11 @@ Rails::Initializer.run do |config|
   config.gem 'searchlogic'
   config.gem "paperclip"
   
-#  config.gem "rspec-rails"
-  
-
-  config.gem "rspec", :lib => false #, :version => ">=1.2.6"
-#  config.gem "rspec-rails", :lib => "false" #, :version => ">=1.2.6"
-  # config.gem "rspec-rails", :lib => "spec/rails" #, :version => ">=1.2.6"
-  # config.gem "factory_girl", :source => "http://gemcutter.org"
+  config.gem "rspec", :lib => false, :version => ">=1.2.2"
+  config.gem "rspec-rails", :lib => false, :version => ">=1.2.2"
+  config.gem "cucumber", :lib => false, :version => "0.9.3"
+  config.gem "webrat"
+#  config.gem "factory_girl", :source => "http://gemcutter.org"
   
 
   # Only load the plugins named here, in the order given (default is alphabetical).
