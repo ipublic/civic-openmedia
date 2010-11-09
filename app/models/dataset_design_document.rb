@@ -41,7 +41,7 @@ class DatasetDesignDocument < CouchRest::Design
   def design_doc_id
     "_design/#{class_name}" 
   end
-
+  
   def document
     {
       "_id" => design_doc_id,
@@ -62,6 +62,10 @@ class DatasetDesignDocument < CouchRest::Design
   end
   
   def string_to_class(str)
+=begin
+  TODO verifyt classname generation
+=end
+#    str = str.to_s.titlecase.gsub(/[[:space:]]/,'') 
     str = str.to_s.rstrip.downcase.gsub(/\b\w/) {|first| first.upcase }
     cname = str.gsub(/[^A-Za-z0-9]/,'')
   end
@@ -156,4 +160,18 @@ class DatasetDesignDocument < CouchRest::Design
   #   end
   # end
  
+  # def generate_identifier
+  #   if !title.blank?
+  #     self['identifier'] = self.class.to_s.pluralize.downcase + '_' +  title.downcase.gsub(/[^a-z0-9]/,'_').squeeze('_').gsub(/^\-|\-$/,'') if new?
+  #   end
+  # end
+  # 
+  # def id_is_unique?
+  #   if self.by_title(:key => self.title, :limit => 1).blank? || self.get("#{self.id}").title == self.title
+  #     return true
+  #   else
+  #     return [false, "Content Document by this title already exists"]
+  #   end
+  # end
+  
 end
