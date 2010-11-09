@@ -24,12 +24,14 @@ class Site < CouchRestRails::Document
   property :replicate_community_catalog
   
   # Location properties
-  property :gnis, :cast_as => 'Gnis', :default => []
+  property :gnis, :cast_as => 'Gnis', :default => [] # e.g.; 584282 for Ellicott City, MD
   
   property :site_domain_name
   property :site_proxy_prefix
   property :site_canonical_url, :default => "http://localhost"
   property :site_organization_id
+  property :site_default_city
+  property :site_default_state
   
   property :catalogs, :cast_as => ['Catalog']
 
