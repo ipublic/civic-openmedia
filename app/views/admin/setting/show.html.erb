@@ -1,0 +1,36 @@
+<% title "Settings" %>
+<div class="grid_12" >
+	<p style="float: right;">
+		<%= link_to "Edit", edit_admin_setting_path(@setting) %>
+	</p>
+	<hr />
+</div>
+<div class="grid_4">
+	<div class="box">
+		<h2>General</h2>
+		<div class="block">
+	  	<p><b>Site name:</b><br /> <%= @setting.site_name %></p>
+	  	<p><b>Site domain name:</b><br /> <%= @setting.site_domain_name %></p>
+	  	<p><b>Site canonical URL:</b><br /> <%= @setting.site_canonical_url %></p>
+			<p><b>Site organization record:</b> <br/><%= get_organization_name(@setting.site_organization_id) %></p>
+		</div>
+	</div>
+</div>
+<div class="grid_4">
+	<div class="box">
+		<h2>Server Settings</h2>
+		<div class="block">
+	  	<p><b>Admin CouchDB server:</b><br /> <%=  @setting.admin_couchdb_server %></p>
+	  	<p><b>Public CouchDB Server:</b><br /> <%=  @setting.public_couchdb_server %></p>
+	  	<p><b>Site proxy prefix:</b><br /> <%=  @setting.site_proxy_prefix %></p>
+		</div>
+	</div>
+</div>
+<div class="grid_4">
+	<div class="box">
+		<h2>Web Services</h2>
+		<div class="block">
+	  	<p><b>Googlemap API key:</b><br /> <%=  @setting.googlemap_api_key %></p>
+		</div>
+	</div>
+</div>

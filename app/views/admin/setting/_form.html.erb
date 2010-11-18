@@ -1,0 +1,47 @@
+<div id="forms">
+	<div class="grid_12">
+		<div class="box">
+			<h2><%= @setting.site_name || "New Site" %></h2>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<% form_for([:admin, @setting], :url => {:controller => "admin/setting"}) do |f| %>
+		<div class="grid_4">
+			<div class="box">
+				  <%= f.error_messages %>
+					<%= f.hidden_field :rev, :value => @setting['_rev'] if @setting['_rev'] %>
+					<fieldset>
+						<h5>General</h5>
+				  	<p><%= f.label :site_name %> <%= f.text_field :site_name %></p>
+				  	<p><%= f.label :site_domain_name %> <%= f.text_field :site_domain_name %></p>
+				  	<p><%= f.label :site_canonical_url %> <%= f.text_field :site_canonical_url %></p>
+						<p><%= f.label :site_organization_id, 'Site organization record' %> <%= f.select :site_organization_id, organization_collection, {:prompt => 'Select organization'} %></p>
+					</fieldset>
+			</div>
+		</div>
+		<div class="grid_4">
+			<div class="box">
+				<fieldset>
+					<h5>Server Settings</h5>
+			  	<p><%= f.label :admin_couchdb_server %> <%= f.text_field :admin_couchdb_server %></p>
+			  	<p><%= f.label :public_couchdb_server %> <%= f.text_field :public_couchdb_server %></p>
+			  	<p><%= f.label :site_proxy_prefix %> <%= f.text_field :site_proxy_prefix %></p>
+				</fieldset>
+			</div>
+		</div>
+		<div class="grid_4">
+			<div class="box">
+				  <%= f.error_messages %>
+					<%= f.hidden_field :rev, :value => @setting['_rev'] if @setting['_rev'] %>
+					<fieldset>
+						<h5>Web Services</h5>
+				  	<p><%= f.label :googlemap_api_key, 'Googlemap API key' %> <%= f.text_field :googlemap_api_key %></p>
+					</fieldset>
+			</div>
+			<p>
+				<%= link_to 'Back', admin_setting_index_path %>
+				<%= f.submit "Submit", :class => "buttonSubmit", :style => "float: right;"%><br/>
+			</p>
+		</div>
+	<% end %>	
+</div>
